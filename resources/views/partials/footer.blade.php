@@ -1,12 +1,12 @@
 <!-- Footer -->
 <footer>
-    <div class="footer-logo">Nurah</div>
+    <div class="footer-logo">Nurah Perfumes</div>
     <p class="footer-description">India's first perfume bar offering high-quality, long-lasting fragrances with exceptional expertise.</p>
     <div class="footer-social">
-        <a href="#" class="social-btn">📘</a>
-        <a href="#" class="social-btn">📷</a>
-        <a href="#" class="social-btn">▶️</a>
-        <a href="#" class="social-btn">📌</a>
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
     </div>
 
     <div class="footer-section">
@@ -32,16 +32,16 @@
         <p class="footer-description">Stay updated with offers & new launches</p>
         <form class="newsletter-form">
             <input type="email" placeholder="Your email" class="newsletter-input">
-            <button type="submit" class="newsletter-btn">→</button>
+            <button type="submit" class="newsletter-btn"><i class="fas fa-arrow-right"></i></button>
         </form>
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Nurah. All rights reserved.</p>
+        <p>© 2025 Nurah Perfumes. All rights reserved.</p>
     </div>
 </footer>
 
 <!-- Quick Action Button -->
 <div class="quick-action">
-    <button class="action-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <button class="action-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i></button>
 </div>

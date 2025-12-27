@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Fresh Perfumes - Nurah')
+@section('title', 'Fresh Perfumes - Nurah Perfumes')
 
 @push('styles')
 <style>
@@ -783,17 +783,17 @@
     <!-- Features Footer -->
     <div class="features-footer">
         <div class="feature">
-            <div class="feature-icon">🚚</div>
+            <div class="feature-icon"><i class="fas fa-truck"></i></div>
             <div class="feature-title">Free Shipping</div>
             <div class="feature-text">Free shipping on orders above ₹399</div>
         </div>
         <div class="feature">
-            <div class="feature-icon">↩️</div>
+            <div class="feature-icon"><i class="fas fa-undo"></i></div>
             <div class="feature-title">Easy Returns</div>
             <div class="feature-text">Simple return process with the perfumes</div>
         </div>
         <div class="feature">
-            <div class="feature-icon">🔒</div>
+            <div class="feature-icon"><i class="fas fa-lock"></i></div>
             <div class="feature-title">Secure Payment</div>
             <div class="feature-text">Payment information is processed securely</div>
         </div>

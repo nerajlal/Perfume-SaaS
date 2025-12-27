@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Inglorious - MYOP Perfume')
+@section('title', 'Inglorious - Nurah Perfumes')
 
 @push('styles')
 <style>

@@ -6,12 +6,12 @@
 <!-- Mobile Header -->
 <div class="mobile-header">
     <div class="header-top">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <a href="{{ route('home') }}" class="logo">Nurah</a>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <a href="{{ route('home') }}" class="logo">Nurah Perfumes</a>
         <div class="header-icons">
-            <button class="icon-btn">🔍</button>
+            <button class="icon-btn"><i class="fas fa-search"></i></button>
             <button class="icon-btn">
-                🛒
+                <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count">0</span>
             </button>
         </div>
@@ -22,7 +22,7 @@
 <div class="mobile-menu" id="mobileMenu">
     <div class="menu-header">
         <span>MENU</span>
-        <button class="menu-close" onclick="toggleMenu()">×</button>
+        <button class="menu-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
     </div>
     <ul class="menu-list">
         <li class="menu-item"><a href="{{ route('home') }}" class="menu-link">Home</a></li>

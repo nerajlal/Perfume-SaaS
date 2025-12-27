@@ -469,19 +469,19 @@
     <!-- Features -->
     <div class="features">
         <div class="feature">
-            <div class="feature-icon">🚚</div>
+            <div class="feature-icon"><i class="fas fa-truck"></i></div>
             <h3 class="feature-title">Free Shipping</h3>
             <p class="feature-text">Free shipping on orders above ₹399 across India</p>
         </div>
 
         <div class="feature">
-            <div class="feature-icon">↩️</div>
+            <div class="feature-icon"><i class="fas fa-undo"></i></div>
             <h3 class="feature-title">Easy Returns</h3>
             <p class="feature-text">Simple return process with the perfumes</p>
         </div>
 
         <div class="feature">
-            <div class="feature-icon">🔒</div>
+            <div class="feature-icon"><i class="fas fa-lock"></i></div>
             <h3 class="feature-title">Secure Payment</h3>
             <p class="feature-text">Your payment information is processed securely</p>
         </div>
