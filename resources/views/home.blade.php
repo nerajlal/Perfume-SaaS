@@ -1,1085 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MYOP - India's First Perfume Bar</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gold: #d4a574;
-            --dark-gold: #b8915f;
-            --text: #333333;
-            --text-light: #666666;
-            --bg-light: #f8f8f8;
-            --border: #e0e0e0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text);
-            line-height: 1.5;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Mobile First - Promo Bar */
-        .promo-bar {
-            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
-            color: var(--white);
-            padding: 12px 15px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 1001;
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        .promo-bar span {
-            color: var(--gold);
-            font-weight: 700;
-        }
-
-        /* Mobile Header */
-        .mobile-header {
-            background: var(--white);
-            position: sticky;
-            top: 40px;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            padding: 12px 15px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--black);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .header-icons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -8px;
-            background: var(--gold);
-            color: var(--white);
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 85%;
-            max-width: 320px;
-            height: 100vh;
-            background: var(--white);
-            z-index: 2000;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        .menu-header {
-            padding: 20px 15px;
-            background: var(--black);
-            color: var(--white);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .menu-close {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        .menu-list {
-            list-style: none;
-            padding: 20px 0;
-        }
-
-        .menu-item {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .menu-link {
-            display: block;
-            padding: 15px 20px;
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 1999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        /* Hero Slider - Mobile Optimized */
-        .hero-slider {
-            position: relative;
-            height: 280px;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: 1.5px solid var(--white);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: var(--white);
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        /* Section Headers - Mobile */
-        .section {
-            padding: 40px 15px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .section-title em {
-            font-style: italic;
-            color: var(--gold);
-        }
-
-        .section-subtitle {
-            font-size: 14px;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Product Cards - Mobile Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            position: relative;
-        }
-
-        .product-image-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            overflow: hidden;
-            background: var(--bg-light);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: var(--gold);
-            color: var(--white);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .product-info {
-            padding: 12px;
-        }
-
-        .product-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .product-price {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .product-price span {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-
-        /* View All Button */
-        .view-all-btn {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto 0;
-            padding: 14px;
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        /* Store Section - Mobile */
-        .store-section {
-            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
-            color: var(--white);
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .store-count {
-            font-family: 'Playfair Display', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .store-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .store-subtitle {
-            font-size: 14px;
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-
-        .store-btn {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--white);
-            padding: 14px 35px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid var(--gold);
-        }
-
-        .store-description {
-            margin-top: 30px;
-            font-size: 13px;
-            line-height: 1.7;
-            opacity: 0.85;
-        }
-
-        /* Category Cards - Mobile */
-        .category-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .category-card {
-            position: relative;
-            height: 200px;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .category-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .category-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-        }
-
-        .category-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 5px;
-        }
-
-        .category-desc {
-            font-size: 13px;
-            color: rgba(255,255,255,0.9);
-        }
-
-        /* Cosmopolitan Section - Mobile */
-        .cosmopolitan-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, var(--black) 100%);
-            padding: 50px 15px;
-        }
-
-        .cosmo-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .cosmo-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 10px;
-        }
-
-        .cosmo-title em {
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .cosmo-subtitle {
-            font-size: 14px;
-            color: rgba(255,255,255,0.85);
-            line-height: 1.6;
-        }
-
-        /* Video Section - Mobile */
-        .video-section {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .video-section video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .video-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--white);
-            text-align: center;
-            line-height: 1.3;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        }
-
-        /* Gender Section - Mobile */
-        .gender-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .gender-card {
-            position: relative;
-            height: 220px;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .gender-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gender-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 25px;
-        }
-
-        .gender-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        /* Testimonials - Mobile Slider */
-        .testimonials {
-            background: var(--bg-light);
-            padding: 50px 0;
-            overflow: hidden;
-        }
-
-        .testimonial-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 0 15px 20px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .testimonial-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        .testimonial-card {
-            min-width: 85%;
-            background: var(--white);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            scroll-snap-align: start;
-        }
-
-        .testimonial-text {
-            font-size: 14px;
-            line-height: 1.7;
-            color: var(--text);
-            margin-bottom: 15px;
-        }
-
-        .testimonial-text em {
-            font-weight: 700;
-            font-style: italic;
-            color: var(--black);
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--gold);
-            font-size: 13px;
-            margin-bottom: 3px;
-        }
-
-        .testimonial-location {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-
-        /* Press Logos - Mobile */
-        .press-section {
-            padding: 40px 15px;
-            text-align: center;
-        }
-
-        .press-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-
-        .press-title em {
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .press-slider {
-            display: flex;
-            overflow-x: auto;
-            gap: 30px;
-            padding: 10px 0;
-            scrollbar-width: none;
-        }
-
-        .press-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        .press-logo {
-            height: 30px;
-            min-width: 80px;
-            opacity: 0.5;
-            filter: grayscale(100%);
-        }
-
-        /* About Section - Mobile */
-        .about-section {
-            padding: 50px 15px;
-        }
-
-        .about-image {
-            margin-bottom: 25px;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .about-image img {
-            width: 100%;
-            display: block;
-        }
-
-        .about-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .about-title em {
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .about-text {
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--text);
-            margin-bottom: 15px;
-        }
-
-        .about-btn {
-            display: inline-block;
-            background: var(--black);
-            color: var(--white);
-            padding: 13px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-
-        /* Blog Cards - Mobile */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .blog-card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .blog-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .blog-content {
-            padding: 20px;
-        }
-
-        .blog-date {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .blog-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .blog-link {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Features - Mobile */
-        .features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            padding: 40px 15px;
-            background: var(--bg-light);
-        }
-
-        .feature {
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-        }
-
-        .feature-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .feature-text {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Footer - Mobile */
-        footer {
-            background: var(--black);
-            color: var(--white);
-            padding: 40px 20px 20px;
-        }
-
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
-        .footer-description {
-            font-size: 13px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.75);
-            margin-bottom: 20px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .footer-section {
-            margin-bottom: 30px;
-        }
-
-        .footer-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links a {
-            display: block;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        .newsletter-form {
-            display: flex;
-            margin-top: 15px;
-            border-radius: 25px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 12px 15px;
-            background: transparent;
-            border: none;
-            color: var(--white);
-            font-size: 13px;
-            outline: none;
-        }
-
-        .newsletter-input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .newsletter-btn {
-            padding: 12px 20px;
-            background: var(--gold);
-            border: none;
-            color: var(--white);
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 12px;
-            color: rgba(255,255,255,0.6);
-        }
-
-        /* Popup - Mobile */
-        .popup-newsletter {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            padding: 30px 20px;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
-            z-index: 2001;
-            transition: bottom 0.4s ease;
-        }
-
-        .popup-newsletter.active {
-            bottom: 0;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: var(--text-light);
-            cursor: pointer;
-        }
-
-        .popup-tag {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-
-        .popup-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .popup-title em {
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .popup-subtitle {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .popup-code {
-            text-align: center;
-            padding: 12px;
-            background: var(--bg-light);
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .popup-code-text {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-
-        .popup-code-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 2px;
-        }
-
-        /* Quick Action Button - Mobile */
-        .quick-action {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-
-        .action-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--gold);
-            color: var(--white);
-            border: none;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(212, 165, 116, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        /* Tablet Adjustments */
-        @media (min-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-            }
-
-            .section-title {
-                font-size: 36px;
-            }
-
-            .hero-slider {
-                height: 400px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .gender-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .testimonial-card {
-                min-width: 45%;
-            }
-        }
-
-        /* Desktop Adjustments */
-        @media (min-width: 1024px) {
-            .mobile-header {
-                display: none;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .category-grid,
-            .gender-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .hero-slider {
-                height: 600px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Promo Bar -->
-    <div class="promo-bar">
-        🎄 Get <span>25% OFF</span> on orders ₹1500+ · Code: <span>MERRY25</span>
-    </div>
-
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <div class="header-top">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <a href="/" class="logo">MYOP</a>
-            <div class="header-icons">
-                <button class="icon-btn">🔍</button>
-                <button class="icon-btn">
-                    🛒
-                    <span class="cart-count">0</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="menu-header">
-            <span class="logo">MYOP</span>
-            <button class="menu-close" onclick="toggleMenu()">×</button>
-        </div>
-        <ul class="menu-list">
-            <li class="menu-item"><a href="/" class="menu-link">Home</a></li>
-            <li class="menu-item"><a href="#signature" class="menu-link">Signature Perfume</a></li>
-            <li class="menu-item"><a href="#personalized" class="menu-link">Personalized</a></li>
-            <li class="menu-item"><a href="#cosmopolitan" class="menu-link">Cosmopolitan</a></li>
-            <li class="menu-item"><a href="#accessories" class="menu-link">Accessories</a></li>
-            <li class="menu-item"><a href="#about" class="menu-link">About Us</a></li>
-            <li class="menu-item"><a href="#stores" class="menu-link">Our Stores</a></li>
-            <li class="menu-item"><a href="#faq" class="menu-link">FAQ</a></li>
-        </ul>
-    </div>
+@extends('layouts.app')
+
+@section('title', 'India\'s First Perfume Bar')
+
+@push('styles')
+<style>
+    /* Hero Slider */
+    .hero-slider { position: relative; width: 100%; height: 50vh; overflow: hidden; }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
+    .slide.active { opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .slider-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+    .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; transition: background 0.3s; }
+    .dot.active { background: var(--white); }
+
+    /* Common Section */
+    .section { padding: 40px 15px; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 30px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--black); }
+    .section-title em { font-style: italic; font-weight: 400; font-family: 'Playfair Display', serif; }
+
+    /* Product Grid */
+    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+    .product-card:hover { transform: translateY(-5px); }
+    .product-image-wrapper { position: relative; aspect-ratio: 1; background: var(--bg-light); overflow: hidden; }
+    .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .product-card:hover .product-image { transform: scale(1.05); }
+    .product-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--white); padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; z-index: 1; }
+    .product-info { padding: 15px; text-align: center; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 5px; color: var(--black); }
+    .product-price { font-size: 14px; font-weight: 700; color: var(--black); }
+    .product-price span { font-weight: 400; color: var(--text-light); font-size: 12px; margin-right: 5px; }
+    .view-all-btn { display: block; width: max-content; margin: 40px auto 0; padding: 12px 30px; background: var(--black); color: var(--white); text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 14px; transition: background 0.3s; }
+    .view-all-btn:hover { background: var(--gold); }
+
+    /* Store Section */
+    .store-section { background: var(--black); color: var(--white); padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
+    .store-count { font-size: 120px; font-weight: 900; line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(212, 165, 116, 0.2); margin-bottom: -40px; position: relative; z-index: 0; }
+    .store-title { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; color: var(--white); }
+    .store-subtitle { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; font-size: 14px; font-weight: 600; }
+    .store-btn { display: inline-block; border: 2px solid var(--white); color: var(--white); padding: 12px 30px; text-decoration: none; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; transition: all 0.3s; margin-bottom: 40px; position: relative; z-index: 1; font-weight: 700; }
+    .store-btn:hover { background: var(--white); color: var(--black); }
+    .store-description { max-width: 600px; margin: 0 auto; font-size: 15px; opacity: 0.8; line-height: 1.8; position: relative; z-index: 1; }
+
+    /* Category Grid */
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .category-card { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; }
+    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .category-card:hover img { transform: scale(1.05); }
+    .category-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%); display: flex; align-items: flex-end; justify-content: center; color: var(--white); text-align: center; padding: 30px; }
+    .category-name { font-weight: 800; font-size: 24px; margin-bottom: 5px; letter-spacing: 1px; text-transform: uppercase; font-family: 'Playfair Display', serif; }
+    .category-desc { font-style: italic; font-size: 14px; opacity: 0.9; }
+
+    /* Cosmopolitan */
+    .cosmopolitan-section { background: #111; padding: 80px 20px; color: var(--white); text-align: center; }
+    .cosmo-header { margin-bottom: 50px; }
+    .cosmo-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); margin-bottom: 15px; }
+    .cosmo-subtitle { font-size: 15px; opacity: 0.7; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+    .cosmopolitan-section .product-card { background: #222; color: var(--white); border: 1px solid #333; }
+    .cosmopolitan-section .product-image-wrapper { background: #1a1a1a; }
+    .cosmopolitan-section .product-name { color: var(--white); }
+    .cosmopolitan-section .product-price { color: var(--gold); }
+    .cosmopolitan-section .product-price span { color: rgba(255,255,255,0.4); }
+
+    /* Video Section */
+    .video-section { position: relative; width: 100%; height: 60vh; overflow: hidden; }
+    .video-section video { width: 100%; height: 100%; object-fit: cover; }
+    .video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+    .video-text { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--white); font-weight: 700; text-align: center; padding: 20px; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+    /* Gender Grid */
+    .gender-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .gender-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .gender-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s; }
+    .gender-card:hover img { transform: scale(1.05); }
+    .gender-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); padding: 30px 10px 15px; text-align: center; }
+    .gender-title { color: var(--white); font-size: 14px; font-weight: 700; letter-spacing: 2px; }
+
+    /* Testimonials */
+    .testimonials { background: var(--bg-light); padding: 80px 20px; }
+    .testimonial-slider { display: flex; overflow-x: auto; gap: 20px; padding: 10px 5px 30px; scrollbar-width: none; -ms-overflow-style: none; }
+    .testimonial-slider::-webkit-scrollbar { display: none; }
+    .testimonial-card { min-width: 300px; background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03); }
+    .testimonial-text { font-size: 16px; line-height: 1.8; margin-bottom: 25px; color: var(--text); font-style: italic; }
+    .testimonial-author { font-weight: 700; color: var(--black); font-size: 15px; margin-bottom: 5px; }
+    .testimonial-location { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Press */
+    .press-section { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); }
+    .press-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 40px; color: var(--black); }
+    .press-slider { display: flex; justify-content: center; gap: 40px; align-items: center; flex-wrap: wrap; opacity: 0.6; }
+    .press-logo { height: 25px; object-fit: contain; filter: grayscale(100%); transition: filter 0.3s, opacity 0.3s; }
+    .press-logo:hover { filter: grayscale(0%); opacity: 1; }
+
+    /* About Section */
+    .about-section { display: grid; gap: 40px; padding: 80px 20px; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .about-title { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 25px; line-height: 1.2; color: var(--black); }
+    .about-text { margin-bottom: 25px; line-height: 1.9; color: var(--text-light); font-size: 16px; }
+    .about-text strong { color: var(--black); }
+    .about-btn { display: inline-block; background: var(--black); color: var(--white); padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s; }
+    .about-btn:hover { transform: translateY(-3px); }
+
+    /* Blog */
+    .blog-grid { display: grid; gap: 25px; }
+    .blog-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s; }
+    .blog-card:hover { transform: translateY(-5px); }
+    .blog-image { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .blog-content { padding: 25px; }
+    .blog-date { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .blog-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 15px; line-height: 1.4; color: var(--black); font-weight: 700; }
+    .blog-link { color: var(--black); text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+    /* Features */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 50px 20px; border-top: 1px solid var(--border); text-align: center; background: var(--white); }
+    .feature-icon { font-size: 32px; margin-bottom: 15px; }
+    .feature-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; color: var(--black); }
+    .feature-text { font-size: 12px; color: var(--text-light); line-height: 1.5; padding: 0 10px; }
+
+    /* Popup */
+    .popup-newsletter { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--white); padding: 50px; border-radius: 20px; text-align: center; max-width: 450px; width: 90%; z-index: 2000; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .popup-newsletter.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: all; }
+    .popup-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 30px; cursor: pointer; color: #ccc; transition: color 0.3s; }
+    .popup-close:hover { color: var(--black); }
+    .popup-tag { font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+    .popup-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; color: var(--black); }
+    .popup-subtitle { font-size: 14px; letter-spacing: 3px; margin-bottom: 25px; font-weight: 600; color: var(--text-light); }
+    .popup-code { background: #fafafa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 2px dashed var(--gold); }
+    .popup-code-text { font-size: 11px; font-weight: 700; color: var(--text-light); margin-bottom: 5px; text-transform: uppercase; }
+    .popup-code-value { font-size: 24px; font-weight: 900; color: var(--black); letter-spacing: 2px; }
+
+    /* Desktop Media Queries */
+    @media (min-width: 768px) {
+        .section { padding: 80px 20px; }
+        .hero-slider { height: 90vh; }
+        .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .category-grid { grid-template-columns: repeat(3, 1fr); }
+        .blog-grid { grid-template-columns: repeat(3, 1fr); }
+        .about-section { grid-template-columns: 1fr 1px; }
+        /* Fix for about section grid column count - intended to be 2 column */
+        .about-section { grid-template-columns: 1fr 1fr; gap: 60px; }
+        .video-text { font-size: 56px; }
+        .section-title { font-size: 42px; }
+        .store-count { font-size: 160px; margin-bottom: -55px; }
+        .store-title { font-size: 48px; }
+    }
+</style>
+@endpush
+
+@section('content')
 
     <!-- Hero Slider -->
     <div class="hero-slider">
@@ -1418,49 +487,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-logo">MYOP</div>
-        <p class="footer-description">India's first perfume bar offering high-quality, long-lasting fragrances with exceptional expertise.</p>
-        <div class="footer-social">
-            <a href="#" class="social-btn">📘</a>
-            <a href="#" class="social-btn">📷</a>
-            <a href="#" class="social-btn">▶️</a>
-            <a href="#" class="social-btn">📌</a>
-        </div>
-
-        <div class="footer-section">
-            <h3 class="footer-heading">Quick Links</h3>
-            <ul class="footer-links">
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/stores">Store Locator</a></li>
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-section">
-            <h3 class="footer-heading">Contact</h3>
-            <ul class="footer-links">
-                <li><a href="tel:+917306900600">+91 730 690 0600</a></li>
-                <li><a href="mailto:support@myop.in">support@myop.in</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-section">
-            <h3 class="footer-heading">Newsletter</h3>
-            <p class="footer-description">Stay updated with offers & new launches</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Your email" class="newsletter-input">
-                <button type="submit" class="newsletter-btn">→</button>
-            </form>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Make Your Own Perfume. All rights reserved.</p>
-        </div>
-    </footer>
-
     <!-- Popup Newsletter -->
     <div class="menu-overlay" id="popupOverlay"></div>
     <div class="popup-newsletter" id="popup">
@@ -1478,25 +504,16 @@
         </form>
     </div>
 
-    <!-- Quick Action Button -->
-    <div class="quick-action">
-        <button class="action-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
-    </div>
+@endsection
 
-    <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('menuOverlay');
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
+@push('scripts')
+<script>
+    // Hero Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
 
-        // Hero Slider
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-
+    if (slides.length > 0) {
         function showSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
             dots.forEach(d => d.classList.remove('active'));
@@ -1517,55 +534,26 @@
                 showSlide(i);
             });
         });
+    }
 
-        // Popup
-        setTimeout(() => {
-            document.getElementById('popup').classList.add('active');
-            document.getElementById('popupOverlay').classList.add('active');
-        }, 5000);
-
-        function closePopup() {
-            document.getElementById('popup').classList.remove('active');
-            document.getElementById('popupOverlay').classList.remove('active');
+    // Popup
+    setTimeout(() => {
+        const popup = document.getElementById('popup');
+        const alertOverlay = document.getElementById('popupOverlay');
+        if(popup && alertOverlay) {
+            popup.classList.add('active');
+            alertOverlay.classList.add('active');
         }
+    }, 5000);
 
-        document.getElementById('popupOverlay').addEventListener('click', closePopup);
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        const alertOverlay = document.getElementById('popupOverlay');
+        if(popup) popup.classList.remove('active');
+        if(alertOverlay) alertOverlay.classList.remove('active');
+    }
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    toggleMenu();
-                }
-            });
-        });
-
-        // Lazy Loading Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.section, .product-card, .category-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Prevent body scroll when menu is open
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuObserver = new MutationObserver(() => {
-            if (mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-        menuObserver.observe(mobileMenu, { attributes: true, attributeFilter: ['class'] });
-    </script>
-</body>
-</html>
+    const alertOverlay = document.getElementById('popupOverlay');
+    if(alertOverlay) alertOverlay.addEventListener('click', closePopup);
+</script>
+@endpush
