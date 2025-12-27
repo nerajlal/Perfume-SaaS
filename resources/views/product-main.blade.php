@@ -327,24 +327,35 @@
         padding: 12px 15px;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         z-index: 99;
+        display: flex;
+        gap: 10px;
     }
 
-    .add-to-cart-btn {
-        width: 100%;
+    .add-to-cart-btn, .buy-now-btn {
+        flex: 1;
         padding: 16px;
-        background: var(--black);
-        color: var(--white);
         border: none;
         border-radius: 12px;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 1px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 5px;
+    }
+
+    .add-to-cart-btn {
+        background: var(--white);
+        color: var(--black);
+        border: 2px solid var(--black);
+    }
+
+    .buy-now-btn {
+        background: var(--black);
+        color: var(--white);
     }
 
     .add-to-cart-btn:active {
@@ -685,11 +696,11 @@
             </div>
         </div>
         <div class="thumbnail-strip">
-            <img src="https://myop.in/cdn/shop/files/inglorious_2fe7f645-0169-4447-b197-1b3cad3f6ba5.webp?v=1752146385&width=416" class="thumbnail active" onclick="changeImage(this, 0)" alt="View 1">
-            <img src="https://myop.in/cdn/shop/files/inglorious_notes.webp?v=1759559980&width=416" class="thumbnail" onclick="changeImage(this, 1)" alt="View 2">
-            <img src="https://myop.in/cdn/shop/files/inglorious_sensation.webp?v=1759559980&width=416" class="thumbnail" onclick="changeImage(this, 2)" alt="View 3">
-            <img src="https://myop.in/cdn/shop/files/bottle_options_for_website.webp?v=1764337765&width=416" class="thumbnail" onclick="changeImage(this, 3)" alt="View 4">
-            <img src="https://myop.in/cdn/shop/files/inglorious_79f92dac-1273-4a41-afc5-4954e0e5ff9e.webp?v=1759559980&width=416" class="thumbnail" onclick="changeImage(this, 4)" alt="View 5">
+            <img src="https://myop.in/cdn/shop/files/inglorious_2fe7f645-0169-4447-b197-1b3cad3f6ba5.webp?v=1752146385&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_2fe7f645-0169-4447-b197-1b3cad3f6ba5.webp?v=1752146385&width=1080" class="thumbnail active" onclick="changeImage(this, 0)" alt="View 1">
+            <img src="https://myop.in/cdn/shop/files/inglorious_notes.webp?v=1759559980&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_notes.webp?v=1759559980&width=1080" class="thumbnail" onclick="changeImage(this, 1)" alt="View 2">
+            <img src="https://myop.in/cdn/shop/files/inglorious_sensation.webp?v=1759559980&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_sensation.webp?v=1759559980&width=1080" class="thumbnail" onclick="changeImage(this, 2)" alt="View 3">
+            <img src="https://myop.in/cdn/shop/files/bottle_options_for_website.webp?v=1764337765&width=416" data-full-img="https://myop.in/cdn/shop/files/bottle_options_for_website.webp?v=1764337765&width=1080" class="thumbnail" onclick="changeImage(this, 3)" alt="View 4">
+            <img src="https://myop.in/cdn/shop/files/inglorious_79f92dac-1273-4a41-afc5-4954e0e5ff9e.webp?v=1759559980&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_79f92dac-1273-4a41-afc5-4954e0e5ff9e.webp?v=1759559980&width=1080" class="thumbnail" onclick="changeImage(this, 4)" alt="View 5">
         </div>
     </div>
 
@@ -759,7 +770,7 @@
         <!-- Personality -->
         <div class="personality-section">
             <label class="option-label">Personality</label>
-            <img src="https://myop.in/cdn/shop/files/Men_allday_persnality.png?v=1715808037&width=1030" alt="Personality" class="personality-image">
+            <img src="https://myop.in/cdn/shop/files/Men_allday_personality.png?v=1715808037&width=1030" alt="Personality" class="personality-image">
         </div>
 
         <!-- Quantity -->
@@ -773,7 +784,7 @@
         </div>
 
         <!-- Share -->
-        <div class="share-section">
+        <!-- <div class="share-section">
             <div class="share-title">Share Product</div>
             <div class="share-buttons">
                 <button class="share-btn" onclick="share('facebook')">📘</button>
@@ -781,7 +792,7 @@
                 <button class="share-btn" onclick="share('whatsapp')">💬</button>
                 <button class="share-btn" onclick="share('email')">✉️</button>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- Product Details Accordion -->
@@ -941,9 +952,10 @@
     <!-- Sticky Bottom Bar -->
     <div class="sticky-bottom">
         <button class="add-to-cart-btn" onclick="addToCart()">
-            <span>Add to Cart</span>
-            <span>•</span>
-            <span id="cartPrice">₹929</span>
+            Add to Cart
+        </button>
+        <button class="buy-now-btn" onclick="window.location.href='/checkout'">
+            Buy Now
         </button>
     </div>
 
@@ -954,29 +966,53 @@
 
 @push('scripts')
 <script>
+(function() {
+    // State variables
     let currentImageIndex = 0;
     let quantity = 1;
     let currentPrice = 929;
 
-    // Image Gallery
-    function changeImage(thumbnail, index) {
-        const mainImage = document.getElementById('mainImage');
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const dots = document.querySelectorAll('.image-dot');
+    // Helper: Update Price Display
+    function updatePrice() {
+        const total = currentPrice * quantity;
+        const productPriceEl = document.getElementById('productPrice');
+        const cartPriceEl = document.getElementById('cartPrice');
+        
+        if (productPriceEl) {
+            productPriceEl.textContent = `Rs. ${currentPrice.toLocaleString()}.00`;
+        }
+        if (cartPriceEl) {
+            cartPriceEl.textContent = `₹${total.toLocaleString()}`;
+        }
+    }
 
-        mainImage.src = thumbnail.src.replace('width=416', 'width=1080');
+    // Expose functions to window
+    window.changeImage = function(thumbnail, index) {
+        const mainImage = document.getElementById('mainImage');
+        const gallery = document.querySelector('.image-gallery');
+        
+        if (!mainImage || !gallery) return;
+
+        const thumbnails = gallery.querySelectorAll('.thumbnail');
+        const dots = gallery.querySelectorAll('.image-dot');
+        const fullImgSrc = thumbnail.getAttribute('data-full-img');
+
+        if (fullImgSrc) {
+            mainImage.src = fullImgSrc;
+        }
         
         thumbnails.forEach(t => t.classList.remove('active'));
         thumbnail.classList.add('active');
 
-        dots.forEach(d => d.classList.remove('active'));
-        dots[index].classList.add('active');
+        if (dots.length > index) {
+            dots.forEach(d => d.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
 
         currentImageIndex = index;
-    }
+    };
 
-    // Size Selection
-    function selectSize(element) {
+    window.selectSize = function(element) {
         document.querySelectorAll('.size-option').forEach(opt => {
             opt.classList.remove('active');
         });
@@ -985,33 +1021,27 @@
         const price = element.getAttribute('data-price');
         currentPrice = parseInt(price);
         updatePrice();
-    }
+    };
 
-    function updatePrice() {
-        const total = currentPrice * quantity;
-        document.getElementById('productPrice').textContent = `Rs. ${currentPrice.toLocaleString()}.00`;
-        document.getElementById('cartPrice').textContent = `₹${total.toLocaleString()}`;
-    }
-
-    // Quantity Controls
-    function increaseQty() {
+    window.increaseQty = function() {
         quantity++;
-        document.getElementById('quantity').textContent = quantity;
+        const qtyEl = document.getElementById('quantity');
+        if(qtyEl) qtyEl.textContent = quantity;
         updatePrice();
-    }
+    };
 
-    function decreaseQty() {
+    window.decreaseQty = function() {
         if (quantity > 1) {
             quantity--;
-            document.getElementById('quantity').textContent = quantity;
+            const qtyEl = document.getElementById('quantity');
+            if(qtyEl) qtyEl.textContent = quantity;
             updatePrice();
         }
-    }
+    };
 
-    // Add to Cart
-    function addToCart() {
+    window.addToCart = function() {
         const toast = document.getElementById('toast');
-        toast.classList.add('show');
+        if(toast) toast.classList.add('show');
 
         // Update cart count
         const cartCount = document.querySelector('.cart-count');
@@ -1021,18 +1051,19 @@
         }
 
         // Hide toast after 2 seconds
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2000);
+        if(toast) {
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
 
         // Haptic feedback on mobile
         if (navigator.vibrate) {
             navigator.vibrate(50);
         }
-    }
+    };
 
-    // Accordion Toggle
-    function toggleAccordion(header) {
+    window.toggleAccordion = function(header) {
         const content = header.nextElementSibling;
         const isActive = header.classList.contains('active');
 
@@ -1047,19 +1078,17 @@
             header.classList.add('active');
             content.classList.add('active');
         }
-    }
+    };
 
-    // FAQ Toggle
-    function toggleFAQ(question) {
+    window.toggleFAQ = function(question) {
         const answer = question.nextElementSibling;
         const isActive = question.classList.contains('active');
 
         question.classList.toggle('active');
         answer.classList.toggle('active');
-    }
+    };
 
-    // Share Function
-    function share(platform) {
+    window.share = function(platform) {
         const url = window.location.href;
         const text = 'Check out Inglorious perfume from MYOP!';
 
@@ -1077,67 +1106,66 @@
                 window.location.href = `mailto:?subject=${text}&body=${url}`;
                 break;
         }
-    }
+    };
 
-    // Touch Swipe for Image Gallery
-    let touchStartX = 0;
-    let touchEndX = 0;
+    // Initialization and Event Key Bindings
+    document.addEventListener('DOMContentLoaded', () => {
+        // Touch Swipe for Image Gallery
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-    const imageContainer = document.querySelector('.main-image-container');
+        const imageContainer = document.querySelector('.main-image-container');
 
-    if(imageContainer){
-        imageContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
+        if(imageContainer){
+            imageContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
 
-        imageContainer.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-    }
+            imageContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+        }
 
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            const gallery = document.querySelector('.image-gallery');
+            if (!gallery) return;
+            
+            const thumbnails = gallery.querySelectorAll('.thumbnail');
 
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0 && currentImageIndex < 4) {
-                // Swipe left - next image
-                currentImageIndex++;
-                const nextThumb = document.querySelectorAll('.thumbnail')[currentImageIndex];
-                changeImage(nextThumb, currentImageIndex);
-            } else if (diff < 0 && currentImageIndex > 0) {
-                // Swipe right - previous image
-                currentImageIndex--;
-                const prevThumb = document.querySelectorAll('.thumbnail')[currentImageIndex];
-                changeImage(prevThumb, currentImageIndex);
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentImageIndex < thumbnails.length - 1) {
+                    // Swipe left - next image
+                    window.changeImage(thumbnails[currentImageIndex + 1], currentImageIndex + 1);
+                } else if (diff < 0 && currentImageIndex > 0) {
+                    // Swipe right - previous image
+                    window.changeImage(thumbnails[currentImageIndex - 1], currentImageIndex - 1);
+                }
             }
         }
-    }
 
-    // Smooth Scroll Animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
+        // Smooth Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.option-section, .notes-card, .detail-accordion, .review-card').forEach(el => {
+            observer.observe(el);
         });
-    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.option-section, .notes-card, .detail-accordion, .review-card').forEach(el => {
-        observer.observe(el);
+        // Prevent scroll when at top (iOS bounce fix)
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
     });
-
-    // Prevent scroll when at top (iOS bounce fix)
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down
-        } else {
-            // Scrolling up
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }, false);
+})();
 </script>
 @endpush

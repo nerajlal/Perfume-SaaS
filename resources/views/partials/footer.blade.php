@@ -1,43 +1,61 @@
 <!-- Footer -->
 <footer>
-    <div class="footer-logo">Nurah Perfumes</div>
-    <p class="footer-description">India's first perfume bar offering high-quality, long-lasting fragrances with exceptional expertise.</p>
-    <div class="footer-social">
-        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
-        <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
-    </div>
+    <div class="footer-content">
+        <!-- Brand Column -->
+        <div class="footer-col">
+            <div class="footer-logo">Nurah.</div>
+            <p class="footer-tagline">Crafting memories through scents. India's first perfume bar offering exceptional, long-lasting fragrances.</p>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+            </div>
+        </div>
 
-    <div class="footer-section">
-        <h3 class="footer-heading">Quick Links</h3>
-        <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Store Locator</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </div>
+        <!-- Shop Column -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Shop</h3>
+            <ul class="footer-links">
+                <li><a href="{{ route('collection', ['category' => 'fresh']) }}">Fresh Collection</a></li>
+                <li><a href="{{ route('collection', ['category' => 'oriental-woody']) }}">Oriental & Woody</a></li>
+                <li><a href="{{ route('collection', ['category' => 'floral']) }}">Floral Collection</a></li>
+                <li><a href="{{ route('all-products') }}">All Products</a></li>
+                <li><a href="{{ route('cosmopolitan') }}">Cosmopolitan</a></li>
+            </ul>
+        </div>
 
-    <div class="footer-section">
-        <h3 class="footer-heading">Contact</h3>
-        <ul class="footer-links">
-            <li><a href="tel:+917306900600">+91 730 690 0600</a></li>
-            <li><a href="mailto:support@burah.in">support@nurah.in</a></li>
-        </ul>
-    </div>
+        <!-- Support Column -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Support</h3>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Store Locator</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns & Exchanges</a></li>
+            </ul>
+        </div>
 
-    <div class="footer-section">
-        <h3 class="footer-heading">Newsletter</h3>
-        <p class="footer-description">Stay updated with offers & new launches</p>
-        <form class="newsletter-form">
-            <input type="email" placeholder="Your email" class="newsletter-input">
-            <button type="submit" class="newsletter-btn"><i class="fas fa-arrow-right"></i></button>
-        </form>
+        <!-- Newsletter Column -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Newsletter</h3>
+            <p class="newsletter-text">Subscribe to receive updates, access to exclusive deals, and more.</p>
+            <form class="footer-form">
+                <input type="email" placeholder="Enter your email" class="footer-input">
+                <button type="submit" class="footer-btn">Join</button>
+            </form>
+        </div>
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Nurah Perfumes. All rights reserved.</p>
+        <div class="copyright">© 2025 Nurah Perfumes. All rights reserved.</div>
+        <div class="payment-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-google-pay"></i>
+        </div>
     </div>
 </footer>
 

@@ -21,7 +21,7 @@
 
     /* Product Grid */
     .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+    .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-decoration: none; color: inherit; display: block; }
     .product-card:hover { transform: translateY(-5px); }
     .product-image-wrapper { position: relative; aspect-ratio: 1; background: var(--bg-light); overflow: hidden; }
     .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
@@ -45,7 +45,7 @@
 
     /* Category Grid */
     .category-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    .category-card { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; }
+    .category-card { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; display: block; text-decoration: none; color: inherit; }
     .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
     .category-card:hover img { transform: scale(1.05); }
     .category-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%); display: flex; align-items: flex-end; justify-content: center; color: var(--white); text-align: center; padding: 30px; }
@@ -71,7 +71,7 @@
 
     /* Gender Grid */
     .gender-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .gender-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .gender-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; display: block; text-decoration: none; color: inherit; }
     .gender-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s; }
     .gender-card:hover img { transform: scale(1.05); }
     .gender-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); padding: 30px 10px 15px; text-align: center; }
@@ -182,7 +182,7 @@
             <h2 class="section-title">Discover <em>Our Bestsellers</em></h2>
         </div>
         <div class="product-grid">
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <span class="product-badge">New</span>
                     <img src="https://myop.in/cdn/shop/files/Sandal_Veer_Product_Thumbnail.webp?v=1764918274&width=1080" alt="Sandal Veer" class="product-image">
@@ -191,9 +191,9 @@
                     <h3 class="product-name">Sandal Veer</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <span class="product-badge">New</span>
                     <img src="https://myop.in/cdn/shop/files/marshamallow_fluff_thumbnail.webp?v=1753800557&width=1080" alt="Marshmallow Fluff" class="product-image">
@@ -202,9 +202,9 @@
                     <h3 class="product-name">Marshmallow Fluff</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/purple_mystique_157c687d-d1f0-4b6a-bce9-aa8db40162b8.webp?v=1752146267&width=1080" alt="Purple Mystique" class="product-image">
                 </div>
@@ -212,9 +212,9 @@
                     <h3 class="product-name">Purple Mystique</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/bangalore_bloom.webp?v=1752146312&width=1080" alt="Bangalore Bloom" class="product-image">
                 </div>
@@ -222,9 +222,9 @@
                     <h3 class="product-name">Bangalore Bloom</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/fruit_punch_e6f7349a-384a-4764-ac3b-354b8aec8894.webp?v=1752146412&width=1080" alt="Fruit Punch" class="product-image">
                 </div>
@@ -232,9 +232,9 @@
                     <h3 class="product-name">Fruit Punch</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/one_of_a_kind_9c41c1b7-c0fb-459a-b874-26f064cee7d6.webp?v=1752146251&width=1080" alt="One of a Kind" class="product-image">
                 </div>
@@ -242,9 +242,9 @@
                     <h3 class="product-name">One of a Kind</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                 </div>
-            </div>
+            </a>
         </div>
-        <a href="/products" class="view-all-btn">View All Products</a>
+        <a href="/all-products" class="view-all-btn">View All Products</a>
     </section>
 
     <!-- Store Section -->
@@ -264,7 +264,7 @@
             <h2 class="section-title">Our <em>Fragrances</em></h2>
         </div>
         <div class="category-grid">
-            <div class="category-card">
+            <a href="/collections?category=fresh" class="category-card">
                 <img src="https://myop.in/cdn/shop/files/fresh_1.webp?v=1714048533&width=1195" alt="Fresh">
                 <div class="category-overlay">
                     <div>
@@ -272,9 +272,9 @@
                         <p class="category-desc">Energize. Vitalize. Awaken.</p>
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="category-card">
+            <a href="/collections?category=oriental-woody" class="category-card">
                 <img src="https://myop.in/cdn/shop/files/woody__oriental_1.webp?v=1714048563&width=1195" alt="Oriental/Woody">
                 <div class="category-overlay">
                     <div>
@@ -282,9 +282,9 @@
                         <p class="category-desc">Exotic. Sensual. Subtle.</p>
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="category-card">
+            <a href="/collections?category=floral" class="category-card">
                 <img src="https://myop.in/cdn/shop/files/floral_1.webp?v=1714048608&width=1195" alt="Floral">
                 <div class="category-overlay">
                     <div>
@@ -292,7 +292,7 @@
                         <p class="category-desc">Fruity. Bloom. Candylicious.</p>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -303,7 +303,7 @@
             <p class="cosmo-subtitle">Embark On a Sensory Voyage with the All-New Cosmopolitan Collection.</p>
         </div>
         <div class="product-grid">
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/oud_de_beirut_e46c1f48-205a-4534-bdb7-4a2b35e8ba0a.webp?v=1752146209&width=1080" alt="Oud De Beirut" class="product-image">
                 </div>
@@ -311,9 +311,9 @@
                     <h3 class="product-name">Oud De Beirut</h3>
                     <p class="product-price"><span>From</span> ₹3,499</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/california.webp?v=1752146216&width=1080" alt="California Sunshine" class="product-image">
                 </div>
@@ -321,9 +321,9 @@
                     <h3 class="product-name">California Sunshine</h3>
                     <p class="product-price"><span>From</span> ₹3,499</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card">
+            <a href="{{ route('product') }}" class="product-card">
                 <div class="product-image-wrapper">
                     <img src="https://myop.in/cdn/shop/files/MOROCCAN_ROSE.webp?v=1752146213&width=1080" alt="Moroccan Rose" class="product-image">
                 </div>
@@ -331,7 +331,7 @@
                     <h3 class="product-name">Moroccan Rose</h3>
                     <p class="product-price"><span>From</span> ₹3,499</p>
                 </div>
-            </div>
+            </a>
         </div>
         <a href="/cosmopolitan" class="view-all-btn" style="background: var(--gold);">Shop Collection</a>
     </div>
@@ -352,26 +352,26 @@
             <h2 class="section-title">Shop By <em>Gender</em></h2>
         </div>
         <div class="gender-grid">
-            <div class="gender-card">
+            <a href="/collections?gender=for-him" class="gender-card">
                 <img src="https://myop.in/cdn/shop/files/For_Him.webp?v=1715237737&width=1165" alt="For Him">
                 <div class="gender-overlay">
                     <h3 class="gender-title">FOR HIM</h3>
                 </div>
-            </div>
+            </a>
 
-            <div class="gender-card">
+            <a href="/collections?gender=for-her" class="gender-card">
                 <img src="https://myop.in/cdn/shop/files/For_Her.webp?v=1714541130&width=1165" alt="For Her">
                 <div class="gender-overlay">
                     <h3 class="gender-title">FOR HER</h3>
                 </div>
-            </div>
+            </a>
 
-            <div class="gender-card">
+            <a href="/collections?gender=unisex" class="gender-card">
                 <img src="https://myop.in/cdn/shop/files/Unisex_copy.webp?v=1718107909&width=3837" alt="Unisex">
                 <div class="gender-overlay">
                     <h3 class="gender-title">UNISEX</h3>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 

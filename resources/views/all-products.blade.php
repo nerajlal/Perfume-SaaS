@@ -760,7 +760,7 @@
     <div class="products-container">
         <div class="product-grid" id="productGrid">
             <!-- Product 1 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/the_legend_b941e444-0b65-48f4-8f1c-85f520434ef9.webp?v=1752146445&width=1080" alt="The Legend" class="product-image">
@@ -773,7 +773,7 @@
             </div>
 
             <!-- Product 2 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/inglorious_2fe7f645-0169-4447-b197-1b3cad3f6ba5.webp?v=1752146385&width=1080" alt="Inglorious" class="product-image">
@@ -786,7 +786,7 @@
             </div>
 
             <!-- Product 3 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/guilt_for_men_db653709-2ed6-419e-b778-2c42f97a9525.webp?v=1752146489&width=1080" alt="Guilt for Men" class="product-image">
@@ -799,7 +799,7 @@
             </div>
 
             <!-- Product 4 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/the_valentine_93fbeb79-eb84-4246-af91-508494f5bd13.jpg?v=1752146452&width=2000" alt="The Valentine" class="product-image">
@@ -812,7 +812,7 @@
             </div>
 
             <!-- Product 5 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/aqua_game_5e7d7c66-a6ef-4b99-8304-ddcb9e7b9f31.webp?v=1752146361&width=1080" alt="Aqua Game" class="product-image">
@@ -825,7 +825,7 @@
             </div>
 
             <!-- Product 6 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <span class="product-badge">Popular</span>
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
@@ -839,7 +839,7 @@
             </div>
 
             <!-- Product 7 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/aqua_marine_17199988-9404-4ac0-87df-cb50ec619aa8.webp?v=1752146497&width=1080" alt="Aqua Marine" class="product-image">
@@ -852,7 +852,7 @@
             </div>
 
             <!-- Product 8 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/Blue_61fa9b7f-ee12-4b11-86e1-5c2cd73efaa0.webp?v=1752146472&width=4096" alt="Blue" class="product-image">
@@ -865,7 +865,7 @@
             </div>
 
             <!-- Product 9 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <span class="product-badge">New</span>
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
@@ -879,7 +879,7 @@
             </div>
 
             <!-- Product 10 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/afterparty.webp?v=1752146181&width=1080" alt="Afterparty" class="product-image">
@@ -892,7 +892,7 @@
             </div>
 
             <!-- Product 11 -->
-            <div onclick="window.location.href='{{ route('product') }}'" class="product-card">
+            <div onclick="window.location.href='/product'" class="product-card">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)">♡</button>
                     <img src="https://myop.in/cdn/shop/files/nightfall.webp?v=1752146242&width=1080" alt="Nightfall" class="product-image">
