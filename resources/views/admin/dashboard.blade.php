@@ -30,44 +30,6 @@
     
 <!-- </div> -->
 
-<!-- Quick Actions / Guide -->
-<div class="card bg-white rounded-lg border border-gray-200 overflow-hidden">
-    <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-        <h2 class="text-sm font-semibold text-gray-700">Setup Guide</h2>
-        <span class="text-xs text-gray-500">2 of 5 completed</span>
-    </div>
-    <div class="p-0">
-        <div class="border-b border-gray-100 p-4 hover:bg-gray-50 cursor-pointer flex gap-4 transition-colors">
-            <div class="w-6 flex-shrink-0 flex items-center justify-center">
-                <i class="far fa-check-circle text-gray-300 text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h4 class="text-sm font-medium text-gray-800">Add your first perfume product</h4>
-                <p class="text-xs text-gray-500 mt-1">Write a description, add photos, and set pricing for your perfumes.</p>
-                <button class="mt-3 text-sm border font-medium border-gray-300 rounded px-3 py-1.5 hover:bg-gray-50">Add product</button>
-            </div>
-        </div>
-        <div class="border-b border-gray-100 p-4 hover:bg-gray-50 cursor-pointer flex gap-4 transition-colors">
-            <div class="w-6 flex-shrink-0 flex items-center justify-center">
-                <i class="far fa-check-circle text-green-600 text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h4 class="text-sm font-medium text-gray-800 line-through text-gray-400">Customize your online store theme</h4>
-                <p class="text-xs text-gray-400 mt-1">Choose colors, fonts, and layout for your Perfume brand.</p>
-            </div>
-        </div>
-        <div class="p-4 hover:bg-gray-50 cursor-pointer flex gap-4 transition-colors">
-            <div class="w-6 flex-shrink-0 flex items-center justify-center">
-                <i class="far fa-circle text-gray-300 text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h4 class="text-sm font-medium text-gray-800">Add a custom domain</h4>
-                <p class="text-xs text-gray-500 mt-1">Strengthen your brand with a custom domain name.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Recent Orders -->
 <div class="card bg-white rounded-lg border border-gray-200">
     <div class="p-4 border-b border-gray-200 flex justify-between items-center">
