@@ -33,24 +33,38 @@
             <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="font-semibold text-gray-700 text-sm">Media</h2>
-                    <!-- <button type="button" class="text-xs text-blue-600 hover:underline" onclick="document.getElementById('media_upload').click()">Add from URL</button> -->
+                    <button type="button" id="toggleUrlBtn" class="text-xs text-blue-600 hover:underline" onclick="toggleUrlInput()">Add from URL</button>
                 </div>
                 
-                <input type="file" id="media_upload" name="media[]" multiple accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)">
+                <!-- URL Input Section -->
+                <div id="urlInputContainer" class="hidden mb-4 p-3 bg-gray-50 rounded border border-gray-200">
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Image or Video URL</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="mediaUrl" class="flex-1 px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-green-500 focus:border-green-500" placeholder="https://example.com/image.jpg">
+                        <button type="button" onclick="addMediaFromUrl()" class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-100">Add</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">Supports types: .jpg, .png, .gif, .mp4, .mov</p>
+                </div>
+
+                <input type="file" id="media_upload" name="media[]" multiple accept="image/*" class="hidden" onchange="handleFileSelect(event)">
                 
                 <!-- Preview Grid -->
                 <div id="media_preview_grid" class="grid grid-cols-4 gap-4 mb-4 hidden"></div>
 
                 <div id="media_dropzone" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:bg-gray-50 transition-colors cursor-pointer" onclick="document.getElementById('media_upload').click()">
                     <div class="flex flex-col items-center">
-                        <i class="fas fa-cloud-upload-alt text-gray-400 text-2xl mb-2"></i>
-                        <span class="text-gray-600 text-sm font-medium mb-1">Add files</span>
-                        <p class="text-xs text-gray-500">Accepts images, videos, or 3D models</p>
+                        <i class="fas fa-image text-gray-400 text-2xl mb-2"></i>
+                        <span class="text-gray-600 text-sm font-medium mb-1">Add images</span>
+                        <p class="text-xs text-gray-500">Accepts images only (use URL for videos)</p>
                     </div>
                 </div>
             </div>
 
             <script>
+                function toggleUrlInput() {
+                    document.getElementById('urlInputContainer').classList.toggle('hidden');
+                }
+
                 function handleFileSelect(event) {
                     const files = event.target.files;
                     const previewGrid = document.getElementById('media_preview_grid');
@@ -66,18 +80,49 @@
 
                         const reader = new FileReader();
                         reader.onload = function(e) {
-                            const div = document.createElement('div');
-                            div.className = 'aspect-square bg-gray-100 rounded border border-gray-200 relative group overflow-hidden';
-                            div.innerHTML = `
-                                <img src="${e.target.result}" class="w-full h-full object-cover">
-                                <button type="button" class="absolute top-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600">
-                                    <i class="fas fa-trash text-xs"></i>
-                                </button>
-                            `;
-                            previewGrid.appendChild(div);
+                            createPreviewItem(e.target.result, 'image');
                         };
                         reader.readAsDataURL(file);
                     }
+                }
+
+                function addMediaFromUrl() {
+                    const urlInput = document.getElementById('mediaUrl');
+                    const url = urlInput.value.trim();
+                    
+                    if (!url) return;
+                    
+                    document.getElementById('media_preview_grid').classList.remove('hidden');
+                    
+                    // Simple check for video extensions
+                    const isVideo = url.match(/\.(mp4|mov|webm)$/i);
+                    const type = isVideo ? 'video' : 'image';
+                    
+                    createPreviewItem(url, type);
+                    
+                    urlInput.value = '';
+                    toggleUrlInput();
+                }
+
+                function createPreviewItem(src, type) {
+                    const previewGrid = document.getElementById('media_preview_grid');
+                    const div = document.createElement('div');
+                    div.className = 'aspect-square bg-gray-100 rounded border border-gray-200 relative group overflow-hidden flex items-center justify-center bg-black';
+                    
+                    let content = '';
+                    if (type === 'video') {
+                        content = `<video src="${src}" class="w-full h-full object-cover opacity-80"></video><i class="fas fa-play absolute text-white text-2xl opacity-80"></i>`;
+                    } else {
+                        content = `<img src="${src}" class="w-full h-full object-cover">`;
+                    }
+
+                    div.innerHTML = `
+                        ${content}
+                        <button type="button" onclick="this.parentElement.remove()" class="absolute top-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600 z-10">
+                            <i class="fas fa-trash text-xs"></i>
+                        </button>
+                    `;
+                    previewGrid.appendChild(div);
                 }
             </script>
 
@@ -106,6 +151,37 @@
                 </div>
             </div>
             
+
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+            
+            <!-- Status -->
+            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Status</h2>
+                <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    <option value="active">Active</option>
+                    <option value="draft">Draft</option>
+                </select>
+            </div>
+
+            <!-- Organization -->
+            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Organization</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Product type</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Collections</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+
             <!-- Variants -->
             <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
                 <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Variants (Sizes)</h2>
@@ -131,43 +207,6 @@
                         <button type="button" class="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
                             <i class="fas fa-plus"></i> Add custom variant
                         </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Right Column -->
-        <div class="space-y-6">
-            
-            <!-- Status -->
-            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Status</h2>
-                <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    <option value="active">Active</option>
-                    <option value="draft">Draft</option>
-                </select>
-            </div>
-
-            <!-- Organization -->
-            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Organization</h2>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Product type</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Vendor</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Collections</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    </div>
-                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                     </div>
                 </div>
             </div>
