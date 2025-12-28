@@ -3,11 +3,11 @@
 @section('title', 'Customers')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
+    <div class="flex justify-between items-center mb-6">
     <h1 class="text-xl font-semibold text-gray-800">Customers</h1>
     <div class="flex gap-2">
-        <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm">Import</button>
-        <button class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm">Add customer</button>
+        <a href="{{ route('admin.customers.import') }}" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm">Import</a>
+        <a href="{{ route('admin.customers.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm">Add customer</a>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
                  </tr>
             </thead>
              <tbody class="divide-y divide-gray-100">
-                <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='#'">
+                <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.customers.show', 1) }}'">
                     <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
@@ -57,7 +57,7 @@
                     <td class="px-6 py-4">5 orders</td>
                     <td class="px-6 py-4 text-right font-medium text-gray-900">₹12,400.00</td>
                 </tr>
-                 <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='#'">
+                 <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.customers.show', 2) }}'">
                     <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
                     <td class="px-6 py-4">
                          <div class="flex items-center gap-3">
