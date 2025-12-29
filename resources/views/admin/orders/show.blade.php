@@ -12,7 +12,7 @@
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <h1 class="text-xl font-bold text-gray-900">Order #{{ $id }}</h1>
-                <span class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 text-xs font-bold uppercase tracking-wide">Pending</span>
+
                 <span id="fulfillmentBadge" class="px-2 py-1 rounded bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wide">Ordered</span>
             </div>
             <p class="text-sm text-gray-500 mt-1 ml-7">December 28, 2025 at 10:21 am from Online Store</p>
@@ -32,9 +32,12 @@
             <div class="card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
                     <h2 class="font-semibold text-gray-700 text-sm">Order Items (2)</h2>
-                    <span class="text-xs text-gray-500">Location: Warehouse A</span>
+                    <!-- <span class="text-xs text-gray-500">Location: Warehouse A</span> -->
                 </div>
                 <div class="divide-y divide-gray-100">
+                    <div id="trackingInfo" class="hidden p-4 bg-blue-50 border-b border-blue-100">
+                         <p class="text-sm text-blue-800 font-medium">Tracking Number: <span id="trackingNumberDisplay" class="font-bold"></span></p>
+                    </div>
                     <!-- Item 1 -->
                     <div class="p-4 flex gap-4">
                         <div class="w-16 h-16 bg-gray-100 rounded border border-gray-200 flex-shrink-0 flex items-center justify-center">
@@ -66,9 +69,9 @@
                     </div>
                 </div>
                 <!-- Fulfillment Action Area -->
-                <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+                <!-- <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
                     <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-gray-50">Fulfill items</button>
-                </div>
+                </div> -->
             </div>
 
             <!-- Payment Card -->
@@ -174,8 +177,20 @@
         function advanceAction() {
             const btn = document.getElementById('fulfillBtn');
             const badge = document.getElementById('fulfillmentBadge');
+            const trackingDiv = document.getElementById('trackingInfo');
+            const trackingDisplay = document.getElementById('trackingNumberDisplay');
             
             // Simulating Backend Call
+            const originalText = btn.innerText;
+            
+            // Check if we are moving to Shipped to ask for Tracking ID first
+            if (orderStatus === 'processing') {
+                var trackingId = prompt("Please enter the Shipment Tracking ID:");
+                if(trackingId === null || trackingId.trim() === "") {
+                    return; // Cancel action if no ID
+                }
+            }
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
             btn.disabled = true;
             
@@ -199,6 +214,12 @@
                     // Transition to Shipped
                     orderStatus = 'shipped';
                     
+                    // Show Tracking Info
+                    if(trackingDiv && trackingDisplay) {
+                        trackingDisplay.innerText = trackingId;
+                        trackingDiv.classList.remove('hidden');
+                    }
+                    
                     // Update Badge
                     badge.className = 'px-2 py-1 rounded bg-purple-100 text-purple-800 text-xs font-bold uppercase tracking-wide';
                     badge.innerText = 'Shipped';
@@ -208,7 +229,7 @@
                     btn.disabled = false;
                     btn.className = 'bg-indigo-600 text-white px-3 py-2 rounded shadow-sm text-sm font-medium hover:bg-indigo-700 transition-colors';
                     
-                    alert('Order marked as Shipped!');
+                    alert('Order marked as Shipped with Tracking ID: ' + trackingId);
 
                 } else if (orderStatus === 'shipped') {
                     // Transition to Delivered
