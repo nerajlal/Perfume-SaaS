@@ -1,104 +1,84 @@
 @extends('layouts.admin')
 
-@section('title', 'Product Coupons')
+@section('title', 'Discounts')
 
 @section('content')
-<div class="mb-6 flex justify-between items-end">
-    <div>
-        <h1 class="text-2xl font-bold text-gray-900">Product Coupons</h1>
-        <p class="text-sm text-gray-500 mt-1">Create and manage discount coupons for specific products</p>
-    </div>
-    <a href="{{ route('admin.discounts.create') }}" class="bg-teal-700 text-white px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-teal-800 transition-colors flex items-center gap-2">
-        <i class="fas fa-plus"></i> Create Coupon
-    </a>
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-xl font-semibold text-gray-800">Discounts</h1>
+    <a href="{{ route('admin.discounts.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm">Create discount</a>
 </div>
 
 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
-    <!-- Filter Bar -->
-    <div class="p-4 border-b border-gray-200 bg-gray-50 flex items-center gap-4">
-        <label class="text-sm font-semibold text-gray-700">Filter by Status:</label>
-        <select class="border border-gray-300 rounded text-sm py-1.5 px-3 focus:ring-teal-500 focus:border-teal-500 bg-white shadow-sm">
-            <option>Active</option>
-            <option>Expired</option>
-            <option>Inactive</option>
-        </select>
-        <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full font-medium">2 coupons</span>
+    <!-- Toolbar -->
+    <div class="p-4 border-b border-gray-200 flex gap-4 bg-gray-50">
+        <div class="flex-1">
+             <div class="flex items-center gap-4 bg-white border border-gray-300 rounded-md px-3 py-2 text-sm shadow-sm">
+                 <i class="fas fa-search text-gray-400"></i>
+                 <input type="text" placeholder="Search discounts" class="flex-1 outline-none text-gray-700">
+             </div>
+        </div>
+        <button class="px-3 py-2 border border-gray-300 bg-white rounded-md text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+            <i class="fas fa-filter mr-2"></i> Filter
+        </button>
+        <button class="px-3 py-2 border border-gray-300 bg-white rounded-md text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+            <i class="fas fa-sort mr-2"></i> Sort
+        </button>
     </div>
 
     <!-- Table -->
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm text-gray-600">
-            <thead class="bg-gray-50 text-xs uppercase font-bold text-gray-700 border-b border-gray-200">
+            <thead class="bg-gray-50 text-xs uppercase font-medium text-gray-500 border-b border-gray-200">
                 <tr>
-                    <th class="px-6 py-4">Product</th>
-                    <th class="px-6 py-4">Coupon Code</th>
-                    <th class="px-6 py-4">Discount</th>
-                    <th class="px-6 py-4">Valid Period</th>
-                    <th class="px-6 py-4">Status</th>
-                    <th class="px-6 py-4 text-right">Actions</th>
+                    <th class="px-6 py-3 w-16"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></th>
+                    <th class="px-6 py-3">Discount code</th>
+                    <th class="px-6 py-3">Status</th>
+                    <th class="px-6 py-3">Discount</th>
+                    <th class="px-6 py-3">Valid Period</th>
+                    <th class="px-6 py-3 text-right">Used</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                <!-- Row 1 -->
                 <tr class="hover:bg-gray-50 transition-colors">
+                     <td class="px-6 py-4"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
                     <td class="px-6 py-4">
-                        <p class="font-bold text-gray-900">Midnight Oud 50ml</p>
-                        <p class="text-xs text-gray-400">ID: 8385986134195</p>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-gray-900">SY2QA0ZM</span>
+                            <span class="text-xs text-gray-500">Midnight Oud 50ml</span>
+                        </div>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="text-pink-500 font-medium bg-pink-50 px-2 py-1 rounded border border-pink-100">SY2QA0ZM</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded">Active</span>
                     </td>
-                    <td class="px-6 py-4">
-                        <span class="bg-teal-700 text-white text-xs font-bold px-2 py-1 rounded">5.00% off</span>
+                    <td class="px-6 py-4 text-gray-900">
+                        5% off
                     </td>
-                    <td class="px-6 py-4 text-xs text-gray-500">
-                        <p>Dec 20, 2025</p>
-                        <p>to</p>
-                        <p>Dec 31, 2025</p>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full">Active</span>
+                    <td class="px-6 py-4 text-gray-500 text-xs">
+                        Dec 20, 2025 - Dec 31, 2025
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="text-blue-500 hover:text-blue-700 border border-blue-200 hover:border-blue-400 px-3 py-1 rounded bg-white transition-colors flex items-center gap-1">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-3 py-1 rounded bg-white transition-colors flex items-center gap-1">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </div>
+                        0
                     </td>
                 </tr>
-                <!-- Row 2 -->
-                <tr class="hover:bg-gray-50 transition-colors">
+                 <tr class="hover:bg-gray-50 transition-colors">
+                     <td class="px-6 py-4"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
                     <td class="px-6 py-4">
-                        <p class="font-bold text-gray-900">Rose & Amber Set</p>
-                        <p class="text-xs text-gray-400">ID: 8385993834675</p>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-gray-900">HT00XAL8</span>
+                            <span class="text-xs text-gray-500">Rose & Amber Set</span>
+                        </div>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="text-pink-500 font-medium bg-pink-50 px-2 py-1 rounded border border-pink-100">HT00XAL8</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded">Active</span>
                     </td>
-                    <td class="px-6 py-4">
-                        <span class="bg-teal-700 text-white text-xs font-bold px-2 py-1 rounded">10.00% off</span>
+                    <td class="px-6 py-4 text-gray-900">
+                        10% off
                     </td>
-                    <td class="px-6 py-4 text-xs text-gray-500">
-                        <p>Dec 11, 2025</p>
-                        <p>to</p>
-                        <p>Jan 02, 2026</p>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full">Active</span>
+                    <td class="px-6 py-4 text-gray-500 text-xs">
+                        Dec 11, 2025 - Jan 02, 2026
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="text-blue-500 hover:text-blue-700 border border-blue-200 hover:border-blue-400 px-3 py-1 rounded bg-white transition-colors flex items-center gap-1">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-3 py-1 rounded bg-white transition-colors flex items-center gap-1">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </div>
+                        12
                     </td>
                 </tr>
             </tbody>
@@ -106,25 +86,23 @@
     </div>
 </div>
 
-<!-- Footer Stats -->
-<div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-    <div class="grid grid-cols-4 divide-x divide-gray-200 text-center">
-        <div>
-            <div class="text-2xl font-bold text-gray-800">2</div>
-            <div class="text-sm text-gray-500">Total Coupons</div>
-        </div>
-        <div>
-            <div class="text-2xl font-bold text-teal-600">2</div>
-            <div class="text-sm text-gray-500">Active</div>
-        </div>
-        <div>
-            <div class="text-2xl font-bold text-red-600">0</div>
-            <div class="text-sm text-gray-500">Expired</div>
-        </div>
-        <div>
-            <div class="text-2xl font-bold text-gray-400">0</div>
-            <div class="text-sm text-gray-500">Inactive</div>
-        </div>
+<!-- Footer Stats (Styled as simple cards) -->
+<div class="grid grid-cols-4 gap-4 mb-6">
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-800">2</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Total</div>
+    </div>
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-green-600">2</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Active</div>
+    </div>
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-400">0</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Expired</div>
+    </div>
+     <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-400">0</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Inactive</div>
     </div>
 </div>
 @endsection

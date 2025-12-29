@@ -1,136 +1,131 @@
 @extends('layouts.admin')
 
-@section('title', 'Create Coupon')
+@section('title', 'Create Discount')
 
 @section('content')
-<div class="mb-6 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-gray-900">Create Coupon</h1>
-    <div class="text-sm text-gray-500">Shop: variant-test-123457.myshopify.com</div>
-</div>
+<div class="max-w-4xl mx-auto pb-10">
+    <div class="flex items-center gap-4 mb-6">
+        <a href="{{ route('admin.discounts') }}" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1 class="text-xl font-bold text-gray-900">Create discount</h1>
+    </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Main Form -->
-    <div class="lg:col-span-2">
-        <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-            <form action="#" method="POST" class="space-y-6">
-                
+    <form action="#" method="POST" class="space-y-6">
+        
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-6">
                 <!-- Product Search -->
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">
-                        Search Product from Your Store <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm" 
-                           placeholder="Start typing product name (e.g., snowboard)...">
-                    <p class="text-xs text-red-500 mt-1">Type at least 2 characters to search</p>
-                </div>
-
-                <!-- Coupon Code -->
-                <div>
-                     <label class="block text-sm font-semibold text-gray-700 mb-1">
-                        Coupon Code <span class="text-red-500">*</span>
-                    </label>
-                    <div class="flex gap-2">
-                        <input type="text" 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm uppercase font-medium" 
-                               placeholder="E.G., SAVE10">
-                        <button type="button" class="px-3 border border-gray-300 rounded-md bg-gray-50 hover:bg-gray-100 text-gray-600">
-                             <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
-                    <p class="text-gray-400 text-xs mt-1">Example: SAVE10, WELCOME20, FREESHIP</p>
-                </div>
-
-                <!-- Discount Type & Value -->
-                <div class="grid grid-cols-2 gap-6">
+                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Product</h2>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">
-                            Discount Type <span class="text-red-500">*</span>
-                        </label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm bg-white">
-                            <option>Percentage (%)</option>
-                            <option>Fixed Amount</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Search product</label>
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                            <input type="text" class="w-full pl-9 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="Search product name...">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Search for a product to apply this coupon to.</p>
+                    </div>
+                </div>
+
+                <!-- Discount Code -->
+                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Discount code</h2>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Code</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="discountCodeInput" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm uppercase font-medium" placeholder="e.g. SUMMER20">
+                            <button type="button" id="generateCodeBtn" class="text-sm text-green-700 font-medium hover:text-green-800 shrink-0">Generate</button>
+                        </div>
+                        <!-- <p class="text-xs text-gray-500 mt-1">Customers will enter this code at checkout.</p> -->
+                     </div>
+                </div>
+
+                <!-- Value -->
+                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Value</h2>
+                     <div class="grid grid-cols-2 gap-4">
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount type</label>
+                             <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                <option>Percentage</option>
+                                <option>Fixed amount</option>
+                            </select>
+                         </div>
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount value</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="10">
+                         </div>
+                     </div>
+                </div>
+
+                <!-- Active Dates -->
+                 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Active dates</h2>
+                     <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
+                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        </div>
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">End date</label>
+                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-6">
+                 <!-- Status -->
+                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Status</h2>
+                    <div class="flex items-center gap-2">
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                            <option>Active</option>
+                            <option>Draft</option>
                         </select>
                     </div>
-                    <div>
-                         <label class="block text-sm font-semibold text-gray-700 mb-1">
-                            Discount Value <span class="text-red-500">*</span>
-                        </label>
-                        <input type="number" 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm" 
-                               value="10">
-                    </div>
                 </div>
 
-                <!-- Validity Dates -->
-                <div class="grid grid-cols-2 gap-6">
-                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">
-                            Valid From (Optional)
-                        </label>
-                        <div class="relative">
-                            <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm">
-                        </div>
-                    </div>
-                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">
-                            Valid Until (Optional)
-                        </label>
-                        <div class="relative">
-                             <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm">
-                        </div>
-                    </div>
+                <!-- Summary -->
+                 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Summary</h2>
+                    <h3 class="text-sm font-bold text-gray-900 mb-1">SUMMER20</h3>
+                    <ul class="list-disc list-inside text-xs text-gray-600 space-y-1">
+                        <li>Applies to specific products</li>
+                        <li>10% off</li>
+                        <li>Active from today</li>
+                    </ul>
                 </div>
-
-                <!-- Active Toggle -->
-                <div class="flex items-center gap-2 pt-2">
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-blue-600 translate-x-5"/>
-                        <label for="toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-blue-600 cursor-pointer"></label>
-                    </div>
-                    <label for="toggle" class="text-sm font-semibold text-gray-800">Active <span class="font-normal text-gray-500">- Coupon will be displayed on product page</span></label>
-                    
-                    <style>
-                        .toggle-checkbox:checked {
-                            right: 0;
-                            border-color: #10b981; /* teal-500/emerald-500 */
-                            transform: translateX(100%);
-                        }
-                        .toggle-checkbox:checked + .toggle-label {
-                            background-color: #10b981;
-                        }
-                        /* Reset for standard checkbox if needed, but here we custom styling */
-                    </style>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex gap-4 pt-4">
-                    <button type="submit" class="bg-teal-700 text-white px-6 py-2.5 rounded shadow-sm text-sm font-medium hover:bg-teal-800 transition-colors flex items-center gap-2">
-                         <i class="fas fa-check"></i> Create Coupon
-                    </button>
-                    <button type="button" class="bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded shadow-sm text-sm font-medium hover:bg-gray-50 transition-colors">
-                        Cancel
-                    </button>
-                </div>
-
-            </form>
+            </div>
+         </div>
+        
+        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+             <button type="button" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-gray-50">Discard</button>
+            <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-green-800 transition-colors">Save discount</button>
         </div>
-    </div>
 
-    <!-- Sidebar Info -->
-    <div>
-        <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-6 sticky top-6">
-            <h3 class="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
-                <i class="far fa-question-circle text-gray-400"></i> How It Works
-            </h3>
-            <p class="text-sm text-gray-600 mb-3">This coupon will be displayed on the selected product page, showing:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mb-4 pl-1">
-                <li>The coupon code</li>
-                <li>Discount amount</li>
-                <li>Validity period (if set)</li>
-            </ul>
-            <p class="text-sm text-gray-600">Customers can copy the code and use it during checkout.</p>
-        </div>
-    </div>
+    </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const generateBtn = document.getElementById('generateCodeBtn');
+        const codeInput = document.getElementById('discountCodeInput');
+
+        generateBtn.addEventListener('click', function() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            const length = 10;
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            codeInput.value = result;
+        });
+    });
+</script>
+@endpush
