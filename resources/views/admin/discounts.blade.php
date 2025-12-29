@@ -8,6 +8,26 @@
     <a href="{{ route('admin.discounts.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm">Create discount</a>
 </div>
 
+<!-- Stats -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-800">2</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Total</div>
+    </div>
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-green-600">2</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Active</div>
+    </div>
+    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-400">0</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Expired</div>
+    </div>
+     <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div class="text-2xl font-bold text-gray-400">0</div>
+        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Inactive</div>
+    </div>
+</div>
+
 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
     <!-- Toolbar -->
     <div class="p-4 border-b border-gray-200 flex gap-4 bg-gray-50">
@@ -99,23 +119,5 @@
     </div>
 </div>
 
-<!-- Footer Stats (Styled as simple cards) -->
-<div class="grid grid-cols-4 gap-4 mb-6">
-    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
-        <div class="text-2xl font-bold text-gray-800">2</div>
-        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Total</div>
-    </div>
-    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
-        <div class="text-2xl font-bold text-green-600">2</div>
-        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Active</div>
-    </div>
-    <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
-        <div class="text-2xl font-bold text-gray-400">0</div>
-        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Expired</div>
-    </div>
-     <div class="card bg-white rounded-lg border border-gray-200 p-4 text-center">
-        <div class="text-2xl font-bold text-gray-400">0</div>
-        <div class="text-xs text-gray-500 uppercase tracking-wide mt-1">Inactive</div>
-    </div>
-</div>
+
 @endsection
