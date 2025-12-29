@@ -1,4 +1,4 @@
-<aside class="w-64 bg-white border-r border-gray-200 flex-shrink-0 flex flex-col h-full hidden md:flex">
+<aside id="adminSidebar" class="w-64 bg-white border-r border-gray-200 flex-shrink-0 flex flex-col h-full hidden md:flex">
     <div class="p-4 flex items-center justify-between h-16 border-b border-gray-100">
         <div class="flex items-center gap-3">
             <div class="w-8 h-8 bg-gray-900 text-white flex items-center justify-center rounded text-sm font-bold">N</div>

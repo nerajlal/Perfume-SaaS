@@ -1,4 +1,5 @@
 <header class="bg-white border-b border-gray-200 h-14 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
+    <button class="text-gray-400 hover:text-gray-600 p-1 md:hidden" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
     <div class="flex items-center flex-1 max-w-2xl">
         <div class="relative w-full max-w-md">
             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -18,6 +19,7 @@
         </div>
     </div>
 </header>
+    <script src="{{ asset('js/admin-sidebar-toggle.js') }}" defer></script>
 
 <!-- Profile Modal -->
 <div id="profileModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
