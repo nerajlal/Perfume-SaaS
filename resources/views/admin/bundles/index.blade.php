@@ -53,7 +53,7 @@
                     </td>
                     <td class="px-6 py-4"><span class="px-2 py-1 rounded bg-gray-100 text-gray-800 text-xs font-semibold">Draft</span></td>
                     <td class="px-6 py-4">2 products</td>
-                    <td class="px-6 py-4">₹ 0.00</td>
+                    <td class="px-6 py-4">₹ 1000.00</td>
                     <td class="px-6 py-4 text-right">
                         <a href="{{ route('admin.bundles.edit', 2) }}" class="text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" onclick="event.stopPropagation()">
                             <i class="fas fa-pen"></i>
