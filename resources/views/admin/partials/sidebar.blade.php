@@ -71,7 +71,7 @@
             <li>
                  <a href="{{ route('admin.settings.managers') }}" class="sidebar-item {{ request()->routeIs('admin.settings.managers*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
                     <i class="fas fa-users-cog w-5 text-center"></i>
-                    <span>Store Managers</span>
+                    <span>Site Managers</span>
                 </a>
             </li>
         </ul>

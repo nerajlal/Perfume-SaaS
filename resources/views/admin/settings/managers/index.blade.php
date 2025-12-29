@@ -42,13 +42,15 @@
                     <td class="px-6 py-4">john.doe@example.com</td>
                     <td class="px-6 py-4">Chandigarh Store</td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Active
-                        </span>
+                        <!-- Toggle Switch -->
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                            <span class="ml-2 text-xs font-medium text-gray-900">Active</span>
+                        </label>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <button class="text-blue-600 hover:text-blue-900 mr-3 text-xs font-semibold uppercase">Edit</button>
-                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase">Remove</button>
+                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded transition-colors">Remove</button>
                     </td>
                 </tr>
 
@@ -65,13 +67,15 @@
                     <td class="px-6 py-4">alice.smith@example.com</td>
                     <td class="px-6 py-4">Mumbai Store</td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Active
-                        </span>
+                         <!-- Toggle Switch -->
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                             <span class="ml-2 text-xs font-medium text-gray-900">Active</span>
+                        </label>
                     </td>
                      <td class="px-6 py-4 text-right">
-                        <button class="text-blue-600 hover:text-blue-900 mr-3 text-xs font-semibold uppercase">Edit</button>
-                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase">Remove</button>
+                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded transition-colors">Remove</button>
                     </td>
                 </tr>
             </tbody>
