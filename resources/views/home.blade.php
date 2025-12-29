@@ -5,7 +5,7 @@
 @push('styles')
 <style>
     /* Hero Slider */
-    .hero-slider { position: relative; width: 100%; height: 50vh; overflow: hidden; }
+    .hero-slider { position: relative; width: 100%; height: 500px; overflow: hidden; }
     .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
     .slide.active { opacity: 1; }
     .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -160,32 +160,26 @@
     <div class="hero-slider">
         <div class="slide active">
             <picture>
-                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/Christmas_banner_phone.webp?v=1765369190&width=1080">
-                <img src="https://myop.in/cdn/shop/files/Christmas_banner_website_copy_2.webp?v=1765369190&width=5760" alt="Christmas Sale">
+                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/b2g1_phone.webp?v=1740730153&width=1000">
+                <img src="https://myop.in/cdn/shop/files/b2g1_6e47992a-e85f-4019-89d5-179ac74e931d.webp?v=1740730153&width=5760" alt="Buy 2 Get 1">
             </picture>
         </div>
         <div class="slide">
             <picture>
-                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/Banner_elante_chandigarh_phone_copy_1.webp?v=1764662226&width=1080">
+                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/Banner_elante_chandigarh_phone_copy_1.webp?v=1764662226&width=1000">
                 <img src="https://myop.in/cdn/shop/files/banner_elante_chandigarh_copy.webp?v=1764662226&width=5760" alt="New Store">
             </picture>
         </div>
         <div class="slide">
             <picture>
-                 <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/banner_phone.webp?v=1763701093&width=1080">
+                 <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/banner_phone.webp?v=1763701093&width=1000">
                 <img src="https://myop.in/cdn/shop/files/banner_desktop.webp?v=1763701093&width=5760" alt="Featured">
             </picture>
         </div>
         <div class="slide">
             <picture>
-                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/marshamallow_phone.webp?v=1753949875&width=1080">
+                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/marshamallow_phone.webp?v=1753949875&width=1000">
                 <img src="https://myop.in/cdn/shop/files/marshamallow_desktop.webp?v=1753949875&width=1420" alt="Marshmallow">
-            </picture>
-        </div>
-        <div class="slide">
-            <picture>
-                <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/b2g1_phone.webp?v=1740730153&width=1080">
-                <img src="https://myop.in/cdn/shop/files/b2g1_6e47992a-e85f-4019-89d5-179ac74e931d.webp?v=1740730153&width=5760" alt="Buy 2 Get 1">
             </picture>
         </div>
         <div class="slider-dots">
@@ -193,7 +187,6 @@
             <div class="dot" data-slide="1"></div>
             <div class="dot" data-slide="2"></div>
             <div class="dot" data-slide="3"></div>
-            <div class="dot" data-slide="4"></div>
         </div>
     </div>
 
