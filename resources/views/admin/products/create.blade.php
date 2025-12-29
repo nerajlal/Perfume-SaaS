@@ -126,32 +126,139 @@
                 }
             </script>
 
-            <!-- Pricing -->
+            <!-- Variants -->
             <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                <h2 class="font-semibold text-gray-700 text-sm mb-4">Pricing</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
-                        <div class="relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm">₹</span>
+                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Variants (Sizes)</h2>
+                <div class="space-y-4">
+                    <!-- 30ml -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50/50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <input type="checkbox" name="variants[]" value="30ml" id="var_30ml" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <label for="var_30ml" class="text-sm font-bold text-gray-800 cursor-pointer flex-1">30ml</label>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 pl-7">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Stock</label>
+                                <input type="number" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0">
                             </div>
-                            <input type="text" class="w-full pl-7 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="0.00">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Price</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Compare At</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Compare-at price</label>
-                        <div class="relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm">₹</span>
+
+                    <!-- 50ml -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50/50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <input type="checkbox" name="variants[]" value="50ml" id="var_50ml" checked class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <label for="var_50ml" class="text-sm font-bold text-gray-800 cursor-pointer flex-1">50ml</label>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 pl-7">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Stock</label>
+                                <input type="number" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0">
                             </div>
-                            <input type="text" class="w-full pl-7 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="0.00">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Price</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Compare At</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 100ml -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50/50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <input type="checkbox" name="variants[]" value="100ml" id="var_100ml" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <label for="var_100ml" class="text-sm font-bold text-gray-800 cursor-pointer flex-1">100ml</label>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 pl-7">
+                             <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Stock</label>
+                                <input type="number" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Price</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Compare At</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample/Tester -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50/50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <input type="checkbox" name="variants[]" value="tester" id="var_tester" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <label for="var_tester" class="text-sm font-bold text-gray-800 cursor-pointer flex-1">Sample / Tester (2ml)</label>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 pl-7">
+                             <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Stock</label>
+                                <input type="number" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Price</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Compare At</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 text-xs">₹</span>
+                                    </div>
+                                    <input type="text" class="w-full pl-6 px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-green-500 focus:border-green-500" placeholder="0.00">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-
 
         </div>
 
@@ -193,29 +300,6 @@
                             <option value="her">For Her</option>
                             <option value="unisex">Unisex</option>
                         </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Variants -->
-            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                <h2 class="font-semibold text-gray-700 text-sm mb-4">Product Variants (Sizes)</h2>
-                <div class="space-y-3">
-                    <div class="flex items-center gap-3 border border-gray-200 rounded p-3 hover:bg-gray-50 cursor-pointer">
-                        <input type="checkbox" name="variants[]" value="30ml" id="var_30ml" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                        <label for="var_30ml" class="text-sm text-gray-700 font-medium cursor-pointer flex-1">30ml</label>
-                    </div>
-                    <div class="flex items-center gap-3 border border-gray-200 rounded p-3 hover:bg-gray-50 cursor-pointer">
-                        <input type="checkbox" name="variants[]" value="50ml" id="var_50ml" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                        <label for="var_50ml" class="text-sm text-gray-700 font-medium cursor-pointer flex-1">50ml</label>
-                    </div>
-                    <div class="flex items-center gap-3 border border-gray-200 rounded p-3 hover:bg-gray-50 cursor-pointer">
-                        <input type="checkbox" name="variants[]" value="100ml" id="var_100ml" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                        <label for="var_100ml" class="text-sm text-gray-700 font-medium cursor-pointer flex-1">100ml</label>
-                    </div>
-                    <div class="flex items-center gap-3 border border-gray-200 rounded p-3 hover:bg-gray-50 cursor-pointer">
-                        <input type="checkbox" name="variants[]" value="tester" id="var_tester" class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                        <label for="var_tester" class="text-sm text-gray-700 font-medium cursor-pointer flex-1">Sample / Tester (2ml)</label>
                     </div>
                 </div>
             </div>
