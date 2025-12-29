@@ -70,6 +70,18 @@ Route::get('/admin/customers/{id}', function ($id) {
 })->name('admin.customers.show');
 
 Route::view('/admin/analytics', 'admin.analytics')->name('admin.analytics');
+Route::get('/admin/analytics/{type}', function ($type) {
+    $titles = [
+        'sales' => ['title' => 'Total Sales', 'value' => '₹45,231.00', 'metricLabel' => 'Revenue'],
+        'orders' => ['title' => 'Total Orders', 'value' => '342', 'metricLabel' => 'Orders'],
+        'aov' => ['title' => 'Average Order Value', 'value' => '₹1,250.00', 'metricLabel' => 'Order Value'],
+        'sessions' => ['title' => 'Online Store Sessions', 'value' => '10,234', 'metricLabel' => 'Sessions'],
+    ];
+
+    $data = $titles[$type] ?? ['title' => 'Report', 'value' => '0', 'metricLabel' => 'Count'];
+
+    return view('admin.analytics.report', $data);
+})->name('admin.analytics.show');
 Route::view('/admin/discounts', 'admin.discounts')->name('admin.discounts');
 Route::view('/admin/discounts/create', 'admin.discounts.create')->name('admin.discounts.create');
 Route::get('/admin/discounts/{id}/edit', function ($id) {

@@ -15,7 +15,7 @@
 <!-- Key Metrics (Normal) -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
     <!-- Total Sales -->
-    <div class="card bg-white rounded-lg p-5 border border-gray-200">
+    <a href="{{ route('admin.analytics.show', 'sales') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
         <div class="flex justify-between items-start mb-2">
             <h3 class="text-xs font-semibold uppercase text-gray-500">Total Sales</h3>
         </div>
@@ -26,10 +26,10 @@
         <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
             <div class="h-full bg-blue-500 rounded-full" style="width: 70%"></div>
         </div>
-    </div>
+    </a>
 
     <!-- Total Orders (New Normal) -->
-    <div class="card bg-white rounded-lg p-5 border border-gray-200">
+    <a href="{{ route('admin.analytics.show', 'orders') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
         <div class="flex justify-between items-start mb-2">
             <h3 class="text-xs font-semibold uppercase text-gray-500">Total Orders</h3>
         </div>
@@ -40,10 +40,10 @@
          <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
             <div class="h-full bg-purple-500 rounded-full" style="width: 55%"></div>
         </div>
-    </div>
+    </a>
 
     <!-- Average Order Value (New Normal) -->
-    <div class="card bg-white rounded-lg p-5 border border-gray-200">
+    <a href="{{ route('admin.analytics.show', 'aov') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
         <div class="flex justify-between items-start mb-2">
             <h3 class="text-xs font-semibold uppercase text-gray-500">Avg. Order Value</h3>
         </div>
@@ -54,10 +54,10 @@
          <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
             <div class="h-full bg-orange-500 rounded-full" style="width: 40%"></div>
         </div>
-    </div>
+    </a>
 
     <!-- Online Store Sessions -->
-    <div class="card bg-white rounded-lg p-5 border border-gray-200">
+    <a href="{{ route('admin.analytics.show', 'sessions') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
         <div class="flex justify-between items-start mb-2">
             <h3 class="text-xs font-semibold uppercase text-gray-500">Sessions</h3>
         </div>
@@ -68,7 +68,7 @@
          <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
             <div class="h-full bg-indigo-500 rounded-full" style="width: 65%"></div>
         </div>
-    </div>
+    </a>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
@@ -127,7 +127,7 @@
             </tbody>
         </table>
         <div class="p-3 border-t border-gray-100 text-center">
-             <button class="text-xs text-blue-600 hover:underline">View all products</button>
+             <a href="{{ route('admin.products', ['sort' => 'best_selling']) }}" class="text-xs text-blue-600 hover:underline">View all products</a>
         </div>
     </div>
 
