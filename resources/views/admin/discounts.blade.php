@@ -36,6 +36,7 @@
                     <th class="px-6 py-3">Discount</th>
                     <th class="px-6 py-3">Valid Period</th>
                     <th class="px-6 py-3 text-right">Used</th>
+                    <th class="px-6 py-3 text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
@@ -59,6 +60,10 @@
                     <td class="px-6 py-4 text-right">
                         0
                     </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{{ route('admin.discounts.edit', 1) }}" class="text-blue-600 hover:text-blue-900 text-xs font-medium mr-2">Edit</a>
+                         <button class="text-red-600 hover:text-red-900 text-xs font-medium">Delete</button>
+                    </td>
                 </tr>
                  <tr class="hover:bg-gray-50 transition-colors">
                      <td class="px-6 py-4"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
@@ -79,6 +84,10 @@
                     </td>
                     <td class="px-6 py-4 text-right">
                         12
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{{ route('admin.discounts.edit', 2) }}" class="text-blue-600 hover:text-blue-900 text-xs font-medium mr-2">Edit</a>
+                         <button class="text-red-600 hover:text-red-900 text-xs font-medium">Delete</button>
                     </td>
                 </tr>
             </tbody>
