@@ -279,7 +279,7 @@
         </div>
         <div class="category-grid">
             <a href="/collections?category=fresh" class="category-card">
-                <img src="https://myop.in/cdn/shop/files/fresh_1.webp?v=1714048533&width=1195" alt="Fresh">
+                <img src="{{ asset('Images/g-fresh.png') }}" alt="Fresh">
                 <div class="category-overlay">
                     <div>
                         <h3 class="category-name">FRESH</h3>
@@ -289,7 +289,7 @@
             </a>
 
             <a href="/collections?category=oriental-woody" class="category-card">
-                <img src="https://myop.in/cdn/shop/files/woody__oriental_1.webp?v=1714048563&width=1195" alt="Oriental/Woody">
+                <img src="{{ asset('Images/g-woody.png') }}" alt="Oriental/Woody">
                 <div class="category-overlay">
                     <div>
                         <h3 class="category-name">ORIENTAL/WOODY</h3>
@@ -299,7 +299,7 @@
             </a>
 
             <a href="/collections?category=floral" class="category-card">
-                <img src="https://myop.in/cdn/shop/files/floral_1.webp?v=1714048608&width=1195" alt="Floral">
+                <img src="{{ asset('Images/g-forall.png') }}" alt="Floral">
                 <div class="category-overlay">
                     <div>
                         <h3 class="category-name">FLORAL</h3>
@@ -367,21 +367,21 @@
         </div>
         <div class="gender-grid">
             <a href="/collections?gender=for-him" class="gender-card">
-                <img src="https://myop.in/cdn/shop/files/For_Him.webp?v=1715237737&width=1165" alt="For Him">
+                <img src="{{ asset('Images/g-men.webp') }}" alt="For Him">
                 <div class="gender-overlay">
                     <h3 class="gender-title">FOR HIM</h3>
                 </div>
             </a>
 
             <a href="/collections?gender=for-her" class="gender-card">
-                <img src="https://myop.in/cdn/shop/files/For_Her.webp?v=1714541130&width=1165" alt="For Her">
+                <img src="{{ asset('Images/g-women.webp') }}" alt="For Her">
                 <div class="gender-overlay">
                     <h3 class="gender-title">FOR HER</h3>
                 </div>
             </a>
 
             <a href="/collections?gender=unisex" class="gender-card">
-                <img src="https://myop.in/cdn/shop/files/Unisex_copy.webp?v=1718107909&width=3837" alt="Unisex">
+                <img src="{{ asset('Images/g-us.webp') }}" alt="Unisex">
                 <div class="gender-overlay">
                     <h3 class="gender-title">UNISEX</h3>
                 </div>
@@ -435,7 +435,7 @@
     <!-- About -->
     <div class="about-section" id="about">
         <div class="about-image">
-            <img src="https://myop.in/cdn/shop/files/Storekurla.jpg?v=1715596487&width=2500" alt="MYOP Store">
+            <img src="{{ asset('Images/g-shop.webp') }}" alt="MYOP Store">
         </div>
         <div>
             <h2 class="about-title"><em>Why We Do,</em> What We Do</h2>
