@@ -3,62 +3,62 @@
 @section('title', 'Bundles')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-xl font-semibold text-gray-800">Bundles</h1>
-    <a href="{{ route('admin.bundles.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm">Create bundle</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0 text-dark">Bundles</h1>
+    <a href="{{ route('admin.bundles.create') }}" class="btn btn-success shadow-sm">Create bundle</a>
 </div>
 
-<div class="card bg-white rounded-lg border border-gray-200 shadow-sm">
-    <div class="p-0 overflow-x-auto">
-        <table class="w-full text-left text-sm text-gray-600">
-            <thead class="bg-gray-50 text-xs uppercase font-medium text-gray-500 border-b border-gray-200">
+<div class="card border shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-secondary">
+            <thead class="bg-light text-uppercase small fw-medium text-muted">
                  <tr>
-                    <th class="px-6 py-3 w-16"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></th>
-                    <th class="px-6 py-3">Title</th>
-                    <th class="px-6 py-3">Status</th>
-                    <th class="px-6 py-3">Products</th>
-                    <th class="px-6 py-3">Total Sales</th>
-                    <th class="px-6 py-3 w-20"></th>
+                    <th class="px-3 py-3" style="width: 50px;"><div class="form-check"><input type="checkbox" class="form-check-input"></div></th>
+                    <th class="px-3 py-3">Title</th>
+                    <th class="px-3 py-3">Status</th>
+                    <th class="px-3 py-3">Products</th>
+                    <th class="px-3 py-3">Total Sales</th>
+                    <th class="px-3 py-3" style="width: 80px;"></th>
                  </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-                <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.bundles.edit', 1) }}'">
-                    <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center overflow-hidden">
-                                <i class="fas fa-cubes text-gray-400"></i>
+            <tbody class="border-top-0">
+                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.bundles.edit', 1) }}'">
+                    <td class="px-3 py-3" onclick="event.stopPropagation()"><div class="form-check"><input type="checkbox" class="form-check-input"></div></td>
+                    <td class="px-3 py-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center bg-light border rounded overflow-hidden" style="width: 40px; height: 40px;">
+                                <i class="fas fa-cubes text-secondary opacity-50"></i>
                             </div>
-                            <span class="font-medium text-gray-800 hover:underline">Summer Essentials Bundle</span>
+                            <span class="fw-medium text-dark text-decoration-hover-underline">Summer Essentials Bundle</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4"><span class="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-semibold">Active</span></td>
-                    <td class="px-6 py-4">3 products</td>
-                    <td class="px-6 py-4">₹ 1,250.00</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2" onclick="event.stopPropagation()">
-                             <a href="{{ route('admin.bundles.edit', 1) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                             <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
+                    <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1 fw-medium">Active</span></td>
+                    <td class="px-3 py-3">3 products</td>
+                    <td class="px-3 py-3">₹ 1,250.00</td>
+                    <td class="px-3 py-3 text-end">
+                        <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
+                             <a href="{{ route('admin.bundles.edit', 1) }}" class="btn btn-white btn-sm border-0 text-secondary hover-text-primary p-1"><i class="fas fa-edit"></i></a>
+                             <button class="btn btn-white btn-sm border-0 text-secondary hover-text-danger p-1"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
-                 <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.bundles.edit', 2) }}'">
-                    <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
-                    <td class="px-6 py-4">
-                         <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center overflow-hidden">
-                                <i class="fas fa-cubes text-gray-400"></i>
+                 <tr class="cursor-pointer" onclick="window.location='{{ route('admin.bundles.edit', 2) }}'">
+                    <td class="px-3 py-3" onclick="event.stopPropagation()"><div class="form-check"><input type="checkbox" class="form-check-input"></div></td>
+                    <td class="px-3 py-3">
+                         <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center bg-light border rounded overflow-hidden" style="width: 40px; height: 40px;">
+                                <i class="fas fa-cubes text-secondary opacity-50"></i>
                             </div>
-                            <span class="font-medium text-gray-800 hover:underline">Oud Lovers Kit</span>
+                            <span class="fw-medium text-dark text-decoration-hover-underline">Oud Lovers Kit</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4"><span class="px-2 py-1 rounded bg-gray-100 text-gray-800 text-xs font-semibold">Draft</span></td>
-                    <td class="px-6 py-4">2 products</td>
-                    <td class="px-6 py-4">₹ 1000.00</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2" onclick="event.stopPropagation()">
-                             <a href="{{ route('admin.bundles.edit', 2) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                             <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
+                    <td class="px-3 py-3"><span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-2 py-1 fw-medium">Draft</span></td>
+                    <td class="px-3 py-3">2 products</td>
+                    <td class="px-3 py-3">₹ 1000.00</td>
+                    <td class="px-3 py-3 text-end">
+                        <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
+                             <a href="{{ route('admin.bundles.edit', 2) }}" class="btn btn-white btn-sm border-0 text-secondary hover-text-primary p-1"><i class="fas fa-edit"></i></a>
+                             <button class="btn btn-white btn-sm border-0 text-secondary hover-text-danger p-1"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -66,4 +66,9 @@
         </table>
     </div>
 </div>
+<style>
+    .text-decoration-hover-underline:hover { text-decoration: underline !important; }
+    .hover-text-primary:hover { color: var(--bs-primary) !important; }
+    .hover-text-danger:hover { color: var(--bs-danger) !important; }
+</style>
 @endsection

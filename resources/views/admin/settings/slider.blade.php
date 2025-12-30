@@ -3,61 +3,61 @@
 @section('title', 'Hero Slider')
 
 @section('content')
-<div class="space-y-6">
+<div class="container-fluid">
 
     <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Hero Slider</h1>
-            <p class="text-sm text-gray-500 mt-1">Manage home page hero banner slides order and content.</p>
+            <h1 class="h3 mb-1 text-dark">Hero Slider</h1>
+            <p class="text-muted small mb-0">Manage home page hero banner slides order and content.</p>
         </div>
-        <a href="{{ route('admin.settings.slider.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-green-800 transition-colors flex items-center gap-2">
+        <a href="{{ route('admin.settings.slider.create') }}" class="btn btn-success shadow-sm d-flex align-items-center gap-2">
             <i class="fas fa-plus"></i> Add New Slide
         </a>
     </div>
 
     <!-- Slides List (Draggable Style) -->
-    <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-        <div class="divide-y divide-gray-200" id="sortable-slides">
+    <div class="card border shadow-sm">
+        <div class="list-group list-group-flush" id="sortable-slides">
             
             <!-- Slide Item 1 -->
-            <div class="p-4 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-gray-50 transition-colors group draggable-item" draggable="true">
+            <div class="list-group-item p-3 d-flex flex-column flex-sm-row align-items-sm-center gap-3 hover-bg-light transition-colors draggable-item" draggable="true">
                 
                 <!-- Visuals Row -->
-                <div class="flex items-center gap-4">
+                <div class="d-flex align-items-center gap-3">
                     <!-- Drag Handle -->
-                    <div class="cursor-move text-gray-400 group-hover:text-gray-600 px-2">
+                    <div class="cursor-move text-secondary px-2 handle">
                         <i class="fas fa-grip-vertical"></i>
                     </div>
 
                     <!-- Desktop Thumb -->
-                    <div class="w-32 h-12 bg-gray-100 rounded border border-gray-200 overflow-hidden relative flex-shrink-0">
-                        <img src="https://myop.in/cdn/shop/files/b2g1_6e47992a-e85f-4019-89d5-179ac74e931d.webp?v=1740730153&width=5760" class="w-full h-full object-cover">
-                        <span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">Desktop</span>
+                    <div class="position-relative bg-light border rounded overflow-hidden flex-shrink-0" style="width: 120px; height: 50px;">
+                        <img src="https://myop.in/cdn/shop/files/b2g1_6e47992a-e85f-4019-89d5-179ac74e931d.webp?v=1740730153&width=5760" class="w-100 h-100 object-fit-cover">
+                        <span class="position-absolute bottom-0 end-0 bg-dark bg-opacity-50 text-white px-1 small" style="font-size: 10px;">Desktop</span>
                     </div>
 
                     <!-- Mobile Thumb -->
-                    <div class="w-8 h-12 bg-gray-100 rounded border border-gray-200 overflow-hidden relative flex-shrink-0">
-                        <img src="https://myop.in/cdn/shop/files/b2g1_phone.webp?v=1740730153&width=1000" class="w-full h-full object-cover">
-                        <span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">Mob</span>
+                    <div class="position-relative bg-light border rounded overflow-hidden flex-shrink-0" style="width: 32px; height: 50px;">
+                        <img src="https://myop.in/cdn/shop/files/b2g1_phone.webp?v=1740730153&width=1000" class="w-100 h-100 object-fit-cover">
+                        <span class="position-absolute bottom-0 end-0 bg-dark bg-opacity-50 text-white px-1 small" style="font-size: 10px;">Mob</span>
                     </div>
                 </div>
 
                 <!-- Info -->
-                <div class="flex-1 min-w-0">
-                    <h3 class="text-sm font-semibold text-gray-900 truncate">Buy 2 Get 1</h3>
+                <div class="flex-grow-1 min-w-0">
+                    <h3 class="h6 fw-bold text-dark mb-0 text-truncate">Buy 2 Get 1</h3>
                 </div>
 
                 <!-- Meta Row (Status + Actions) -->
-                <div class="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto sm:ml-4 border-t sm:border-t-0 p-2 sm:p-0 border-gray-100">
+                <div class="d-flex align-items-center justify-content-between justify-content-sm-end gap-3 w-100 w-sm-auto border-top border-sm-0 pt-2 pt-sm-0 mt-2 mt-sm-0">
                     <!-- Status -->
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill fw-normal">
                         Active
                     </span>
 
                     <!-- Actions -->
-                    <div class="flex items-center gap-2">
-                        <button class="p-2 text-gray-400 hover:text-red-600 transition-colors" title="Delete">
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-link btn-sm p-2 text-secondary hover-text-danger" title="Delete">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -65,42 +65,42 @@
             </div>
 
             <!-- Slide Item 2 -->
-            <div class="p-4 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-gray-50 transition-colors group draggable-item" draggable="true">
+            <div class="list-group-item p-3 d-flex flex-column flex-sm-row align-items-sm-center gap-3 hover-bg-light transition-colors draggable-item" draggable="true">
                  <!-- Visuals Row -->
-                <div class="flex items-center gap-4">
+                <div class="d-flex align-items-center gap-3">
                     <!-- Drag Handle -->
-                    <div class="cursor-move text-gray-400 group-hover:text-gray-600 px-2">
+                    <div class="cursor-move text-secondary px-2 handle">
                         <i class="fas fa-grip-vertical"></i>
                     </div>
 
                     <!-- Desktop Thumb -->
-                    <div class="w-32 h-12 bg-gray-100 rounded border border-gray-200 overflow-hidden relative flex-shrink-0">
-                        <img src="https://myop.in/cdn/shop/files/banner_elante_chandigarh_copy.webp?v=1764662226&width=5760" class="w-full h-full object-cover">
-                         <span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">Desktop</span>
+                    <div class="position-relative bg-light border rounded overflow-hidden flex-shrink-0" style="width: 120px; height: 50px;">
+                        <img src="https://myop.in/cdn/shop/files/banner_elante_chandigarh_copy.webp?v=1764662226&width=5760" class="w-100 h-100 object-fit-cover">
+                         <span class="position-absolute bottom-0 end-0 bg-dark bg-opacity-50 text-white px-1 small" style="font-size: 10px;">Desktop</span>
                     </div>
 
                     <!-- Mobile Thumb -->
-                    <div class="w-8 h-12 bg-gray-100 rounded border border-gray-200 overflow-hidden relative flex-shrink-0">
-                        <img src="https://myop.in/cdn/shop/files/Banner_elante_chandigarh_phone_copy_1.webp?v=1764662226&width=1000" class="w-full h-full object-cover">
-                        <span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">Mob</span>
+                    <div class="position-relative bg-light border rounded overflow-hidden flex-shrink-0" style="width: 32px; height: 50px;">
+                        <img src="https://myop.in/cdn/shop/files/Banner_elante_chandigarh_phone_copy_1.webp?v=1764662226&width=1000" class="w-100 h-100 object-fit-cover">
+                        <span class="position-absolute bottom-0 end-0 bg-dark bg-opacity-50 text-white px-1 small" style="font-size: 10px;">Mob</span>
                     </div>
                 </div>
 
                 <!-- Info -->
-                <div class="flex-1 min-w-0">
-                    <h3 class="text-sm font-semibold text-gray-900 truncate">New Store - Chandigarh</h3>
+                <div class="flex-grow-1 min-w-0">
+                    <h3 class="h6 fw-bold text-dark mb-0 text-truncate">New Store - Chandigarh</h3>
                 </div>
 
                 <!-- Meta Row (Status + Actions) -->
-                 <div class="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto sm:ml-4 border-t sm:border-t-0 p-2 sm:p-0 border-gray-100">
+                 <div class="d-flex align-items-center justify-content-between justify-content-sm-end gap-3 w-100 w-sm-auto border-top border-sm-0 pt-2 pt-sm-0 mt-2 mt-sm-0">
                     <!-- Status -->
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill fw-normal">
                         Active
                     </span>
 
                     <!-- Actions -->
-                    <div class="flex items-center gap-2">
-                        <button class="p-2 text-gray-400 hover:text-red-600 transition-colors" title="Delete">
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-link btn-sm p-2 text-secondary hover-text-danger" title="Delete">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -110,6 +110,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    .hover-bg-light:hover { background-color: var(--bs-light) !important; }
+    .object-fit-cover { object-fit: cover; }
+    .hover-text-danger:hover { color: var(--bs-danger) !important; }
+    .handle:hover { color: var(--bs-dark) !important; }
+</style>
 @endsection
 
 @push('scripts')
@@ -122,13 +129,13 @@
             draggables.forEach(draggable => {
                 draggable.addEventListener('dragstart', () => {
                     draggable.classList.add('dragging');
-                    draggable.classList.add('bg-gray-50'); // Keep hover style
+                    draggable.classList.add('bg-light'); // Keep hover style
                     draggable.style.opacity = '0.5';
                 });
 
                 draggable.addEventListener('dragend', () => {
                     draggable.classList.remove('dragging');
-                    draggable.classList.remove('bg-gray-50');
+                    draggable.classList.remove('bg-light');
                     draggable.style.opacity = '1';
                 });
             });

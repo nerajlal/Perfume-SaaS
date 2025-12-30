@@ -3,80 +3,82 @@
 @section('title', 'Attributes & Fragrance Notes')
 
 @section('content')
-<div class="max-w-6xl mx-auto">
-    <div class="flex justify-between items-center mb-6">
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Attributes & Fragrance Notes</h1>
-            <p class="text-sm text-gray-500 mt-1">Manage olfactory families and scent notes for your perfumes.</p>
+            <h1 class="h3 mb-1 text-dark">Attributes & Fragrance Notes</h1>
+            <p class="text-muted small mb-0">Manage olfactory families and scent notes for your perfumes.</p>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="row g-4">
         
         <!-- Families Column -->
-        <div class="space-y-6">
-            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Olfactory Families</h2>
-                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">5 Families</span>
+        <div class="col-12 col-lg-6">
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <h2 class="h5 fw-bold text-dark mb-0">Olfactory Families</h2>
+                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">5 Families</span>
                 </div>
                 
-                <!-- Add Form -->
-                <div class="flex gap-2 mb-6">
-                    <input type="text" placeholder="Add new family (e.g. Woody)" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 text-sm">
-                    <button class="bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-900 transition-colors">Add</button>
-                </div>
+                <div class="card-body p-3">
+                    <!-- Add Form -->
+                    <div class="input-group mb-3">
+                        <input type="text" placeholder="Add new family (e.g. Woody)" class="form-control form-control-sm">
+                        <button class="btn btn-dark btn-sm">Add</button>
+                    </div>
 
-                <!-- List -->
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 group hover:border-gray-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <span class="text-sm font-medium text-gray-700">Floral</span>
+                    <!-- List -->
+                    <div class="vstack gap-2">
+                        <div class="d-flex items-center justify-content-between p-2 bg-light border rounded group-hover-border transition-colors item-row">
+                            <div class="d-flex items-center gap-3">
+                                <span class="rounded-circle bg-purple-400" style="width: 8px; height: 8px;"></span>
+                                <span class="small fw-medium text-dark item-text">Floral</span>
+                            </div>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-                            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        <div class="d-flex items-center justify-content-between p-2 bg-light border rounded group-hover-border transition-colors item-row">
+                            <div class="d-flex items-center gap-3">
+                                <span class="rounded-circle bg-amber-600" style="width: 8px; height: 8px;"></span>
+                                <span class="small fw-medium text-dark item-text">Oriental (Amber)</span>
+                            </div>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 group hover:border-gray-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-600"></span>
-                            <span class="text-sm font-medium text-gray-700">Oriental (Amber)</span>
+                         <div class="d-flex items-center justify-content-between p-2 bg-light border rounded group-hover-border transition-colors item-row">
+                            <div class="d-flex items-center gap-3">
+                                <span class="rounded-circle bg-green-700" style="width: 8px; height: 8px;"></span>
+                                <span class="small fw-medium text-dark item-text">Woody</span>
+                            </div>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-                            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        <div class="d-flex items-center justify-content-between p-2 bg-light border rounded group-hover-border transition-colors item-row">
+                            <div class="d-flex items-center gap-3">
+                                <span class="rounded-circle bg-cyan-400" style="width: 8px; height: 8px;"></span>
+                                <span class="small fw-medium text-dark item-text">Fresh / Aquatic</span>
+                            </div>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 group hover:border-gray-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-green-700"></span>
-                            <span class="text-sm font-medium text-gray-700">Woody</span>
-                        </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-                            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 group hover:border-gray-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                            <span class="text-sm font-medium text-gray-700">Fresh / Aquatic</span>
-                        </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-                            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                      <div class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 group hover:border-gray-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-red-400"></span>
-                            <span class="text-sm font-medium text-gray-700">Citrus</span>
-                        </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-                            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                          <div class="d-flex items-center justify-content-between p-2 bg-light border rounded group-hover-border transition-colors item-row">
+                            <div class="d-flex items-center gap-3">
+                                <span class="rounded-circle bg-red-400" style="width: 8px; height: 8px;"></span>
+                                <span class="small fw-medium text-dark item-text">Citrus</span>
+                            </div>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,40 +86,42 @@
         </div>
 
         <!-- Notes Column -->
-        <div class="space-y-6">
-            <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Perfume Notes</h2>
-                    <span class="bg-gray-100 text-gray-600 text-xs font-semibold px-2 py-1 rounded">12 Notes</span>
+        <div class="col-12 col-lg-6">
+            <div class="card border shadow-sm h-100">
+                 <div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <h2 class="h5 fw-bold text-dark mb-0">Perfume Notes</h2>
+                    <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill">12 Notes</span>
                 </div>
 
-                <!-- Add Form -->
-                <div class="flex gap-2 mb-6">
-                    <input type="text" placeholder="Add new note (e.g. Saffron)" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 text-sm">
-                    <button class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors">Add</button>
-                </div>
-
-                <!-- List with Search -->
-                <div class="mb-4 relative">
-                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                    <input type="text" placeholder="Search notes..." class="w-full pl-8 px-3 py-1.5 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-green-500">
-                </div>
-
-                <div class="space-y-1 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                    
-                    @php
-                    $notes = ['Rose', 'Oud', 'Saffron', 'Amber', 'Musk', 'Vanilla', 'Bergamot', 'Patchouli', 'Sandalwood', 'Jasmine', 'Leather', 'Black Pepper'];
-                    @endphp
-
-                    @foreach($notes as $note)
-                    <div class="flex items-center justify-between px-3 py-2 hover:bg-gray-50 rounded group transition-colors">
-                        <span class="text-sm text-gray-700">{{ $note }}</span>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                             <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash text-xs"></i></button>
-                        </div>
+                <div class="card-body p-3">
+                    <!-- Add Form -->
+                    <div class="input-group mb-3">
+                        <input type="text" placeholder="Add new note (e.g. Saffron)" class="form-control form-control-sm">
+                        <button class="btn btn-success btn-sm">Add</button>
                     </div>
-                    @endforeach
 
+                    <!-- List with Search -->
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
+                        <input type="text" placeholder="Search notes..." class="form-control border-start-0 shadow-none">
+                    </div>
+
+                    <div class="vstack gap-1 overflow-auto pe-2 custom-scrollbar" style="max-height: 400px;">
+                        
+                        @php
+                        $notes = ['Rose', 'Oud', 'Saffron', 'Amber', 'Musk', 'Vanilla', 'Bergamot', 'Patchouli', 'Sandalwood', 'Jasmine', 'Leather', 'Black Pepper'];
+                        @endphp
+
+                        @foreach($notes as $note)
+                        <div class="d-flex items-center justify-content-between px-3 py-2 hover-bg-light rounded transition-colors item-row">
+                            <span class="small text-dark item-text">{{ $note }}</span>
+                            <div class="d-flex gap-2 opacity-0 group-hover-opacity transition-opacity text-nowrap item-actions">
+                                 <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash small"></i></button>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,24 +129,37 @@
     </div>
 </div>
 
+<style>
+    .bg-purple-400 { background-color: #c084fc !important; }
+    .bg-amber-600 { background-color: #d97706 !important; }
+    .bg-cyan-400 { background-color: #22d3ee !important; }
+    .bg-red-400 { background-color: #f87171 !important; }
+    .hover-text-primary:hover { color: var(--bs-primary) !important; }
+    .hover-text-danger:hover { color: var(--bs-danger) !important; }
+    .hover-text-success:hover { color: var(--bs-success) !important; }
+    .group-hover-border:hover { border-color: #dee2e6 !important; }
+    .item-row:hover .group-hover-opacity { opacity: 1 !important; }
+    .hover-bg-light:hover { background-color: var(--bs-light) !important; }
+</style>
+
 <script>
     function enableEdit(btn) {
-        const itemRow = btn.closest('.flex.items-center.justify-between');
-        const textSpan = itemRow.querySelector('.text-sm.font-medium, .text-sm.text-gray-700');
+        const itemRow = btn.closest('.d-flex.items-center.justify-content-between'); // Updated selector
+        const textSpan = itemRow.querySelector('.item-text'); // Updated class selector
         const currentText = textSpan.innerText;
         
         // Hide edit button, Show save button
         const actionDiv = btn.parentElement;
         actionDiv.innerHTML = `
-            <button onclick="saveEdit(this)" class="text-green-600 hover:text-green-800"><i class="fas fa-check"></i></button>
-            <button onclick="cancelEdit(this, '${currentText}')" class="text-gray-400 hover:text-red-600"><i class="fas fa-times"></i></button>
+            <button onclick="saveEdit(this)" class="btn btn-link btn-sm p-0 text-success hover-text-success"><i class="fas fa-check"></i></button>
+            <button onclick="cancelEdit(this, '${currentText}')" class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-times"></i></button>
         `;
         
         // Replace text with input
         const input = document.createElement('input');
         input.type = 'text';
         input.value = currentText;
-        input.className = 'w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-green-500 focus:border-green-500';
+        input.className = 'form-control form-control-sm border-secondary'; // Bootstrap classes
         
         textSpan.style.display = 'none';
         textSpan.parentElement.insertBefore(input, textSpan.nextSibling);
@@ -150,10 +167,10 @@
     }
 
     function saveEdit(btn) {
-        const itemRow = btn.closest('.flex.items-center.justify-between');
+        const itemRow = btn.closest('.d-flex.items-center.justify-content-between');
         const input = itemRow.querySelector('input');
         const newText = input.value;
-        const textSpan = itemRow.querySelector('.text-sm.font-medium, .text-sm.text-gray-700');
+        const textSpan = itemRow.querySelector('.item-text');
         
         // Update text and show span
         textSpan.innerText = newText;
@@ -163,15 +180,15 @@
         // Restore buttons
         const actionDiv = btn.parentElement;
         actionDiv.innerHTML = `
-            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+            <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
         `;
     }
 
     function cancelEdit(btn, originalText) {
-        const itemRow = btn.closest('.flex.items-center.justify-between');
+        const itemRow = btn.closest('.d-flex.items-center.justify-content-between');
         const input = itemRow.querySelector('input');
-        const textSpan = itemRow.querySelector('.text-sm.font-medium, .text-sm.text-gray-700');
+        const textSpan = itemRow.querySelector('.item-text');
         
         // Restore text and show span
         textSpan.style.display = 'block';
@@ -180,8 +197,8 @@
         // Restore buttons
         const actionDiv = btn.parentElement;
         actionDiv.innerHTML = `
-            <button onclick="enableEdit(this)" class="text-gray-400 hover:text-blue-600"><i class="fas fa-edit"></i></button>
-            <button class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+            <button onclick="enableEdit(this)" class="btn btn-link btn-sm p-0 text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-link btn-sm p-0 text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
         `;
     }
 </script>

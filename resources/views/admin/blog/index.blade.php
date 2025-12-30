@@ -3,117 +3,126 @@
 @section('title', 'Blog & Articles')
 
 @section('content')
-<div class="max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+<div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Blog & Articles</h1>
-            <p class="text-sm text-gray-500 mt-1">Manage your blog posts and news articles.</p>
+            <h1 class="h3 mb-0 text-dark">Blog & Articles</h1>
+            <p class="small text-muted mt-1 mb-0">Manage your blog posts and news articles.</p>
         </div>
-        <a href="{{ route('admin.blog.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors flex w-fit items-center">
-            <i class="fas fa-plus mr-2"></i> Create New Post
+        <a href="{{ route('admin.blog.create') }}" class="btn btn-success shadow-sm fw-medium d-inline-flex align-items-center">
+            <i class="fas fa-plus me-2"></i> Create New Post
         </a>
     </div>
 
-    <div class="card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-            <thead>
-                <tr class="bg-gray-50 border-b border-gray-100 text-xs uppercase text-gray-500 font-semibold">
-                    <th class="p-4">Post Details</th>
-                    <th class="p-4">Status</th>
-                    <th class="p-4">Date</th>
-                    <th class="p-4 text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <!-- Post 1 -->
-                <tr class="hover:bg-gray-50 transition-colors group">
-                    <td class="p-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-gray-200 rounded-md overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=150&q=80" class="w-full h-full object-cover">
+    <div class="card border shadow-sm p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-start">
+                <thead class="bg-light text-secondary small text-uppercase fw-semibold">
+                    <tr>
+                        <th class="px-4 py-3 border-bottom">Post Details</th>
+                        <th class="px-4 py-3 border-bottom">Status</th>
+                        <th class="px-4 py-3 border-bottom">Date</th>
+                        <th class="px-4 py-3 border-bottom text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    <!-- Post 1 -->
+                    <tr class="hover-bg-light transition-colors group">
+                        <td class="px-4 py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-light rounded overflow-hidden flex-shrink-0" style="width: 48px; height: 48px;">
+                                    <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=150&q=80" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div>
+                                    <h3 class="h6 fw-semibold text-dark mb-1">The Art of Layering Scents</h3>
+                                    <p class="small text-muted mb-0">Expert tips on combining fragrances.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-800 text-sm mb-1">The Art of Layering Scents</h3>
-                                <p class="text-xs text-gray-500">Expert tips on combining fragrances.</p>
+                        </td>
+                        <td class="px-4 py-3">
+                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill fw-medium d-inline-flex align-items-center gap-1">
+                                <span class="rounded-circle bg-success" style="width: 6px; height: 6px;"></span> Published
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-secondary small">
+                            Oct 24, 2024
+                        </td>
+                        <td class="px-4 py-3 text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ route('admin.blog.edit', 1) }}" class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-primary"><i class="fas fa-edit"></i></a>
+                                <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
                             </div>
-                        </div>
-                    </td>
-                    <td class="p-4">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <span class="w-1.5 h-1.5 rounded-full bg-green-600"></span> Published
-                        </span>
-                    </td>
-                    <td class="p-4 text-sm text-gray-600">
-                        Oct 24, 2024
-                    </td>
-                    <td class="p-4 text-right">
-                        <div class="flex justify-end gap-2">
-                            <a href="{{ route('admin.blog.edit', 1) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Post 2 -->
-                 <tr class="hover:bg-gray-50 transition-colors group">
-                    <td class="p-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-gray-200 rounded-md overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1595425235483-360e2ceb002c?w=150&q=80" class="w-full h-full object-cover">
+                        </td>
+                    </tr>
+    
+                    <!-- Post 2 -->
+                     <tr class="hover-bg-light transition-colors group">
+                        <td class="px-4 py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-light rounded overflow-hidden flex-shrink-0" style="width: 48px; height: 48px;">
+                                    <img src="https://images.unsplash.com/photo-1595425235483-360e2ceb002c?w=150&q=80" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div>
+                                    <h3 class="h6 fw-semibold text-dark mb-1">Top 5 Winter Fragrances for 2024</h3>
+                                    <p class="small text-muted mb-0">Discover this season's most captivating scents.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-800 text-sm mb-1">Top 5 Winter Fragrances for 2024</h3>
-                                <p class="text-xs text-gray-500">Discover this season's most captivating scents.</p>
+                        </td>
+                        <td class="px-4 py-3">
+                             <span class="badge bg-success bg-opacity-10 text-success rounded-pill fw-medium d-inline-flex align-items-center gap-1">
+                                <span class="rounded-circle bg-success" style="width: 6px; height: 6px;"></span> Published
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-secondary small">
+                            Dec 15, 2024
+                        </td>
+                        <td class="px-4 py-3 text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ route('admin.blog.edit', 1) }}" class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-primary"><i class="fas fa-edit"></i></a>
+                                <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
                             </div>
-                        </div>
-                    </td>
-                    <td class="p-4">
-                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <span class="w-1.5 h-1.5 rounded-full bg-green-600"></span> Published
-                        </span>
-                    </td>
-                    <td class="p-4 text-sm text-gray-600">
-                        Dec 15, 2024
-                    </td>
-                    <td class="p-4 text-right">
-                        <div class="flex justify-end gap-2">
-                            <a href="{{ route('admin.blog.edit', 1) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Post 3 (Draft) -->
-                 <tr class="hover:bg-gray-50 transition-colors group bg-gray-50/50">
-                    <td class="p-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-gray-100 rounded-md overflow-hidden flex-shrink-0 flex items-center justify-center border border-gray-200">
-                                <i class="fas fa-image text-gray-300"></i>
+                        </td>
+                    </tr>
+    
+                    <!-- Post 3 (Draft) -->
+                     <tr class="hover-bg-light transition-colors group bg-light bg-opacity-50">
+                        <td class="px-4 py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-light rounded overflow-hidden flex-shrink-0 d-flex align-items-center justify-content-center border" style="width: 48px; height: 48px;">
+                                    <i class="fas fa-image text-secondary opacity-25"></i>
+                                </div>
+                                <div>
+                                    <h3 class="h6 fw-semibold text-dark mb-1">Understanding Ouds: An Introduction</h3>
+                                    <p class="small text-muted mb-0">A beginner's guide to the world of Oud.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-800 text-sm mb-1">Understanding Ouds: An Introduction</h3>
-                                <p class="text-xs text-gray-500">A beginner's guide to the world of Oud.</p>
+                        </td>
+                        <td class="px-4 py-3">
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill fw-medium d-inline-flex align-items-center gap-1">
+                                <span class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></span> Draft
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-secondary small">
+                            -
+                        </td>
+                        <td class="px-4 py-3 text-end">
+                            <div class="d-flex justify-content-end gap-2 opacity-0 group-hover-opacity-100 transition-opacity show-on-hover">
+                                <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
                             </div>
-                        </div>
-                    </td>
-                    <td class="p-4">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                            <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span> Draft
-                        </span>
-                    </td>
-                    <td class="p-4 text-sm text-gray-600">
-                        -
-                    </td>
-                    <td class="p-4 text-right">
-                        <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></button>
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+<style>
+    .object-fit-cover { object-fit: cover; }
+    .hover-bg-light:hover { background-color: var(--bs-light) !important; }
+    .hover-text-primary:hover { color: var(--bs-primary) !important; }
+    .hover-text-danger:hover { color: var(--bs-danger) !important; }
+    .group:hover .show-on-hover { opacity: 1 !important; }
+</style>
 @endsection

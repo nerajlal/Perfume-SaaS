@@ -1,75 +1,71 @@
-<header class="bg-white border-b border-gray-200 h-14 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
-    <button class="text-gray-400 hover:text-gray-600 p-1 md:hidden" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-    <div class="flex items-center flex-1 max-w-2xl">
-        <div class="relative w-full max-w-md">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                <i class="fas fa-search text-sm"></i>
-            </span>
-            <input type="text" class="block w-full pl-10 pr-3 py-1.5 border border-gray-300 rounded-md leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm transition duration-150 ease-in-out" placeholder="Search">
+<header class="navbar navbar-expand bg-white border-bottom sticky-top px-4 py-2 flex-shrink-0" style="height: 64px;">
+    <button class="btn btn-link text-secondary p-1 d-md-none me-3" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    
+    <div class="d-flex align-items-center flex-grow-1" style="max-width: 600px;">
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-search small"></i></span>
+            <input type="text" class="form-control bg-light border-start-0 shadow-none ps-0" placeholder="Search">
         </div>
     </div>
-    <div class="flex items-center gap-4">
-        <button class="text-gray-400 hover:text-gray-600 p-1 relative">
+
+    <div class="d-flex align-items-center gap-3 ms-auto">
+        <button class="btn btn-link text-secondary p-1 position-relative text-decoration-none">
             <i class="fas fa-bell"></i>
-            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+            </span>
         </button>
-        <div class="flex items-center gap-2 cursor-pointer" onclick="toggleProfileModal()">
-            <div class="w-8 h-8 rounded bg-green-700 text-white flex items-center justify-center text-sm font-medium">SA</div>
-            <span class="text-sm font-medium text-gray-700 hidden sm:block">Admin</span>
+        
+        <div class="dropdown">
+            <div class="d-flex align-items-center gap-2 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex align-items-center justify-content-center rounded bg-success text-white fw-medium" style="width: 32px; height: 32px;">SA</div>
+                <span class="small fw-medium text-secondary d-none d-sm-block">Admin</span>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                <li><a class="dropdown-item small" href="#" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user-edit me-2 text-muted"></i> Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item small text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+            </ul>
         </div>
     </div>
 </header>
     <script src="{{ asset('js/admin-sidebar-toggle.js') }}" defer></script>
 
 <!-- Profile Modal -->
-<div id="profileModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <!-- Background overlay -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="toggleProfileModal()"></div>
-
-        <!-- Modal panel -->
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                        <i class="fas fa-user-edit text-green-600"></i>
-                    </div>
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            Update Profile
-                        </h3>
-                        <div class="mt-4 space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" name="name" id="name" value="Admin" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" name="email" id="email" value="admin@nurah.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700">New Password</label>
-                                <input type="password" name="password" id="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="Leave blank to keep current">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleProfileModal()">
-                    Save Changes
-                </button>
-                <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="toggleProfileModal()">
-                    Cancel
-                </button>
+            <div class="modal-body pt-0">
+                <div class="text-center mb-4 mt-2">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 p-3 mb-2">
+                        <i class="fas fa-user-edit text-success fs-4"></i>
+                    </div>
+                    <p class="text-muted small">Update your account details below.</p>
+                </div>
+                
+                <form class="vstack gap-3">
+                    <div>
+                        <label for="name" class="form-label small fw-medium text-secondary">Name</label>
+                        <input type="text" class="form-control" id="name" value="Admin">
+                    </div>
+                    <div>
+                        <label for="email" class="form-label small fw-medium text-secondary">Email</label>
+                        <input type="email" class="form-control" id="email" value="admin@nurah.com">
+                    </div>
+                    <div>
+                        <label for="password" class="form-label small fw-medium text-secondary">New Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Leave blank to keep current">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 bg-light py-2">
+                <button type="button" class="btn btn-white border text-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success btn-sm text-white">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function toggleProfileModal() {
-        const modal = document.getElementById('profileModal');
-        modal.classList.toggle('hidden');
-    }
-</script>

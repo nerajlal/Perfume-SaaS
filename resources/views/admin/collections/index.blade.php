@@ -3,60 +3,66 @@
 @section('title', 'Collections')
 
 @section('content')
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-    <h1 class="text-xl font-semibold text-gray-800">Collections</h1>
-    <a href="{{ route('admin.collections.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-800 transition-colors shadow-sm w-fit">Create collection</a>
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <h1 class="h3 mb-0 text-dark">Collections</h1>
+    <a href="{{ route('admin.collections.create') }}" class="btn btn-success shadow-sm fw-medium">Create collection</a>
 </div>
 
-<div class="card bg-white rounded-lg border border-gray-200 shadow-sm">
-    <div class="p-0 overflow-x-auto">
-        <table class="w-full text-left text-sm text-gray-600">
-            <thead class="bg-gray-50 text-xs uppercase font-medium text-gray-500 border-b border-gray-200">
+<div class="card border shadow-sm container-fluid p-0 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-start">
+            <thead class="bg-light text-secondary small text-uppercase fw-medium">
                  <tr>
-                    <th class="px-6 py-3 w-16"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></th>
-                    <th class="px-6 py-3">Title</th>
-                    <th class="px-6 py-3">Products</th>
-                    <th class="px-6 py-3">Conditions</th>
-                    <th class="px-6 py-3 w-20"></th>
+                    <th class="px-4 py-3" style="width: 50px;">
+                        <input class="form-check-input" type="checkbox">
+                    </th>
+                    <th class="px-4 py-3 border-bottom">Title</th>
+                    <th class="px-4 py-3 border-bottom">Products</th>
+                    <th class="px-4 py-3 border-bottom">Conditions</th>
+                    <th class="px-4 py-3 border-bottom" style="width: 100px;"></th>
                  </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-                <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.collections.show', 1) }}'">
-                    <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center overflow-hidden">
+            <tbody class="divide-y">
+                <tr class="cursor-pointer group" onclick="window.location='{{ route('admin.collections.show', 1) }}'">
+                    <td class="px-4 py-3" onclick="event.stopPropagation()">
+                        <input class="form-check-input" type="checkbox">
+                    </td>
+                    <td class="px-4 py-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded border flex-shrink-0 overflow-hidden" style="width: 40px; height: 40px;">
                                 <!-- Placeholder Image -->
-                                <i class="fas fa-image text-gray-400"></i>
+                                <i class="fas fa-image text-secondary opacity-50"></i>
                             </div>
-                            <span class="font-medium text-gray-800 hover:underline">Best Sellers</span>
+                            <span class="fw-medium text-dark text-decoration-underline-hover">Best Sellers</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4">12 products</td>
-                    <td class="px-6 py-4">Manual</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2" onclick="event.stopPropagation()">
-                            <a href="{{ route('admin.collections.show', 1) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
+                    <td class="px-4 py-3 text-secondary">12 products</td>
+                    <td class="px-4 py-3 text-secondary">Manual</td>
+                    <td class="px-4 py-3 text-end">
+                        <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
+                            <a href="{{ route('admin.collections.show', 1) }}" class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-primary"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
-                 <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location='{{ route('admin.collections.show', 2) }}'">
-                    <td class="px-6 py-4" onclick="event.stopPropagation()"><input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500"></td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center overflow-hidden">
-                                <i class="fas fa-image text-gray-400"></i>
+                 <tr class="cursor-pointer group" onclick="window.location='{{ route('admin.collections.show', 2) }}'">
+                    <td class="px-4 py-3" onclick="event.stopPropagation()">
+                        <input class="form-check-input" type="checkbox">
+                    </td>
+                    <td class="px-4 py-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded border flex-shrink-0 overflow-hidden" style="width: 40px; height: 40px;">
+                                <i class="fas fa-image text-secondary opacity-50"></i>
                             </div>
-                            <span class="font-medium text-gray-800 hover:underline">New Arrivals</span>
+                            <span class="fw-medium text-dark text-decoration-underline-hover">New Arrivals</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4">8 products</td>
-                    <td class="px-6 py-4">Automated</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2" onclick="event.stopPropagation()">
-                            <a href="{{ route('admin.collections.show', 2) }}" class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-blue-600 transition-colors shadow-sm"><i class="fas fa-edit"></i></a>
-                            <button class="p-1.5 hover:bg-white rounded text-gray-400 hover:text-red-600 transition-colors shadow-sm"><i class="fas fa-trash"></i></button>
+                    <td class="px-4 py-3 text-secondary">8 products</td>
+                    <td class="px-4 py-3 text-secondary">Automated</td>
+                    <td class="px-4 py-3 text-end">
+                        <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
+                            <a href="{{ route('admin.collections.show', 2) }}" class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-primary"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-sm btn-white border shadow-sm text-secondary hover-text-danger"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -64,4 +70,10 @@
         </table>
     </div>
 </div>
+<style>
+    .text-decoration-underline-hover:hover { text-decoration: underline !important; }
+    .hover-text-primary:hover { color: var(--bs-primary) !important; }
+    .hover-text-danger:hover { color: var(--bs-danger) !important; }
+    .cursor-pointer { cursor: pointer; }
+</style>
 @endsection

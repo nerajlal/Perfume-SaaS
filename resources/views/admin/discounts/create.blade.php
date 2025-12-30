@@ -3,112 +3,118 @@
 @section('title', 'Create Discount')
 
 @section('content')
-<div class="max-w-4xl mx-auto pb-10">
-    <div class="flex items-center gap-4 mb-6">
-        <a href="{{ route('admin.discounts') }}" class="text-gray-500 hover:text-gray-700">
+<div class="container pb-5" style="max-width: 900px;">
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <a href="{{ route('admin.discounts') }}" class="text-secondary hover-text-dark">
             <i class="fas fa-arrow-left"></i>
         </a>
-        <h1 class="text-xl font-bold text-gray-900">Create discount</h1>
+        <h1 class="h3 mb-0 text-dark">Create discount</h1>
     </div>
 
-    <form action="#" method="POST" class="space-y-6">
-        
-         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <form action="#" method="POST">
+         <div class="row g-4">
             <!-- Left Column -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Product Search -->
-                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Product</h2>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Search product</label>
-                        <div class="relative">
-                            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
-                            <input type="text" class="w-full pl-9 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="Search product name...">
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Search for a product to apply this coupon to.</p>
-                    </div>
-                </div>
-
-                <!-- Discount Code -->
-                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Discount code</h2>
-                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Code</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="discountCodeInput" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm uppercase font-medium" placeholder="e.g. SUMMER20">
-                            <button type="button" id="generateCodeBtn" class="text-sm text-green-700 font-medium hover:text-green-800 shrink-0">Generate</button>
-                        </div>
-                        <!-- <p class="text-xs text-gray-500 mt-1">Customers will enter this code at checkout.</p> -->
-                     </div>
-                </div>
-
-                <!-- Value -->
-                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Value</h2>
-                     <div class="grid grid-cols-2 gap-4">
-                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount type</label>
-                             <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                <option>Percentage</option>
-                                <option>Fixed amount</option>
-                            </select>
-                         </div>
-                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount value</label>
-                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="10">
-                         </div>
-                     </div>
-                </div>
-
-                <!-- Active Dates -->
-                 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                     <h2 class="font-semibold text-gray-700 text-sm mb-4">Active dates</h2>
-                     <div class="grid grid-cols-2 gap-4">
+            <div class="col-12 col-lg-8">
+                <div class="vstack gap-4">
+                    <!-- Product Search -->
+                    <div class="card border shadow-sm p-4">
+                        <h2 class="h6 fw-bold text-secondary mb-3">Product</h2>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
-                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                            <label class="form-label fw-medium text-secondary small mb-1">Search product</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white text-secondary border-end-0"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control border-start-0 shadow-none ps-0" placeholder="Search product name...">
+                            </div>
+                            <p class="small text-muted mt-1 mb-0">Search for a product to apply this coupon to.</p>
                         </div>
+                    </div>
+
+                    <!-- Discount Code -->
+                    <div class="card border shadow-sm p-4">
+                         <h2 class="h6 fw-bold text-secondary mb-3">Discount code</h2>
                          <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">End date</label>
-                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                        </div>
-                     </div>
+                            <label class="form-label fw-medium text-secondary small mb-1">Code</label>
+                            <div class="input-group">
+                                <input type="text" id="discountCodeInput" class="form-control text-uppercase fw-medium" placeholder="e.g. SUMMER20">
+                                <button type="button" id="generateCodeBtn" class="btn btn-outline-success">Generate</button>
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Value -->
+                    <div class="card border shadow-sm p-4">
+                         <h2 class="h6 fw-bold text-secondary mb-3">Value</h2>
+                         <div class="row g-3">
+                             <div class="col-12 col-md-6">
+                                <label class="form-label fw-medium text-secondary small mb-1">Discount type</label>
+                                 <select class="form-select">
+                                    <option>Percentage</option>
+                                    <option>Fixed amount</option>
+                                </select>
+                             </div>
+                             <div class="col-12 col-md-6">
+                                <label class="form-label fw-medium text-secondary small mb-1">Discount value</label>
+                                <input type="text" class="form-control" placeholder="10">
+                             </div>
+                         </div>
+                    </div>
+
+
                 </div>
             </div>
 
             <!-- Right Column -->
-            <div class="space-y-6">
-                 <!-- Status -->
-                <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Status</h2>
-                    <div class="flex items-center gap-2">
-                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+            <div class="col-12 col-lg-4">
+                <div class="vstack gap-4">
+                     <!-- Status -->
+                    <div class="card border shadow-sm p-4">
+                        <h2 class="h6 fw-bold text-secondary mb-3">Status</h2>
+                        <select class="form-select">
                             <option>Active</option>
                             <option>Draft</option>
                         </select>
                     </div>
-                </div>
 
-                <!-- Summary -->
-                 <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                    <h2 class="font-semibold text-gray-700 text-sm mb-4">Summary</h2>
-                    <h3 class="text-sm font-bold text-gray-900 mb-1">SUMMER20</h3>
-                    <ul class="list-disc list-inside text-xs text-gray-600 space-y-1">
-                        <li>Applies to specific products</li>
-                        <li>10% off</li>
-                        <li>Active from today</li>
-                    </ul>
+                    <!-- Active Dates -->
+                     <div class="card border shadow-sm p-4">
+                         <h2 class="h6 fw-bold text-secondary mb-3">Active dates</h2>
+                         <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-medium text-secondary small mb-1">Start date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                             <div class="col-12">
+                                <label class="form-label fw-medium text-secondary small mb-1">End date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Summary -->
+                     <div class="card border shadow-sm p-4">
+                        <h2 class="h6 fw-bold text-secondary mb-3">Summary</h2>
+                        <h3 class="h6 fw-bold text-dark mb-2">SUMMER20</h3>
+                        <ul class="list-unstyled mb-0 small text-secondary">
+                            <li class="mb-1"><i class="fas fa-circle text-secondary me-2" style="font-size: 4px; vertical-align: middle;"></i>Applies to specific products</li>
+                            <li class="mb-1"><i class="fas fa-circle text-secondary me-2" style="font-size: 4px; vertical-align: middle;"></i>10% off</li>
+                            <li><i class="fas fa-circle text-secondary me-2" style="font-size: 4px; vertical-align: middle;"></i>Active from today</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
          </div>
         
-        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
-             <button type="button" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-gray-50">Discard</button>
-            <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-green-800 transition-colors">Save discount</button>
+        <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
+             <button type="button" class="btn btn-white border shadow-sm text-secondary fw-medium hover-bg-light">Discard</button>
+            <button type="submit" class="btn btn-success shadow-sm fw-medium">Save discount</button>
         </div>
 
     </form>
 </div>
+<style>
+    .hover-text-dark:hover { color: #343a40 !important; }
+    .hover-bg-light:hover { background-color: var(--bs-light) !important; }
+</style>
 @endsection
 
 @push('scripts')

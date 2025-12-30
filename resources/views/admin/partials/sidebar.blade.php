@@ -1,109 +1,102 @@
-<aside id="adminSidebar" class="w-64 bg-white border-r border-gray-200 flex-shrink-0 flex flex-col h-full hidden md:flex">
-    <div class="p-4 flex items-center justify-between h-16 border-b border-gray-100">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-gray-900 text-white flex items-center justify-center rounded text-sm font-bold">N</div>
-            <span class="font-semibold text-gray-700">Nurah Admin</span>
+<aside id="adminSidebar" class="sidebar d-none d-md-flex flex-column bg-white border-end h-100">
+    <div class="p-3 d-flex align-items-center justify-content-between border-bottom" style="height: 64px;">
+        <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center justify-content-center rounded bg-dark text-white fw-bold" style="width: 32px; height: 32px; font-size: 14px;">N</div>
+            <span class="fw-semibold text-secondary">Nurah Admin</span>
         </div>
-        <button class="text-gray-400 hover:text-gray-600"><i class="fas fa-chevron-left text-xs"></i></button>
+        <button class="btn btn-link text-secondary p-0 text-decoration-none"><i class="fas fa-chevron-left small"></i></button>
     </div>
 
-    <nav class="flex-1 overflow-y-auto py-3">
-        <ul class="space-y-0.5 px-2">
+    <nav class="flex-grow-1 overflow-auto py-2">
+        <ul class="list-unstyled mb-0 px-2 d-flex flex-column gap-1">
             <li>
-                <a href="{{ route('admin.dashboard') }}" class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors text-gray-600">
-                    <i class="fas fa-home w-5 text-center"></i>
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-home text-center" style="width: 20px;"></i>
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.orders') }}" class="sidebar-item {{ request()->routeIs('admin.orders') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-box-open w-5 text-center"></i>
+                <a href="{{ route('admin.orders') }}" class="sidebar-item {{ request()->routeIs('admin.orders') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-box-open text-center" style="width: 20px;"></i>
                     <span>Orders</span>
-                    <span class="ml-auto bg-gray-100 text-xs px-1.5 py-0.5 rounded-full text-gray-500">2</span>
+                    <span class="ms-auto badge bg-light text-secondary border rounded-pill">2</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.collections') }}" class="sidebar-item {{ request()->routeIs('admin.collections*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-layer-group w-5 text-center"></i>
+                <a href="{{ route('admin.collections') }}" class="sidebar-item {{ request()->routeIs('admin.collections*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-layer-group text-center" style="width: 20px;"></i>
                     <span>Collections</span>
                 </a>
             </li>
              <li>
-                <a href="{{ route('admin.attributes') }}" class="sidebar-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-wind w-5 text-center"></i>
+                <a href="{{ route('admin.attributes') }}" class="sidebar-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-wind text-center" style="width: 20px;"></i>
                     <span>Attributes</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.products') }}" class="sidebar-item {{ request()->routeIs('admin.products*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-tag w-5 text-center"></i>
+                <a href="{{ route('admin.products') }}" class="sidebar-item {{ request()->routeIs('admin.products*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-tag text-center" style="width: 20px;"></i>
                     <span>Products</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.reviews') }}" class="sidebar-item {{ request()->routeIs('admin.reviews*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-star w-5 text-center"></i>
+                <a href="{{ route('admin.reviews') }}" class="sidebar-item {{ request()->routeIs('admin.reviews*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-star text-center" style="width: 20px;"></i>
                     <span>Reviews</span>
-                    <i class="fas fa-crown text-yellow-500 ml-auto" title="Premium Feature"></i>
+                    <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('admin.bundles') }}" class="sidebar-item {{ request()->routeIs('admin.bundles*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-cubes w-5 text-center"></i>
+                <a href="{{ route('admin.bundles') }}" class="sidebar-item {{ request()->routeIs('admin.bundles*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-cubes text-center" style="width: 20px;"></i>
                     <span>Bundles</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.customers') }}" class="sidebar-item {{ request()->routeIs('admin.customers') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-users w-5 text-center"></i>
+                <a href="{{ route('admin.customers') }}" class="sidebar-item {{ request()->routeIs('admin.customers') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-users text-center" style="width: 20px;"></i>
                     <span>Customers</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.analytics') }}" class="sidebar-item {{ request()->routeIs('admin.analytics') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-chart-bar w-5 text-center"></i>
+                <a href="{{ route('admin.analytics') }}" class="sidebar-item {{ request()->routeIs('admin.analytics') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-chart-bar text-center" style="width: 20px;"></i>
                     <span>Analytics</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.discounts') }}" class="sidebar-item {{ request()->routeIs('admin.discounts*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-percent w-5 text-center"></i>
+                <a href="{{ route('admin.discounts') }}" class="sidebar-item {{ request()->routeIs('admin.discounts*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-percent text-center" style="width: 20px;"></i>
                     <span>Discounts</span>
                 </a>
             </li>
 
-            <li class="px-3 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <li class="px-3 pt-3 pb-2 text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 0.05em;">
                 Settings
             </li>
             <li>
-                 <a href="{{ route('admin.settings.slider') }}" class="sidebar-item {{ request()->routeIs('admin.settings.slider') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-images w-5 text-center"></i>
+                 <a href="{{ route('admin.settings.slider') }}" class="sidebar-item {{ request()->routeIs('admin.settings.slider') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-images text-center" style="width: 20px;"></i>
                     <span>Hero Slider</span>
                 </a>
             </li>
             <li>
-                 <a href="{{ route('admin.settings.managers') }}" class="sidebar-item {{ request()->routeIs('admin.settings.managers*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-users-cog w-5 text-center"></i>
+                 <a href="{{ route('admin.settings.managers') }}" class="sidebar-item {{ request()->routeIs('admin.settings.managers*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-users-cog text-center" style="width: 20px;"></i>
                     <span>Site Managers</span>
-                    <i class="fas fa-crown text-yellow-500 ml-auto" title="Premium Feature"></i>
+                    <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
                 </a>
             </li>
             <li>
-                 <a href="{{ route('admin.blog') }}" class="sidebar-item {{ request()->routeIs('admin.blog*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 transition-colors">
-                    <i class="fas fa-newspaper w-5 text-center"></i>
+                 <a href="{{ route('admin.blog') }}" class="sidebar-item {{ request()->routeIs('admin.blog*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-newspaper text-center" style="width: 20px;"></i>
                     <span>Blog & Articles</span>
-                    <i class="fas fa-crown text-yellow-500 ml-auto" title="Premium Feature"></i>
+                    <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
                 </a>
             </li>
         </ul>
 
     </nav>
-
-    <!-- <div class="p-4 border-t border-gray-200">
-        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-gray-100 transition-colors">
-            <i class="fas fa-cog w-5 text-center"></i>
-            <span>Settings</span>
-        </a>
-    </div> -->
 </aside>

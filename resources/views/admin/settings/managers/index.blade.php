@@ -3,81 +3,84 @@
 @section('title', 'Store Managers')
 
 @section('content')
-<div class="space-y-6">
+<div class="container-fluid">
 
     <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Site Managers</h1>
-            <p class="text-sm text-gray-500 mt-1">Manage site managers and their permissions.</p>
+            <h1 class="h3 mb-1 text-dark">Site Managers</h1>
+            <p class="text-muted small mb-0">Manage site managers and their permissions.</p>
         </div>
-        <a href="{{ route('admin.settings.managers.create') }}" class="bg-green-700 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-green-800 transition-colors flex items-center gap-2">
+        <a href="{{ route('admin.settings.managers.create') }}" class="btn btn-success shadow-sm d-flex align-items-center gap-2">
             <i class="fas fa-user-plus"></i> Add Manager
         </a>
     </div>
 
     <!-- Managers List -->
-    <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden overflow-x-auto">
-        <table class="w-full text-left text-sm text-gray-600">
-            <thead class="bg-gray-50 text-xs uppercase font-medium text-gray-500 border-b border-gray-200">
-                <tr>
-                    <th class="px-6 py-3">Name</th>
-                    <th class="px-6 py-3">Email</th>
-                    <th class="px-6 py-3">Status</th>
-                    <th class="px-6 py-3 text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <!-- Mock Manager 1 -->
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 font-medium text-gray-900">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">
-                                JD
+    <div class="card border shadow-sm container-fluid p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-secondary small text-uppercase fw-medium">
+                    <tr>
+                        <th class="px-4 py-3 border-bottom">Name</th>
+                        <th class="px-4 py-3 border-bottom">Email</th>
+                        <th class="px-4 py-3 border-bottom">Status</th>
+                        <th class="px-4 py-3 border-bottom text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    <!-- Mock Manager 1 -->
+                    <tr>
+                        <td class="px-4 py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle fw-bold small" style="width: 32px; height: 32px;">
+                                    JD
+                                </div>
+                                <span class="fw-medium text-dark">John Doe</span>
                             </div>
-                            John Doe
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">john.doe@example.com</td>
-                    <td class="px-6 py-4">
-                        <!-- Toggle Switch -->
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" checked class="sr-only peer">
-                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
-                            <span class="ml-2 text-xs font-medium text-gray-900">Active</span>
-                        </label>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded transition-colors">Remove</button>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="px-4 py-3 text-secondary">john.doe@example.com</td>
+                        <td class="px-4 py-3">
+                            <!-- Toggle Switch -->
+                            <div class="form-check form-switch p-0 m-0 d-flex align-items-center">
+                                <input class="form-check-input ms-0 me-2" type="checkbox" role="switch" id="activeSwitch1" checked>
+                                <label class="form-check-label small fw-medium text-dark" for="activeSwitch1">Active</label>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-end">
+                            <button class="btn btn-sm btn-light text-danger fw-semibold text-uppercase small px-3 py-1 rounded transition-colors hover-bg-danger-soft">Remove</button>
+                        </td>
+                    </tr>
 
-                <!-- Mock Manager 2 -->
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 font-medium text-gray-900">
-                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">
-                                AS
+                    <!-- Mock Manager 2 -->
+                    <tr>
+                        <td class="px-4 py-3">
+                             <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center justify-content-center bg-info bg-opacity-10 text-info rounded-circle fw-bold small" style="width: 32px; height: 32px;">
+                                    AS
+                                </div>
+                                <span class="fw-medium text-dark">Alice Smith</span>
                             </div>
-                            Alice Smith
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">alice.smith@example.com</td>
-                    <td class="px-6 py-4">
-                         <!-- Toggle Switch -->
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" checked class="sr-only peer">
-                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
-                             <span class="ml-2 text-xs font-medium text-gray-900">Active</span>
-                        </label>
-                    </td>
-                     <td class="px-6 py-4 text-right">
-                        <button class="text-red-600 hover:text-red-900 text-xs font-semibold uppercase bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded transition-colors">Remove</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <td class="px-4 py-3 text-secondary">alice.smith@example.com</td>
+                        <td class="px-4 py-3">
+                             <!-- Toggle Switch -->
+                            <div class="form-check form-switch p-0 m-0 d-flex align-items-center">
+                                <input class="form-check-input ms-0 me-2" type="checkbox" role="switch" id="activeSwitch2" checked>
+                                <label class="form-check-label small fw-medium text-dark" for="activeSwitch2">Active</label>
+                            </div>
+                        </td>
+                         <td class="px-4 py-3 text-end">
+                            <button class="btn btn-sm btn-light text-danger fw-semibold text-uppercase small px-3 py-1 rounded transition-colors hover-bg-danger-soft">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
+<style>
+    .hover-bg-danger-soft:hover { background-color: #fef2f2 !important; color: #dc3545 !important; }
+</style>
 @endsection

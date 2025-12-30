@@ -3,233 +3,261 @@
 @section('title', 'Analytics')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-xl font-semibold text-gray-800">Analytics</h1>
-    <div class="flex items-center gap-2 border border-gray-300 rounded-md bg-white px-3 py-1.5 shadow-sm text-sm cursor-pointer hover:bg-gray-50">
-        <i class="far fa-calendar text-gray-400"></i>
-        <span class="text-gray-700">Last 30 days</span>
-        <i class="fas fa-chevron-down text-gray-400 text-xs ml-1"></i>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0 text-dark">Analytics</h1>
+    <div class="d-flex align-items-center gap-2 border rounded bg-white px-3 py-1 shadow-sm text-sm cursor-pointer hover-bg-light">
+        <i class="far fa-calendar text-secondary"></i>
+        <span class="text-dark">Last 30 days</span>
+        <i class="fas fa-chevron-down text-secondary small ms-1"></i>
     </div>
 </div>
 
 <!-- Key Metrics (Normal) -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+<div class="row g-3 mb-4">
     <!-- Total Sales -->
-    <a href="{{ route('admin.analytics.show', 'sales') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
-        <div class="flex justify-between items-start mb-2">
-            <h3 class="text-xs font-semibold uppercase text-gray-500">Total Sales</h3>
-        </div>
-        <div class="text-2xl font-bold text-gray-900 mb-1">₹45,231.00</div>
-        <div class="text-sm text-green-600 font-medium">
-             <i class="fas fa-arrow-up mr-1"></i> 12%
-        </div>
-        <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-blue-500 rounded-full" style="width: 70%"></div>
-        </div>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ route('admin.analytics.show', 'sales') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Total Sales</h3>
+            </div>
+            <div class="h3 fw-bold text-dark mb-1">₹45,231.00</div>
+            <div class="small text-success fw-medium">
+                 <i class="fas fa-arrow-up me-1"></i> 12%
+            </div>
+            <div class="progress mt-3" style="height: 4px;">
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%"></div>
+            </div>
+        </a>
+    </div>
 
     <!-- Total Orders (New Normal) -->
-    <a href="{{ route('admin.analytics.show', 'orders') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
-        <div class="flex justify-between items-start mb-2">
-            <h3 class="text-xs font-semibold uppercase text-gray-500">Total Orders</h3>
-        </div>
-        <div class="text-2xl font-bold text-gray-900 mb-1">342</div>
-        <div class="text-sm text-green-600 font-medium">
-             <i class="fas fa-arrow-up mr-1"></i> 8%
-        </div>
-         <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-purple-500 rounded-full" style="width: 55%"></div>
-        </div>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ route('admin.analytics.show', 'orders') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Total Orders</h3>
+            </div>
+            <div class="h3 fw-bold text-dark mb-1">342</div>
+            <div class="small text-success fw-medium">
+                 <i class="fas fa-arrow-up me-1"></i> 8%
+            </div>
+             <div class="progress mt-3" style="height: 4px;">
+                <div class="progress-bar bg-purple" role="progressbar" style="width: 55%"></div>
+            </div>
+        </a>
+    </div>
 
     <!-- Average Order Value (New Normal) -->
-    <a href="{{ route('admin.analytics.show', 'aov') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
-        <div class="flex justify-between items-start mb-2">
-            <h3 class="text-xs font-semibold uppercase text-gray-500">Avg. Order Value</h3>
-        </div>
-        <div class="text-2xl font-bold text-gray-900 mb-1">₹1,250.00</div>
-        <div class="text-sm text-red-600 font-medium">
-             <i class="fas fa-arrow-down mr-1"></i> 2%
-        </div>
-         <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-orange-500 rounded-full" style="width: 40%"></div>
-        </div>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ route('admin.analytics.show', 'aov') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Avg. Order Value</h3>
+            </div>
+            <div class="h3 fw-bold text-dark mb-1">₹1,250.00</div>
+            <div class="small text-danger fw-medium">
+                 <i class="fas fa-arrow-down me-1"></i> 2%
+            </div>
+             <div class="progress mt-3" style="height: 4px;">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"></div>
+            </div>
+        </a>
+    </div>
 
     <!-- Online Store Sessions -->
-    <a href="{{ route('admin.analytics.show', 'sessions') }}" class="card bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer block">
-        <div class="flex justify-between items-start mb-2">
-            <h3 class="text-xs font-semibold uppercase text-gray-500">Sessions</h3>
-        </div>
-        <div class="text-2xl font-bold text-gray-900 mb-1">10,234</div>
-        <div class="text-sm text-green-600 font-medium">
-             <i class="fas fa-arrow-up mr-1"></i> 5%
-        </div>
-         <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-indigo-500 rounded-full" style="width: 65%"></div>
-        </div>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ route('admin.analytics.show', 'sessions') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Sessions</h3>
+            </div>
+            <div class="h3 fw-bold text-dark mb-1">10,234</div>
+            <div class="small text-success fw-medium">
+                 <i class="fas fa-arrow-up me-1"></i> 5%
+            </div>
+             <div class="progress mt-3" style="height: 4px;">
+                <div class="progress-bar bg-indigo" role="progressbar" style="width: 65%"></div>
+            </div>
+        </a>
+    </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+<div class="row g-3 mb-4">
     
     <!-- Top Products (Normal) -->
-    <div class="card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden lg:col-span-2">
-        <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-            <h3 class="font-semibold text-gray-700 text-sm">Top Selling Products</h3>
-            <span class="text-xs text-gray-500">Last 30 days</span>
-        </div>
-        <table class="w-full text-left text-sm">
-            <thead class="bg-gray-50 text-xs uppercase font-medium text-gray-500 border-b border-gray-100">
-                <tr>
-                    <th class="px-4 py-3">Product</th>
-                    <th class="px-4 py-3 text-right">Units Sold</th>
-                    <th class="px-4 py-3 text-right">Revenue</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center">
-                                <i class="fas fa-image text-gray-400"></i>
-                            </div>
-                            <span class="font-medium text-gray-900">Midnight Oud 50ml</span>
-                        </div>
-                    </td>
-                    <td class="px-4 py-3 text-right text-gray-600">45</td>
-                    <td class="px-4 py-3 text-right font-medium text-gray-900">₹1,89,000</td>
-                </tr>
-                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center">
-                                <i class="fas fa-image text-gray-400"></i>
-                            </div>
-                            <span class="font-medium text-gray-900">Jasmine Musk Oil</span>
-                        </div>
-                    </td>
-                    <td class="px-4 py-3 text-right text-gray-600">32</td>
-                    <td class="px-4 py-3 text-right font-medium text-gray-900">₹44,800</td>
-                </tr>
-                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3">
-                        <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 bg-gray-100 rounded border border-gray-200 flex items-center justify-center">
-                                <i class="fas fa-image text-gray-400"></i>
-                            </div>
-                            <span class="font-medium text-gray-900">Rose & Amber Gift Set</span>
-                        </div>
-                    </td>
-                    <td class="px-4 py-3 text-right text-gray-600">18</td>
-                    <td class="px-4 py-3 text-right font-medium text-gray-900">₹1,53,000</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="p-3 border-t border-gray-100 text-center">
-             <a href="{{ route('admin.products', ['sort' => 'best_selling']) }}" class="text-xs text-blue-600 hover:underline">View all products</a>
+    <div class="col-12 col-lg-8">
+        <div class="card border shadow-sm">
+            <div class="card-header bg-light border-bottom p-3 d-flex justify-content-between align-items-center">
+                <h3 class="h6 fw-semibold text-secondary mb-0">Top Selling Products</h3>
+                <span class="small text-muted">Last 30 days</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light text-uppercase small fw-medium text-muted border-bottom">
+                        <tr>
+                            <th class="px-3 py-3">Product</th>
+                            <th class="px-3 py-3 text-end">Units Sold</th>
+                            <th class="px-3 py-3 text-end">Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td class="px-3 py-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-image text-secondary opacity-50"></i>
+                                    </div>
+                                    <span class="fw-medium text-dark">Midnight Oud 50ml</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-3 text-end text-secondary">45</td>
+                            <td class="px-3 py-3 text-end fw-medium text-dark">₹1,89,000</td>
+                        </tr>
+                         <tr>
+                            <td class="px-3 py-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-image text-secondary opacity-50"></i>
+                                    </div>
+                                    <span class="fw-medium text-dark">Jasmine Musk Oil</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-3 text-end text-secondary">32</td>
+                            <td class="px-3 py-3 text-end fw-medium text-dark">₹44,800</td>
+                        </tr>
+                         <tr>
+                            <td class="px-3 py-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-image text-secondary opacity-50"></i>
+                                    </div>
+                                    <span class="fw-medium text-dark">Rose & Amber Gift Set</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-3 text-end text-secondary">18</td>
+                            <td class="px-3 py-3 text-end fw-medium text-dark">₹1,53,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-white border-top p-2 text-center">
+                 <a href="{{ route('admin.products', ['sort' => 'best_selling']) }}" class="small text-decoration-none">View all products</a>
+            </div>
         </div>
     </div>
 
     <!-- Sales by Location (New Pro) -->
-    <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4 relative overflow-hidden">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-gray-700 text-sm">Sales by Location</h3>
-            <i class="fas fa-crown text-yellow-500 text-xs" title="Pro Feature"></i>
-        </div>
-        
-        <!-- Blurred Content -->
-        <div class="blur-sm select-none opacity-50 space-y-4">
-            <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">Mumbai</span>
-                <div class="h-2 w-24 bg-gray-100 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 80%"></div></div>
-                <span class="text-sm font-medium">₹12.5k</span>
+    <div class="col-12 col-lg-4">
+        <div class="card border shadow-sm p-3 h-100 position-relative overflow-hidden">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h6 fw-semibold text-secondary mb-0">Sales by Location</h3>
+                <i class="fas fa-crown text-warning small" title="Pro Feature"></i>
             </div>
-             <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">Delhi</span>
-                 <div class="h-2 w-24 bg-gray-100 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 65%"></div></div>
-                <span class="text-sm font-medium">₹8.2k</span>
+            
+            <!-- Blurred Content -->
+            <div class="opacity-50 user-select-none" style="filter: blur(4px);">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="small text-secondary">Mumbai</span>
+                    <div class="progress w-50" style="height: 8px;"><div class="progress-bar bg-primary" role="progressbar" style="width: 80%"></div></div>
+                    <span class="small fw-medium">₹12.5k</span>
+                </div>
+                 <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="small text-secondary">Delhi</span>
+                     <div class="progress w-50" style="height: 8px;"><div class="progress-bar bg-primary" role="progressbar" style="width: 65%"></div></div>
+                    <span class="small fw-medium">₹8.2k</span>
+                </div>
+                 <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="small text-secondary">Bangalore</span>
+                     <div class="progress w-50" style="height: 8px;"><div class="progress-bar bg-primary" role="progressbar" style="width: 45%"></div></div>
+                    <span class="small fw-medium">₹5.1k</span>
+                </div>
+                 <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="small text-secondary">Chennai</span>
+                     <div class="progress w-50" style="height: 8px;"><div class="progress-bar bg-primary" role="progressbar" style="width: 30%"></div></div>
+                    <span class="small fw-medium">₹3.4k</span>
+                </div>
             </div>
-             <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">Bangalore</span>
-                 <div class="h-2 w-24 bg-gray-100 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 45%"></div></div>
-                <span class="text-sm font-medium">₹5.1k</span>
-            </div>
-             <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">Chennai</span>
-                 <div class="h-2 w-24 bg-gray-100 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 30%"></div></div>
-                <span class="text-sm font-medium">₹3.4k</span>
-            </div>
-        </div>
 
-        <!-- Lock Overlay -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-            <div class="bg-white/90 p-3 rounded-full shadow-sm border border-gray-200 flex items-center justify-center w-10 h-10 mb-2">
-                <i class="fas fa-lock text-gray-400"></i>
+            <!-- Lock Overlay -->
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center z-10">
+                <div class="bg-white bg-opacity-75 p-2 rounded-circle shadow-sm border mb-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fas fa-lock text-secondary opacity-50"></i>
+                </div>
+                <span class="badge bg-white bg-opacity-90 text-secondary border shadow-sm fw-semibold">Upgrade to Pro</span>
             </div>
-            <span class="text-xs font-semibold text-gray-500 bg-white/90 px-2.5 py-1 rounded border border-gray-200">Upgrade to Pro</span>
         </div>
     </div>
 
 </div>
 
 <!-- Pro Features Row -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="row g-3">
 
     <!-- Sessions by Device (Pro) -->
-     <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4 relative overflow-hidden">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-gray-700 text-sm">Sessions by Device</h3>
-            <i class="fas fa-crown text-yellow-500 text-xs" title="Pro Feature"></i>
-        </div>
-        <div class="blur-md select-none opacity-40">
-            <div class="flex items-center justify-center h-32 relative">
-                <div class="w-24 h-24 rounded-full border-[8px] border-blue-500" style="border-right-color: #ef4444; transform: rotate(45deg);"></div>
+     <div class="col-12 col-md-4">
+        <div class="card border shadow-sm p-3 position-relative overflow-hidden">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h6 fw-semibold text-secondary mb-0">Sessions by Device</h3>
+                <i class="fas fa-crown text-warning small" title="Pro Feature"></i>
             </div>
-        </div>
-        <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-             <div class="bg-white/90 p-3 rounded-full shadow-sm border border-gray-200 flex items-center justify-center w-10 h-10 mb-2">
-                <i class="fas fa-lock text-gray-400"></i>
+            <div class="opacity-50 user-select-none" style="filter: blur(8px);">
+                <div class="d-flex align-items-center justify-content-center py-4 position-relative">
+                    <div class="rounded-circle border border-5 border-primary" style="width: 96px; height: 96px; border-right-color: #dc3545 !important; transform: rotate(45deg);"></div>
+                </div>
             </div>
-            <span class="text-xs font-semibold text-gray-500 bg-white/90 px-2.5 py-1 rounded border border-gray-200">Upgrade to Pro</span>
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center z-10">
+                 <div class="bg-white bg-opacity-75 p-2 rounded-circle shadow-sm border mb-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fas fa-lock text-secondary opacity-50"></i>
+                </div>
+                <span class="badge bg-white bg-opacity-90 text-secondary border shadow-sm fw-semibold">Upgrade to Pro</span>
+            </div>
         </div>
     </div>
 
     <!-- Returning Customer Rate (Pro) -->
-    <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4 relative overflow-hidden">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-gray-700 text-sm">Retention Rate</h3>
-            <i class="fas fa-crown text-yellow-500 text-xs" title="Pro Feature"></i>
-        </div>
-        <div class="blur-md select-none opacity-40 space-y-2">
-             <div class="text-2xl font-bold text-gray-900">15.45%</div>
-             <div class="h-24 bg-gray-50 rounded w-full"></div>
-        </div>
-         <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-             <div class="bg-white/90 p-3 rounded-full shadow-sm border border-gray-200 flex items-center justify-center w-10 h-10 mb-2">
-                <i class="fas fa-lock text-gray-400"></i>
+    <div class="col-12 col-md-4">
+        <div class="card border shadow-sm p-3 position-relative overflow-hidden">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h6 fw-semibold text-secondary mb-0">Retention Rate</h3>
+                <i class="fas fa-crown text-warning small" title="Pro Feature"></i>
             </div>
-            <span class="text-xs font-semibold text-gray-500 bg-white/90 px-2.5 py-1 rounded border border-gray-200">Upgrade to Pro</span>
+            <div class="opacity-50 user-select-none" style="filter: blur(8px);">
+                 <div class="h3 fw-bold text-dark mb-2">15.45%</div>
+                 <div class="bg-light rounded w-100" style="height: 100px;"></div>
+            </div>
+             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center z-10">
+                 <div class="bg-white bg-opacity-75 p-2 rounded-circle shadow-sm border mb-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fas fa-lock text-secondary opacity-50"></i>
+                </div>
+                <span class="badge bg-white bg-opacity-90 text-secondary border shadow-sm fw-semibold">Upgrade to Pro</span>
+            </div>
         </div>
     </div>
 
     <!-- Profit Margin (New Pro) -->
-    <div class="card bg-white rounded-lg border border-gray-200 shadow-sm p-4 relative overflow-hidden">
-        <div class="flex justify-between items-center mb-4">
-             <h3 class="font-semibold text-gray-700 text-sm">Profit Margin</h3>
-            <i class="fas fa-crown text-yellow-500 text-xs" title="Pro Feature"></i>
-        </div>
-        <div class="blur-md select-none opacity-40 space-y-2">
-             <div class="text-2xl font-bold text-gray-900">22.1%</div>
-             <div class="h-24 bg-gray-50 rounded w-full"></div>
-        </div>
-         <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
-             <div class="bg-white/90 p-3 rounded-full shadow-sm border border-gray-200 flex items-center justify-center w-10 h-10 mb-2">
-                <i class="fas fa-lock text-gray-400"></i>
+    <div class="col-12 col-md-4">
+        <div class="card border shadow-sm p-3 position-relative overflow-hidden">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h3 class="h6 fw-semibold text-secondary mb-0">Profit Margin</h3>
+                <i class="fas fa-crown text-warning small" title="Pro Feature"></i>
             </div>
-            <span class="text-xs font-semibold text-gray-500 bg-white/90 px-2.5 py-1 rounded border border-gray-200">Upgrade to Pro</span>
+            <div class="opacity-50 user-select-none" style="filter: blur(8px);">
+                 <div class="h3 fw-bold text-dark mb-2">22.1%</div>
+                 <div class="bg-light rounded w-100" style="height: 100px;"></div>
+            </div>
+             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center z-10">
+                 <div class="bg-white bg-opacity-75 p-2 rounded-circle shadow-sm border mb-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fas fa-lock text-secondary opacity-50"></i>
+                </div>
+                <span class="badge bg-white bg-opacity-90 text-secondary border shadow-sm fw-semibold">Upgrade to Pro</span>
+            </div>
         </div>
     </div>
 
 </div>
+<style>
+    .bg-purple { background-color: #a855f7 !important; }
+    .bg-indigo { background-color: #6366f1 !important; }
+    .bg-orange { background-color: #f97316 !important; }
+    .hover-shadow:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; }
+    .transition-base { transition: all .3s ease; }
+    .hover-bg-light:hover { background-color: var(--bs-light) !important; }
+</style>
 @endsection
