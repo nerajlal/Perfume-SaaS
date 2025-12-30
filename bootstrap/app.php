@@ -14,7 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, \Illuminate\Http\Request $request) {
-            return response()->view('nurah.errors.404', [], 404);
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $e, \Illuminate\Http\Request $request) {
+            $view = 'nurah.errors.' . $e->getStatusCode();
+            if (view()->exists($view)) {
+                 return response()->view($view, [], $e->getStatusCode());
+            }
         });
     })->create();
