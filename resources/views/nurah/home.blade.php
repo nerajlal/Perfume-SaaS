@@ -366,6 +366,16 @@
                     <p class="product-price"><span>From</span> ₹3,499</p>
                 </div>
             </a>
+
+            <a href="{{ route('product') }}" class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://myop.in/cdn/shop/files/oud_de_beirut_e46c1f48-205a-4534-bdb7-4a2b35e8ba0a.webp?v=1752146209&width=1080" alt="Parisian Night" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Parisian Night</h3>
+                    <p class="product-price"><span>From</span> ₹3,499</p>
+                </div>
+            </a>
         </div>
         <a href="/cosmopolitan" class="view-all-btn" style="background: var(--gold);">Shop Collection</a>
     </div>
