@@ -161,25 +161,25 @@
         <div class="slide active">
             <picture>
                 <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/b2g1_phone.webp?v=1740730153&width=1000">
-                <img src="https://myop.in/cdn/shop/files/b2g1_6e47992a-e85f-4019-89d5-179ac74e931d.webp?v=1740730153&width=5760" alt="Buy 2 Get 1">
+                <img src="{{ asset('Images/bd1.webp') }}" alt="Buy 2 Get 1">
             </picture>
         </div>
         <div class="slide">
             <picture>
                 <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/Banner_elante_chandigarh_phone_copy_1.webp?v=1764662226&width=1000">
-                <img src="https://myop.in/cdn/shop/files/banner_elante_chandigarh_copy.webp?v=1764662226&width=5760" alt="New Store">
+                <img src="{{ asset('Images/bd2.webp') }}" alt="New Store">
             </picture>
         </div>
         <div class="slide">
             <picture>
                  <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/banner_phone.webp?v=1763701093&width=1000">
-                <img src="https://myop.in/cdn/shop/files/banner_desktop.webp?v=1763701093&width=5760" alt="Featured">
+                <img src="{{ asset('Images/bd3.webp') }}" alt="Featured">
             </picture>
         </div>
         <div class="slide">
             <picture>
                 <source media="(max-width: 768px)" srcset="https://myop.in/cdn/shop/files/marshamallow_phone.webp?v=1753949875&width=1000">
-                <img src="https://myop.in/cdn/shop/files/marshamallow_desktop.webp?v=1753949875&width=1420" alt="Marshmallow">
+                <img src="{{ asset('Images/bd4.webp') }}" alt="Marshmallow">
             </picture>
         </div>
         <div class="slider-dots">
