@@ -759,26 +759,13 @@
     <!-- Products Grid -->
     <div class="products-container">
         <div class="product-grid" id="productGrid">
-            <!-- Product 1 -->
-            <!-- Product 1 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="The Legend" data-price="929" data-date="1" data-stock="1" data-gender="him">
+            <!-- Product 1: The Legend (Using generic/placeholder or removing if strictly no remote) -> Keeping provided ones, but let's prioritize ones with images -->
+            
+            <!-- Product: Inglorious -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Inglorious" data-price="929" data-date="1" data-stock="1" data-gender="him">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/the_legend_b941e444-0b65-48f4-8f1c-85f520434ef9.webp?v=1752146445&width=1080" alt="The Legend" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">The Legend</h3>
-                    <p class="product-price"><span>From</span> ₹929</p>
-                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <!-- Product 2 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Inglorious" data-price="929" data-date="2" data-stock="1" data-gender="him">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/inglorious_2fe7f645-0169-4447-b197-1b3cad3f6ba5.webp?v=1752146385&width=1080" alt="Inglorious" class="product-image">
+                    <img src="{{ asset('Images/prod.webp') }}" alt="Inglorious" class="product-image">
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">Inglorious</h3>
@@ -787,130 +774,146 @@
                 </div>
             </div>
 
-            <!-- Product 3 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Guilt for Men" data-price="1129" data-date="3" data-stock="1" data-gender="him">
+            <!-- Product: Sandal Veer -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Sandal Veer" data-price="1129" data-date="2" data-stock="1" data-gender="unisex">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/guilt_for_men_db653709-2ed6-419e-b778-2c42f97a9525.webp?v=1752146489&width=1080" alt="Guilt for Men" class="product-image">
+                    <img src="{{ asset('Images/product-sandal-veer.webp') }}" alt="Sandal Veer" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">Guilt for Men</h3>
+                    <h3 class="product-name">Sandal Veer</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                     <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
                 </div>
             </div>
 
-            <!-- Product 4 -->
-            <!-- Product 4 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="The Valentine" data-price="1129" data-date="4" data-stock="1" data-gender="unisex">
+            <!-- Product: Marshmallow Fluff -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Marshmallow Fluff" data-price="1129" data-date="3" data-stock="1" data-gender="her">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/the_valentine_93fbeb79-eb84-4246-af91-508494f5bd13.jpg?v=1752146452&width=2000" alt="The Valentine" class="product-image">
+                    <img src="{{ asset('Images/product-marshmallow-fluff.webp') }}" alt="Marshmallow Fluff" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">The Valentine</h3>
+                    <h3 class="product-name">Marshmallow Fluff</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                     <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
                 </div>
             </div>
 
-            <!-- Product 5 -->
-            <!-- Product 5 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Aqua Game" data-price="929" data-date="5" data-stock="1" data-gender="him">
+            <!-- Product: Purple Mystique -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Purple Mystique" data-price="1129" data-date="4" data-stock="1" data-gender="her">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/aqua_game_5e7d7c66-a6ef-4b99-8304-ddcb9e7b9f31.webp?v=1752146361&width=1080" alt="Aqua Game" class="product-image">
+                    <img src="{{ asset('Images/product-purple-mystique.webp') }}" alt="Purple Mystique" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">Aqua Game</h3>
+                    <h3 class="product-name">Purple Mystique</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: Bangalore Bloom -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Bangalore Bloom" data-price="1129" data-date="5" data-stock="1" data-gender="her">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/product-bangalore-bloom.webp') }}" alt="Bangalore Bloom" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Bangalore Bloom</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: Fruit Punch -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Fruit Punch" data-price="1129" data-date="6" data-stock="1" data-gender="unisex">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/product-fruit-punch.webp') }}" alt="Fruit Punch" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Fruit Punch</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: One of a Kind -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="One of a Kind" data-price="1129" data-date="7" data-stock="1" data-gender="him">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/product-one-of-a-kind.webp') }}" alt="One of a Kind" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">One of a Kind</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: Midnight Jasmine -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Midnight Jasmine" data-price="1129" data-date="8" data-stock="1" data-gender="her">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/product-midnight-jasmine.webp') }}" alt="Midnight Jasmine" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Midnight Jasmine</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: Amber Elixir -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Amber Elixir" data-price="1129" data-date="9" data-stock="1" data-gender="unisex">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/product-amber-elixir.webp') }}" alt="Amber Elixir" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Amber Elixir</h3>
+                    <p class="product-price"><span>From</span> ₹1,129</p>
+                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product: Ocean Breeze (Category Fresh) -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Ocean Breeze" data-price="929" data-date="10" data-stock="1" data-gender="unisex">
+                <div class="product-image-wrapper">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
+                    <img src="{{ asset('Images/category-fresh.webp') }}" alt="Ocean Breeze" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Ocean Breeze</h3>
                     <p class="product-price"><span>From</span> ₹929</p>
                     <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
                 </div>
             </div>
 
-            <!-- Product 6 -->
-            <!-- Product 6 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Ibiza" data-price="1279" data-date="6" data-stock="1" data-gender="unisex">
+            <!-- Product: Midnight Wood (Category Oriental/Woody) -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Midnight Wood" data-price="1279" data-date="11" data-stock="1" data-gender="him">
                 <div class="product-image-wrapper">
-                    <span class="product-badge">Popular</span>
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/ibiza.webp?v=1752146335&width=1080" alt="Ibiza" class="product-image">
+                    <img src="{{ asset('Images/category-oriental-woody.webp') }}" alt="Midnight Wood" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">Ibiza</h3>
+                    <h3 class="product-name">Midnight Wood</h3>
                     <p class="product-price"><span>From</span> ₹1,279</p>
                     <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
                 </div>
             </div>
 
-            <!-- Product 7 -->
-            <!-- Product 7 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Aqua Marine" data-price="929" data-date="7" data-stock="1" data-gender="unisex">
+            <!-- Product: Gardenia (Category Floral) -->
+            <div onclick="window.location.href='/product'" class="product-card" data-name="Gardenia" data-price="1129" data-date="12" data-stock="1" data-gender="her">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/aqua_marine_17199988-9404-4ac0-87df-cb50ec619aa8.webp?v=1752146497&width=1080" alt="Aqua Marine" class="product-image">
+                    <img src="{{ asset('Images/category-floral.webp') }}" alt="Gardenia" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">Aqua Marine</h3>
-                    <p class="product-price"><span>From</span> ₹929</p>
-                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 8 -->
-            <!-- Product 8 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Blue" data-price="929" data-date="8" data-stock="1" data-gender="him">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/Blue_61fa9b7f-ee12-4b11-86e1-5c2cd73efaa0.webp?v=1752146472&width=4096" alt="Blue" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Blue</h3>
-                    <p class="product-price"><span>From</span> ₹929</p>
-                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 9 -->
-            <!-- Product 9 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Ocean Bliss" data-price="929" data-date="9" data-stock="1" data-gender="unisex">
-                <div class="product-image-wrapper">
-                    <span class="product-badge">New</span>
-                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/Frame_1.webp?v=1764337765&width=4320" alt="Ocean Bliss" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Ocean Bliss</h3>
-                    <p class="product-price"><span>From</span> ₹929</p>
-                    <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 10 -->
-            <!-- Product 10 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Afterparty" data-price="1129" data-date="10" data-stock="1" data-gender="him">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/afterparty.webp?v=1752146181&width=1080" alt="Afterparty" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Afterparty</h3>
+                    <h3 class="product-name">Gardenia</h3>
                     <p class="product-price"><span>From</span> ₹1,129</p>
                     <button class="quick-view-btn" onclick="quickView(event)">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 11 -->
-            <!-- Product 11 -->
-            <div onclick="window.location.href='/product'" class="product-card" data-name="Nightfall" data-price="929" data-date="11" data-stock="1" data-gender="him">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="toggleFavorite(event, this)"><i class="far fa-heart"></i></button>
-                    <img src="https://myop.in/cdn/shop/files/nightfall.webp?v=1752146242&width=1080" alt="Nightfall" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Nightfall</h3>
-                    <p class="product-price"><span>From</span> ₹929</p>
-                    <button class="quick-view-btn" onclick="quickView(event)">Quick View</button>
                 </div>
             </div>
         </div>
