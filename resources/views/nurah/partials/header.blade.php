@@ -10,7 +10,14 @@
         <a href="{{ route('home') }}" class="logo">Nurah Perfumes</a>
         <div class="header-icons">
             <button class="icon-btn" onclick="openSearch()"><i class="fas fa-search"></i></button>
-            <a href="javascript:void(0)" onclick="openLogin()" class="icon-btn" style="color: inherit;"><i class="fas fa-user"></i></a>
+            @auth
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="icon-btn" style="color: inherit;" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <a href="javascript:void(0)" onclick="openLogin()" class="icon-btn" style="color: inherit;"><i class="fas fa-user"></i></a>
+            @endauth
             <a href="{{ route('cart') }}" class="icon-btn" style="color: inherit;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count">0</span>
@@ -51,13 +58,26 @@
         <h2 class="login-title">Welcome Back</h2>
         <p class="login-subtitle">Sign in to access your account</p>
         
-        <form class="login-form" onsubmit="event.preventDefault(); alert('Login functionality coming soon!');">
+        <form class="login-form" action="{{ route('login') }}" method="POST">
+            @csrf
+            
+            @if($errors->any() && session('open_login'))
+                <div class="alert alert-danger" style="color: red; font-size: 13px; margin-bottom: 10px;">
+                    <ul style="list-style: none; padding: 0;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="form-group">
-                <input type="email" class="form-input" placeholder="Email Address" required>
+                <input type="email" name="email" class="form-input" placeholder="Email Address" required value="{{ old('email') }}">
             </div>
             <div class="form-group">
-                <input type="password" class="form-input" placeholder="Password" required>
+                <input type="password" name="password" class="form-input" placeholder="Password" required>
             </div>
+            
             <button type="submit" class="login-btn">Sign In</button>
         </form>
         
@@ -71,6 +91,22 @@
     </div>
 </div>
 
+@if(session('open_register'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        openRegister();
+    });
+</script>
+@endif
+
+@if(session('open_login'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        openLogin();
+    });
+</script>
+@endif
+
 <!-- Register Modal -->
 <div class="login-modal" id="registerModal">
     <div class="login-content">
@@ -78,15 +114,33 @@
         <h2 class="login-title">Create Account</h2>
         <p class="login-subtitle">Join us for exclusive offers & updates</p>
         
-        <form class="login-form" onsubmit="event.preventDefault(); alert('Registration functionality coming soon!');">
+        <form class="login-form" action="{{ route('register') }}" method="POST">
+            @csrf
+            
+            @if($errors->any() && session('open_register'))
+                <div class="alert alert-danger" style="color: red; font-size: 13px; margin-bottom: 10px;">
+                    <ul style="list-style: none; padding: 0;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="form-group">
-                <input type="text" class="form-input" placeholder="Full Name" required>
+                <input type="text" name="name" class="form-input" placeholder="Full Name" required value="{{ old('name') }}">
             </div>
             <div class="form-group">
-                <input type="email" class="form-input" placeholder="Email Address" required>
+                <input type="email" name="email" class="form-input" placeholder="Email Address" required value="{{ old('email') }}">
             </div>
             <div class="form-group">
-                <input type="password" class="form-input" placeholder="Password" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Phone Number" value="{{ old('phone') }}">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-input" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password_confirmation" class="form-input" placeholder="Confirm Password" required>
             </div>
             <button type="submit" class="login-btn">Create Account</button>
         </form>

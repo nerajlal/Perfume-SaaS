@@ -14,6 +14,12 @@ Route::view('/contact', 'nurah.contact')->name('contact');
 Route::view('/cart', 'nurah.cart')->name('cart');
 Route::view('/checkout', 'nurah.checkout')->name('checkout');
 
+// User Auth Routes
+Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register');
+Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+
 // Admin Routes (Auth Disabled for now)
 // Route::prefix('admin')->name('admin.')->group(function () {
 //     // Auth Routes
@@ -74,11 +80,9 @@ Route::get('/admin/blog/{id}/edit', function ($id) {
 })->name('admin.blog.edit');
 
 
-Route::view('/admin/customers', 'admin.customers')->name('admin.customers');
+Route::get('/admin/customers', [App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('admin.customers');
 Route::view('/admin/customers/create', 'admin.customers.create')->name('admin.customers.create');
-Route::get('/admin/customers/{id}', function ($id) {
-    return view('admin.customers.show', ['id' => $id]);
-})->name('admin.customers.show');
+Route::get('/admin/customers/{id}', [App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('admin.customers.show');
 
 Route::view('/admin/analytics', 'admin.analytics')->name('admin.analytics');
 Route::get('/admin/analytics/{type}', function ($type) {
