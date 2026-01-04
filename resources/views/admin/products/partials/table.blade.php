@@ -10,7 +10,7 @@
                     <i class="fas fa-image text-secondary opacity-50"></i>
                 @endif
             </div>
-            <span class="fw-medium text-dark hover-primary mb-0">{{ $product->title }}</span>
+            <span class="fw-medium text-dark hover-success mb-0">{{ $product->title }}</span>
         </div>
     </td>
     <td class="px-3 py-3">
@@ -28,7 +28,7 @@
     <td class="px-3 py-3">{{ $product->vendor }}</td>
     <td class="px-3 py-3 text-end">
         <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
-            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-link text-secondary hover-primary p-0"><i class="fas fa-edit"></i></a>
+            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-link text-secondary hover-success p-0"><i class="fas fa-edit"></i></a>
             
             <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this product?');">
                 @csrf
@@ -49,6 +49,19 @@
 @endforelse
 <tr>
     <td colspan="7" class="px-3 py-3 border-0">
-        {{ $products->appends(request()->query())->links() }}
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="text-secondary small">
+                Showing 
+                <span class="fw-medium">{{ $products->firstItem() ?? 0 }}</span> 
+                to 
+                <span class="fw-medium">{{ $products->lastItem() ?? 0 }}</span> 
+                of 
+                <span class="fw-medium">{{ $products->total() }}</span> 
+                results
+            </div>
+            <div>
+                {{ $products->appends(request()->query())->links() }}
+            </div>
+        </div>
     </td>
 </tr>

@@ -8,11 +8,11 @@
     <a href="{{ route('admin.products.create') }}" class="btn btn-success shadow-sm">Add product</a>
 </div>
 
-<!-- Stats -->
+    <!-- Stats -->
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-3">
         <a href="{{ route('admin.products') }}" class="text-decoration-none">
-            <div class="card border shadow-sm p-3 text-center h-100 {{ !request('status') ? 'border-primary bg-primary bg-opacity-10' : '' }}">
+            <div class="card border shadow-sm p-3 text-center h-100 {{ !request('status') ? 'border-success bg-success bg-opacity-10' : '' }}">
                 <div class="h3 fw-bold text-dark mb-0">{{ $total }}</div>
                 <div class="small text-muted text-uppercase tracking-wide mt-1">Total</div>
             </div>
@@ -67,7 +67,7 @@
                 <ul class="dropdown-menu shadow-sm border-0">
                     <li><a class="dropdown-item small" href="{{ route('admin.products', array_merge(request()->query(), ['type' => null, 'page' => 1])) }}">All Types</a></li>
                     @foreach($types as $type)
-                        <li><a class="dropdown-item small {{ request('type') == $type ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['type' => $type, 'page' => 1])) }}">{{ $type }}</a></li>
+                        <li><a class="dropdown-item small {{ request('type') == $type ? 'active bg-light text-success fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['type' => $type, 'page' => 1])) }}">{{ $type }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -78,11 +78,11 @@
                     <i class="fas fa-sort me-2"></i> Sort
                 </button>
                 <ul class="dropdown-menu shadow-sm border-0 dropdown-menu-end">
-                    <li><a class="dropdown-item small {{ !request('sort') || request('sort') == 'newest' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'newest', 'page' => 1])) }}">Newest First</a></li>
-                    <li><a class="dropdown-item small {{ request('sort') == 'oldest' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'oldest', 'page' => 1])) }}">Oldest First</a></li>
+                    <li><a class="dropdown-item small {{ !request('sort') || request('sort') == 'newest' ? 'active bg-light text-success fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'newest', 'page' => 1])) }}">Newest First</a></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'oldest' ? 'active bg-light text-success fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'oldest', 'page' => 1])) }}">Oldest First</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item small {{ request('sort') == 'title_asc' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'title_asc', 'page' => 1])) }}">Title (A-Z)</a></li>
-                    <li><a class="dropdown-item small {{ request('sort') == 'title_desc' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'title_desc', 'page' => 1])) }}">Title (Z-A)</a></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'title_asc' ? 'active bg-light text-success fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'title_asc', 'page' => 1])) }}">Title (A-Z)</a></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'title_desc' ? 'active bg-light text-success fw-bold' : '' }}" href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'title_desc', 'page' => 1])) }}">Title (Z-A)</a></li>
                 </ul>
             </div>
         </div>
@@ -143,4 +143,31 @@
         });
     });
 </script>
+<style>
+    .hover-success:hover {
+        color: #008060 !important;
+    }
+    .hover-danger:hover {
+        color: var(--bs-danger) !important;
+    }
+    
+    /* Pagination Overrides */
+    .page-link {
+        color: #008060;
+        border-color: #dee2e6;
+    }
+    .page-link:hover {
+        color: #004d3a;
+        background-color: #e6f2f0;
+        border-color: #dee2e6;
+    }
+    .page-item.active .page-link {
+        background-color: #008060;
+        border-color: #008060;
+        color: white;
+    }
+    .page-item.disabled .page-link {
+        color: #6c757d;
+    }
+</style>
 @endsection
