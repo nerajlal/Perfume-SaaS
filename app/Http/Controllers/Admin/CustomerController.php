@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::where('type', 'user');
 
         if ($request->has('search')) {
             $search = $request->search;

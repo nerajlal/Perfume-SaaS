@@ -14,9 +14,9 @@
     <div class="card-header bg-light border-bottom p-3 d-flex gap-3">
         <div class="flex-grow-1">
              <form action="{{ route('admin.customers') }}" method="GET">
-                 <div class="input-group input-group-sm">
+                 <div class="input-group shadow-sm">
                      <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
-                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search customers" class="form-control border-start-0 shadow-none">
+                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search customers" class="form-control border-start-0 ps-0 shadow-none">
                  </div>
              </form>
         </div>
