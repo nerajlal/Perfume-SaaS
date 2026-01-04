@@ -33,6 +33,14 @@
                     </div>
                 </div>
 
+
+                
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-12 col-lg-4">
+            <div class="vstack gap-4">
                 <!-- Status -->
                 <div class="card border shadow-sm p-4">
                      <h2 class="h6 fw-bold text-secondary mb-3">Status</h2>
@@ -41,13 +49,7 @@
                         <label class="form-check-label" for="status">Active</label>
                      </div>
                 </div>
-                
-            </div>
-        </div>
 
-        <!-- Right Column -->
-        <div class="col-12 col-lg-4">
-            <div class="vstack gap-4">
                 <!-- Collection Image -->
                 <div class="card border shadow-sm p-4">
                     <h2 class="h6 fw-bold text-secondary mb-3">Collection Image</h2>
@@ -57,7 +59,7 @@
                             <span class="text-secondary fw-medium small mb-1">Add image</span>
                             <p class="small text-muted mb-0">1200 x 1200px recommended</p>
                         </div>
-                        <input type="file" name="image" id="collection_image" class="d-none" accept="image/*" onchange="previewImage(this)">
+                        <input type="file" name="image" id="collection_image" class="d-none" accept="image/webp" onchange="previewImage(this)">
                     </div>
                     <div id="image_preview" class="mt-3 d-none">
                         <img src="" alt="Preview" class="w-100 rounded">

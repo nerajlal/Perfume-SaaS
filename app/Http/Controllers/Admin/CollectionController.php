@@ -35,7 +35,7 @@ class CollectionController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:webp|max:2048',
             'status' => 'boolean',
         ]);
 
@@ -57,7 +57,7 @@ class CollectionController extends Controller
             'slug' => $slug,
             'description' => $request->description,
             'image' => $imagePath,
-            'status' => $request->has('status') ? $request->status : true,
+            'status' => $request->has('status'),
         ]);
 
         return redirect()->route('admin.collections')->with('success', 'Collection created successfully.');
@@ -91,7 +91,7 @@ class CollectionController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:webp|max:2048',
             'status' => 'boolean',
         ]);
 
@@ -120,7 +120,7 @@ class CollectionController extends Controller
             'slug' => $slug,
             'description' => $request->description,
             'image' => $imagePath,
-            'status' => $request->has('status') ? $request->status : $collection->status,
+            'status' => $request->has('status'),
         ]);
 
         return redirect()->route('admin.collections')->with('success', 'Collection updated successfully.');
