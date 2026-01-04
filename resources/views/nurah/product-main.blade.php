@@ -957,7 +957,13 @@
                     <div class="intensity-container">
                         <div class="intensity-label">{{ $product->intensity ?? 'Medium' }}</div>
                         <div class="intensity-bar">
-                            <div class="intensity-fill" style="width: {{ $product->intensity == 'Strong' ? '100%' : ($product->intensity == 'Medium' ? '60%' : '30%') }}"></div>
+                            @php
+                                $intensity = strtolower($product->intensity ?? 'medium');
+                                $width = '60%'; // Default Medium
+                                if(str_contains($intensity, 'strong') || str_contains($intensity, 'high')) $width = '100%';
+                                elseif(str_contains($intensity, 'light') || str_contains($intensity, 'low')) $width = '30%';
+                            @endphp
+                            <div class="intensity-fill" style="width: {{ $width }}"></div>
                         </div>
                     </div>
                 </div>
@@ -1033,11 +1039,9 @@
                                 <p class="highlight-text">Experience the captivating scent that has been reformulated for the Indian tropical weather.</p>
                             </div>
                             <div class="accordion-text">
-                                • Long-lasting fragrance (5-6 hours)<br>
-                                • High-quality European perfume oils<br>
-                                • Perfect for daily wear<br>
-                                • Fresh and energizing scent<br>
-                                • Suitable for all occasions
+                            <div class="accordion-text">
+                                <!-- Dynamic features to be added later -->
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -1127,112 +1131,26 @@
     <div class="related-products-section">
         <h2 class="reviews-title" style="margin: 0 0 20px 20px; font-size: 20px;">You May Also Like</h2>
         <div class="related-scroll-container">
-            <!-- Product 1: Sandal Veer -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
+            @forelse($relatedProducts as $related)
+            <div class="product-card" onclick="window.location.href='{{ route('product', ['id' => $related->id]) }}'">
                 <div class="product-image-wrapper">
                     <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
+                    @if($related->created_at->diffInDays(now()) < 7)
                     <span class="product-badge">New</span>
-                    <img src="{{ asset('Images/product-sandal-veer.webp') }}" class="product-image" alt="Sandal Veer">
+                    @endif
+                    <img src="{{ $related->main_image_url }}" class="product-image" alt="{{ $related->title }}">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">Sandal Veer</h3>
-                    <p class="product-price">₹1,129</p>
+                    <h3 class="product-name">{{ $related->title }}</h3>
+                    <p class="product-price">₹{{ number_format($related->starting_price, 0) }}</p>
                     <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
                 </div>
             </div>
-
-            <!-- Product 2: Marshmallow Fluff -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <span class="product-badge">New</span>
-                    <img src="{{ asset('Images/product-marshmallow-fluff.webp') }}" class="product-image" alt="Marshmallow Fluff">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Marshmallow Fluff</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
+            @empty
+            <div style="padding: 20px; text-align: center; width: 100%; color: var(--text-light);">
+                No other products viewed yet.
             </div>
-
-            <!-- Product 3: Purple Mystique -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-purple-mystique.webp') }}" class="product-image" alt="Purple Mystique">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Purple Mystique</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 4: Bangalore Bloom -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-bangalore-bloom.webp') }}" class="product-image" alt="Bangalore Bloom">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Bangalore Bloom</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 5: Fruit Punch -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-fruit-punch.webp') }}" class="product-image" alt="Fruit Punch">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Fruit Punch</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 6: One of a Kind -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-one-of-a-kind.webp') }}" class="product-image" alt="One of a Kind">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">One of a Kind</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 7: Midnight Jasmine -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-midnight-jasmine.webp') }}" class="product-image" alt="Midnight Jasmine">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Midnight Jasmine</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 8: Amber Elixir -->
-            <div class="product-card" onclick="window.location.href='{{ route('product') }}'">
-                <div class="product-image-wrapper">
-                    <button class="favorite-btn" onclick="event.stopPropagation(); toggleFavorite(this)">♡</button>
-                    <img src="{{ asset('Images/product-amber-elixir.webp') }}" class="product-image" alt="Amber Elixir">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Amber Elixir</h3>
-                    <p class="product-price">₹1,129</p>
-                    <button class="quick-view-btn" onclick="event.stopPropagation(); addToCart()">Add to Cart</button>
-                </div>
-            </div>
-
+            @endforelse
     </div>
 
     <!-- Footer Spacer -->

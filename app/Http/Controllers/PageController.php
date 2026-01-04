@@ -93,7 +93,45 @@ class PageController extends Controller
         $product = \App\Models\Product::where('status', 'active')
             ->with(['variants', 'images'])
             ->findOrFail($id);
+
+        // Track Recently Viewed
+        $recentlyViewed = session()->get('recently_viewed', []);
+        
+        // Remove current ID if exists to re-add at top (most recent)
+        if(($key = array_search($id, $recentlyViewed)) !== false) {
+            unset($recentlyViewed[$key]);
+        }
+        
+        // Add to front
+        array_unshift($recentlyViewed, $id);
+        
+        // Keep only last 4
+        $recentlyViewed = array_slice($recentlyViewed, 0, 4);
+        
+        // Save back to session
+        session()->put('recently_viewed', $recentlyViewed);
+
+        // Fetch Related Products (Recently Viewed excluding current)
+        // We filter out the current product ID just in case logic above overlaps or visual preference
+        $relatedIds = array_diff($recentlyViewed, [$id]);
+        
+        if(count($relatedIds) > 0) {
+            $relatedProducts = \App\Models\Product::whereIn('id', $relatedIds)
+                ->where('status', 'active')
+                ->with(['images', 'variants'])
+                ->get()
+                ->sortBy(function($model) use ($relatedIds) {
+                    return array_search($model->id, $relatedIds);
+                });
+        } else {
+            // Fallback: If no history, show random products (or latest)
+            $relatedProducts = \App\Models\Product::where('status', 'active')
+                ->where('id', '!=', $id)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+        }
             
-        return view('nurah.product-main', compact('product'));
+        return view('nurah.product-main', compact('product', 'relatedProducts'));
     }
 }

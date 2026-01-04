@@ -242,10 +242,10 @@
 
     <!-- Store Section -->
     <div class="store-section" id="stores">
-        <div class="store-count">60</div>
+        <!-- <div class="store-count">60</div> -->
         <h2 class="store-title">Stores Near You</h2>
         <p class="store-subtitle">Find a store near you</p>
-        <a href="/stores" class="store-btn">Locate Stores</a>
+        <a href="#" class="store-btn">Locate Stores</a>
         <p class="store-description">
             Nurah Perfumes is India's pioneering perfume brand offering top-notch, value for money fragrances with exceptional expertise in the art & science of perfumery.
         </p>
