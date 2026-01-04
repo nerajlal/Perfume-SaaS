@@ -46,11 +46,12 @@ Route::get('/admin/collections/{id}/edit', [App\Http\Controllers\Admin\Collectio
 Route::put('/admin/collections/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'update'])->name('admin.collections.update');
 Route::delete('/admin/collections/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'destroy'])->name('admin.collections.destroy');
 
-Route::view('/admin/bundles', 'admin.bundles.index')->name('admin.bundles');
-Route::view('/admin/bundles/create', 'admin.bundles.create')->name('admin.bundles.create');
-Route::get('/admin/bundles/{id}/edit', function ($id) {
-    return view('admin.bundles.edit', ['id' => $id]);
-})->name('admin.bundles.edit');
+Route::get('/admin/bundles', [App\Http\Controllers\Admin\BundleController::class, 'index'])->name('admin.bundles');
+Route::get('/admin/bundles/create', [App\Http\Controllers\Admin\BundleController::class, 'create'])->name('admin.bundles.create');
+Route::post('/admin/bundles', [App\Http\Controllers\Admin\BundleController::class, 'store'])->name('admin.bundles.store');
+Route::get('/admin/bundles/{id}/edit', [App\Http\Controllers\Admin\BundleController::class, 'edit'])->name('admin.bundles.edit');
+Route::put('/admin/bundles/{id}', [App\Http\Controllers\Admin\BundleController::class, 'update'])->name('admin.bundles.update');
+Route::delete('/admin/bundles/{id}', [App\Http\Controllers\Admin\BundleController::class, 'destroy'])->name('admin.bundles.destroy');
 
 Route::get('/admin/attributes', [App\Http\Controllers\Admin\AttributeController::class, 'index'])->name('admin.attributes');
 Route::post('/admin/attributes', [App\Http\Controllers\Admin\AttributeController::class, 'store'])->name('admin.attributes.store');

@@ -41,14 +41,6 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.reviews') }}" class="sidebar-item {{ request()->routeIs('admin.reviews*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
-                    <i class="fas fa-star text-center" style="width: 20px;"></i>
-                    <span>Reviews</span>
-                    <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
-                </a>
-            </li>
-
-            <li>
                 <a href="{{ route('admin.bundles') }}" class="sidebar-item {{ request()->routeIs('admin.bundles*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
                     <i class="fas fa-cubes text-center" style="width: 20px;"></i>
                     <span>Bundles</span>
@@ -70,6 +62,13 @@
                 <a href="{{ route('admin.discounts') }}" class="sidebar-item {{ request()->routeIs('admin.discounts*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
                     <i class="fas fa-percent text-center" style="width: 20px;"></i>
                     <span>Discounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.reviews') }}" class="sidebar-item {{ request()->routeIs('admin.reviews*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-star text-center" style="width: 20px;"></i>
+                    <span>Reviews</span>
+                    <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
                 </a>
             </li>
 
