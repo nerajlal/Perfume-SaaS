@@ -178,14 +178,25 @@ class PageController extends Controller
                     return array_search($model->id, $relatedIds);
                 });
         } else {
-            // Fallback: If no history, show random products (or latest)
             $relatedProducts = \App\Models\Product::where('status', 'active')
                 ->where('id', '!=', $id)
                 ->inRandomOrder()
                 ->limit(4)
                 ->get();
         }
+        
+        // Fetch specific active coupon for this product
+        $coupon = $product->discounts()
+            ->where('status', 'active')
+            ->where(function($q) {
+                $q->whereNull('starts_at')->orWhere('starts_at', '<=', now());
+            })
+            ->where(function($q) {
+                $q->whereNull('ends_at')->orWhere('ends_at', '>=', now());
+            })
+            ->orderByDesc('value')
+            ->first();
             
-        return view('nurah.product-main', compact('product', 'relatedProducts'));
+        return view('nurah.product-main', compact('product', 'relatedProducts', 'coupon'));
     }
 }

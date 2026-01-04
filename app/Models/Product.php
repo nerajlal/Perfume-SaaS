@@ -57,9 +57,25 @@ class Product extends Model
         return $this->belongsTo(Collection::class);
     }
 
+    public function discounts()
+    {
+        return $this->belongsToMany(\App\Models\Discount::class, 'discount_product');
+    }
+
+    public function bundles()
+    {
+        return $this->belongsToMany(\App\Models\Bundle::class, 'bundle_product');
+    }
+
     public function getStartingPriceAttribute()
     {
         return $this->variants->min('price');
+    }
+
+    public function getCompareAtPriceAttribute()
+    {
+        $variant = $this->variants->sortBy('price')->first();
+        return $variant ? $variant->compare_at_price : null;
     }
 
     public function getMainImageUrlAttribute()

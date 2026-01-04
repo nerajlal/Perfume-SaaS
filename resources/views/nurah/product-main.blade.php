@@ -937,9 +937,11 @@
                 </div>
 
                 <!-- Promo Banner -->
+                @if(isset($coupon))
                 <div class="promo-banner">
-                    🎁 BUY 2 GET 1 FREE! Use code: <span class="promo-code">B2G1</span>
+                    Use code <span class="promo-code">{{ $coupon->code }}</span> for an extra {{ $coupon->type == 'percentage' ? number_format($coupon->value) . '%' : '₹' . number_format($coupon->value) }} OFF!
                 </div>
+                @endif
 
                 <!-- Size Selection -->
                 <div class="option-section">
