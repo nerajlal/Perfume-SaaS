@@ -100,12 +100,11 @@ class ProductController extends Controller
         ]));
 
         // Sync Variants
-        $existingSizes = [];
         if ($request->has('variant_data')) {
+            $currentVariantIds = [];
             foreach ($request->variant_data as $size => $data) {
                 if (isset($data['enabled'])) {
-                    $existingSizes[] = $size;
-                    $product->variants()->updateOrCreate(
+                    $variant = $product->variants()->updateOrCreate(
                         ['size' => $size],
                         [
                             'stock' => $data['stock'] ?? 0,
@@ -113,31 +112,42 @@ class ProductController extends Controller
                             'compare_at_price' => $data['compare_at_price'],
                         ]
                     );
+                    $currentVariantIds[] = $variant->id;
                 }
             }
+            // Remove variants that were unchecked
+            $product->variants()->whereNotIn('id', $currentVariantIds)->delete();
         }
-        // Delete variants not in the submitted list
-        $product->variants()->whereNotIn('size', $existingSizes)->delete();
 
-        // Handle Deleted Media
+        // Handle Image Deletion
         if ($request->has('deleted_images')) {
             foreach ($request->deleted_images as $imageId) {
-                $image = ProductImage::find($imageId);
-                if ($image && $image->product_id == $product->id) {
-                    Storage::disk('public')->delete($image->path);
+                $image = $product->images()->find($imageId);
+                if ($image) {
+                    if (Storage::disk('public')->exists($image->path)) {
+                        Storage::disk('public')->delete($image->path);
+                    }
                     $image->delete();
                 }
             }
         }
 
-        // Handle New Media
+        // Handle Scan/Reorder Existing Images
+        if ($request->has('media_order')) {
+            foreach ($request->media_order as $index => $imageId) {
+                $product->images()->where('id', $imageId)->update(['order' => $index]);
+            }
+        }
+
+        // Handle Media Uploads
         if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $file) {
+            $startOrder = $product->images()->max('order') + 1; // Start after existing
+            foreach ($request->file('media') as $index => $file) {
                 $path = $file->store('products', 'public');
                 $product->images()->create([
                     'path' => $path,
                     'type' => 'image',
-                    'order' => 0
+                    'order' => $startOrder + $index
                 ]);
             }
         }

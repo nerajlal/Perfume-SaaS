@@ -65,7 +65,24 @@
                 </div>
             </div>
 
+            <!-- SortableJS -->
+            <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
             <script>
+                // Global DataTransfer to manage selected files
+                let dt = new DataTransfer();
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var el = document.getElementById('media_preview_grid');
+                    // Initialize Sortable
+                    var sortable = Sortable.create(el, {
+                        animation: 150,
+                        onEnd: function (evt) {
+                            updateFilesFromDOM();
+                        }
+                    });
+                });
+
                 /*
                 function toggleUrlInput() {
                     document.getElementById('urlInputContainer').classList.toggle('d-none');
@@ -83,26 +100,55 @@
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i];
                         
-                        if (!file.type.startsWith('image/')) continue;
+                        // Enforce WebP only
+                        if (file.type !== 'image/webp') {
+                            alert('Only WebP images are allowed: ' + file.name);
+                            continue;
+                        }
+
+                        // Add to DataTransfer
+                        dt.items.add(file);
 
                         const reader = new FileReader();
                         reader.onload = function(e) {
-                            createPreviewItem(e.target.result, 'image');
+                            createPreviewItem(e.target.result, 'image', file);
                         };
                         reader.readAsDataURL(file);
                     }
+                    
+                    // Sync input files
+                    document.getElementById('media_upload').files = dt.files;
+                }
+
+                function updateFilesFromDOM() {
+                    const newDt = new DataTransfer();
+                    const previewItems = document.querySelectorAll('.preview-item');
+                    
+                    previewItems.forEach(item => {
+                        // We attached the file object to the DOM element in createPreviewItem
+                        if (item.fileRef) {
+                            newDt.items.add(item.fileRef);
+                        }
+                    });
+                    
+                    dt = newDt;
+                    document.getElementById('media_upload').files = dt.files;
                 }
 
                 /*
                 function addMediaFromUrl() {
-                   // ... (Logic preserved but inactive)
+                   // ...
                 }
                 */
 
-                function createPreviewItem(src, type) {
+                function createPreviewItem(src, type, fileObj) {
                     const previewGrid = document.getElementById('media_preview_grid');
                     const col = document.createElement('div');
-                    col.className = 'col-6 col-md-3';
+                    col.className = 'col-6 col-md-3 preview-item';
+                    col.style.cursor = 'move';
+                    
+                    // Store file reference for reordering
+                    col.fileRef = fileObj;
                     
                     const div = document.createElement('div');
                     div.className = 'ratio ratio-1x1 bg-dark rounded border overflow-hidden position-relative group-hover-container';
@@ -116,12 +162,23 @@
 
                     div.innerHTML = `
                         ${content}
-                        <button type="button" onclick="this.closest('.col-6').remove()" class="btn btn-white btn-sm rounded-circle shadow-sm position-absolute top-0 end-0 m-1 opacity-0 group-hover-visible transition-opacity text-danger p-0 d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                        <button type="button" onclick="removeFile(this)" class="btn btn-white btn-sm rounded-circle shadow-sm position-absolute top-0 end-0 m-1 opacity-0 group-hover-visible transition-opacity text-danger p-0 d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
                             <i class="fas fa-trash extra-small"></i>
                         </button>
                     `;
                     col.appendChild(div);
                     previewGrid.appendChild(col);
+                }
+
+                function removeFile(btn) {
+                    btn.closest('.preview-item').remove();
+                    updateFilesFromDOM();
+                    
+                    // Hide grid if empty
+                     const previewGrid = document.getElementById('media_preview_grid');
+                     if (previewGrid.children.length === 0) {
+                         previewGrid.classList.add('d-none');
+                     }
                 }
             </script>
             
