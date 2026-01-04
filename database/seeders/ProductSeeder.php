@@ -1,0 +1,141 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Collection;
+use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductVariant;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        $products = [
+            [
+                'title' => 'Amber Elixir',
+                'image' => 'images/product-amber-elixir.webp',
+                'type' => 'Perfume Oil',
+                'vendor' => 'Nurah',
+                'price' => 1299.00,
+            ],
+            [
+                'title' => 'Bangalore Bloom',
+                'image' => 'images/product-bangalore-bloom.webp',
+                'type' => 'Eau de Parfum',
+                'vendor' => 'Nurah',
+                'price' => 1499.00,
+            ],
+            [
+                'title' => 'California Sunshine',
+                'image' => 'images/product-california-sunshine.webp',
+                'type' => 'Body Mist',
+                'vendor' => 'Nurah',
+                'price' => 899.00,
+            ],
+            [
+                'title' => 'Fruit Punch',
+                'image' => 'images/product-fruit-punch.webp',
+                'type' => 'Perfume Oil',
+                'vendor' => 'Nurah',
+                'price' => 999.00,
+            ],
+            [
+                'title' => 'Marshmallow Fluff',
+                'image' => 'images/product-marshmallow-fluff.webp',
+                'type' => 'Eau de Toilette',
+                'vendor' => 'SweetScents',
+                'price' => 1150.00,
+            ],
+            [
+                'title' => 'Midnight Jasmine',
+                'image' => 'images/product-midnight-jasmine.webp',
+                'type' => 'Perfume Oil',
+                'vendor' => 'Nurah',
+                'price' => 1350.00,
+            ],
+            [
+                'title' => 'Moroccan Rose',
+                'image' => 'images/product-moroccan-rose.webp',
+                'type' => 'Eau de Parfum',
+                'vendor' => 'Nurah',
+                'price' => 1599.00,
+            ],
+            [
+                'title' => 'One of a Kind',
+                'image' => 'images/product-one-of-a-kind.webp',
+                'type' => 'Eau de Parfum',
+                'vendor' => 'Nurah',
+                'price' => 2499.00,
+            ],
+            [
+                'title' => 'Oud de Beirut',
+                'image' => 'images/product-oud-de-beirut.webp',
+                'type' => 'Oud',
+                'vendor' => 'Nurah',
+                'price' => 2999.00,
+            ],
+            [
+                'title' => 'Parisian Night',
+                'image' => 'images/product-parisian-night.webp',
+                'type' => 'Eau de Parfum',
+                'vendor' => 'Nurah',
+                'price' => 1899.00,
+            ],
+            [
+                'title' => 'Purple Mystique',
+                'image' => 'images/product-purple-mystique.webp',
+                'type' => 'Body Mist',
+                'vendor' => 'Nurah',
+                'price' => 799.00,
+            ],
+            [
+                'title' => 'Sandal Veer',
+                'image' => 'images/product-sandal-veer.webp',
+                'type' => 'Attar',
+                'vendor' => 'Nurah',
+                'price' => 599.00,
+            ],
+        ];
+
+        // Ensure collections exist
+        $collections = Collection::all();
+
+        foreach ($products as $data) {
+            $product = Product::create([
+                'title' => $data['title'],
+                'slug' => Str::slug($data['title']),
+                'description' => "Experience the enchanting aroma of {$data['title']}. A perfect blend for any occasion.",
+                'status' => 'active',
+                'type' => $data['type'],
+                'vendor' => $data['vendor'],
+                'collection_id' => $collections->isNotEmpty() ? $collections->random()->id : null,
+                'gender' => collect(['Men', 'Women', 'Unisex'])->random(),
+                'olfactory_family' => collect(['Floral', 'Woody', 'Fresh', 'Oriental'])->random(),
+                'intensity' => collect(['Light', 'Moderate', 'Strong'])->random(),
+            ]);
+
+            // Add Image
+            ProductImage::create([
+                'product_id' => $product->id,
+                'path' => $data['image'], // Using the path relative to public/storage linking
+                'type' => 'main',
+                'order' => 1,
+            ]);
+
+            // Add Variants (Example: Sizes)
+            $sizes = ['50ml', '100ml'];
+            foreach ($sizes as $index => $size) {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'sku' => Str::upper(Str::slug($data['title'])) . '-' . $size,
+                    'size' => $size,
+                    'price' => $index === 0 ? $data['price'] : $data['price'] * 1.8, // 100ml is roughly double price
+                    'stock' => rand(10, 100),
+                ]);
+            }
+        }
+    }
+}
