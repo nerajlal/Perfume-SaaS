@@ -16,6 +16,7 @@
                     <th class="px-3 py-3" style="width: 50px;"><div class="form-check"><input type="checkbox" class="form-check-input"></div></th>
                     <th class="px-3 py-3">Title</th>
                     <th class="px-3 py-3">Status</th>
+                    <th class="px-3 py-3">Price</th>
                     <th class="px-3 py-3">Products</th>
                     <th class="px-3 py-3">Total Sales</th>
                     <th class="px-3 py-3" style="width: 80px;"></th>
@@ -42,6 +43,7 @@
                             {{ ucfirst($bundle->status) }}
                         </span>
                     </td>
+                    <td class="px-3 py-3 fw-medium text-dark">₹ {{ number_format($bundle->total_price, 2) }}</td>
                     <td class="px-3 py-3">{{ $bundle->products->count() }} products</td>
                     <td class="px-3 py-3">--</td> {{-- Sales data not yet available --}}
                     <td class="px-3 py-3 text-end">

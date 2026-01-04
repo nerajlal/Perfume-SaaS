@@ -12,7 +12,7 @@ class BundleController extends Controller
 {
     public function index()
     {
-        $bundles = Bundle::with('products')->latest()->paginate(10);
+        $bundles = Bundle::with(['products.variants'])->latest()->paginate(10);
         return view('admin.bundles.index', compact('bundles'));
     }
 
