@@ -36,14 +36,14 @@
                 <div class="card border shadow-sm p-3 mb-4">
                     <h2 class="h6 fw-bold text-secondary mb-3">Products</h2>
                     <div class="vstack gap-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
-                            <input type="text" id="product_search" class="form-control border-start-0 shadow-none" placeholder="Search products..." list="product_list">
-                            <datalist id="product_list">
-                                @foreach($products as $product)
-                                    <option value="{{ $product->title }}" data-id="{{ $product->id }}" data-price="{{ $product->variants->min('price') ?? 0 }}" data-image="{{ $product->images->first()?->path }}">
-                                @endforeach
-                            </datalist>
+                        <div class="position-relative">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
+                                <input type="text" id="product_search" class="form-control border-start-0 shadow-none" placeholder="Search products..." autocomplete="off">
+                            </div>
+                            <div id="search_results" class="position-absolute w-100 bg-white border rounded shadow-sm d-none" style="z-index: 1000; max-height: 200px; overflow-y: auto;">
+                                <!-- Results populated by JS -->
+                            </div>
                         </div>
                         
                         <div id="selected_products_container" class="border rounded {{ $bundle->products->isEmpty() ? 'd-none' : '' }}">
@@ -132,27 +132,70 @@
             }
         }
 
-        document.getElementById('product_search').addEventListener('input', function(e) {
-            const val = e.target.value;
-            const options = document.getElementById('product_list').options;
-            let found = false;
-            let id = '';
-            let price = '';
-            let image = '';
-            
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === val) {
-                    found = true;
-                    id = options[i].getAttribute('data-id');
-                    price = options[i].getAttribute('data-price');
-                    image = options[i].getAttribute('data-image');
-                    break;
-                }
+        @php
+            $productData = $products->map(function($p) {
+                return [
+                    'id' => $p->id,
+                    'title' => $p->title,
+                    'price' => $p->variants->min('price') ?? 0,
+                    'image' => $p->images->first()?->path
+                ];
+            });
+        @endphp
+        
+        const allProducts = @json($productData);
+
+        const searchInput = document.getElementById('product_search');
+        const resultsContainer = document.getElementById('search_results');
+
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length < 1) {
+                resultsContainer.classList.add('d-none');
+                return;
             }
 
-            if (found) {
-                addProduct(id, val, price, image);
-                e.target.value = '';
+            const matches = allProducts.filter(p => p.title.toLowerCase().includes(query));
+            
+            if (matches.length > 0) {
+                resultsContainer.innerHTML = '';
+                matches.forEach(product => {
+                    // Check if already selected
+                    if (document.querySelector(`input[name="products[]"][value="${product.id}"]`)) return;
+
+                    const div = document.createElement('div');
+                    div.className = 'p-2 d-flex align-items-center gap-2 hover-bg-light cursor-pointer border-bottom';
+                    div.style.cursor = 'pointer';
+                    div.innerHTML = `
+                        <div class="d-flex align-items-center justify-content-center bg-light border rounded overflow-hidden" style="width: 32px; height: 32px;">
+                            ${product.image ? `<img src="/storage/${product.image}" class="w-100 h-100 object-fit-cover">` : `<i class="fas fa-image text-secondary opacity-50 small"></i>`}
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="mb-0 small fw-medium text-dark">${product.title}</p>
+                        </div>
+                    `;
+                    div.onclick = () => {
+                        addProduct(product.id, product.title, product.price, product.image);
+                        searchInput.value = '';
+                        resultsContainer.classList.add('d-none');
+                    };
+                    resultsContainer.appendChild(div);
+                });
+                
+                if (resultsContainer.children.length > 0) {
+                    resultsContainer.classList.remove('d-none');
+                } else {
+                    resultsContainer.classList.add('d-none');
+                }
+            } else {
+                resultsContainer.classList.add('d-none');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                resultsContainer.classList.add('d-none');
             }
         });
 
