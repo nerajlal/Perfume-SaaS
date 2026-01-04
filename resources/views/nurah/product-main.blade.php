@@ -664,6 +664,7 @@
             max-width: 600px;
             margin: 0 auto;
         }
+    }
 
     /* Desktop Layout Enhancements */
     @media (min-width: 900px) {
@@ -744,19 +745,8 @@
         background: var(--white);
     }
     
-    .related-scroll-container {
-        display: flex;
-        gap: 15px;
-        overflow-x: auto;
-        padding: 0 20px 20px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    
-    .related-scroll-container::-webkit-scrollbar {
-        display: none;
-    }
 
+    
     /* Product Card Styles (Ported) */
     .product-card {
         background: var(--white);
@@ -768,9 +758,7 @@
         color: inherit;
         display: block;
         cursor: pointer;
-        flex-shrink: 0;
-        min-width: 170px; /* Mobile width */
-        max-width: 170px;
+        width: 100%;
     }
 
     .product-image-wrapper {
@@ -825,6 +813,7 @@
         color: var(--black);
         padding: 0;
         line-height: 1;
+        z-index: 2;
     }
 
     .favorite-btn.active {
@@ -871,16 +860,38 @@
         cursor: pointer;
     }
 
-    @media (min-width: 900px) {
+    .related-scroll-container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 0 10px 40px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ... existing styles ... */
+
+    @media (min-width: 768px) {
+        .related-scroll-container {
+             grid-template-columns: repeat(3, 1fr);
+             gap: 20px;
+        }
+    }
+
+    @media (min-width: 1024px) {
         .related-products-section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
+        .related-scroll-container {
+             grid-template-columns: repeat(4, 1fr);
+        }
+
         .product-card {
-            min-width: 240px; /* Desktop width */
-            max-width: 240px;
+            min-width: 0;
+            max-width: none;
         }
 
         .quick-view-btn {

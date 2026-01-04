@@ -1,14 +1,14 @@
 @extends('nurah.layouts.app')
 
 @section('title', 'About Us - Nurah Perfumes')
-
+<!-- {{ asset('Images/about-store.webp') }} -->
 @push('styles')
 <style>
     .about-hero {
         position: relative;
         height: 60vh;
         min-height: 400px;
-        background-image: url('https://myop.in/cdn/shop/files/Storekurla.jpg?v=1715596487&width=2500');
+        background-image: url('{{ asset('Images/about-store.webp') }}');
         background-size: cover;
         background-position: center;
         display: flex;
@@ -140,7 +140,7 @@
     <section class="about-section">
         <div class="story-grid">
             <div class="story-image">
-                <img src="https://myop.in/cdn/shop/files/Storekurla.jpg?v=1715596487&width=800" alt="Nurah Store" style="width: 100%; border-radius: 20px;">
+                <img src="{{ asset('Images/about-store.webp') }}" alt="Nurah Store" style="width: 100%; border-radius: 20px;">
             </div>
             <div class="story-content">
                 <h2>Why We Do, What We Do</h2>
