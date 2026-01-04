@@ -63,6 +63,19 @@
 @endforelse
 <tr>
     <td colspan="7" class="px-3 py-3 border-0">
-        {{ $discounts->appends(request()->query())->links() }}
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="text-secondary small">
+                Showing
+                <span class="fw-medium">{{ $discounts->firstItem() ?? 0 }}</span>
+                to
+                <span class="fw-medium">{{ $discounts->lastItem() ?? 0 }}</span>
+                of
+                <span class="fw-medium">{{ $discounts->total() }}</span>
+                results
+            </div>
+            <div>
+                {{ $discounts->appends(request()->query())->links() }}
+            </div>
+        </div>
     </td>
 </tr>

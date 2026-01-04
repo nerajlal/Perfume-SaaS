@@ -108,7 +108,26 @@
 </script>
 <style>
     .text-decoration-hover-underline:hover { text-decoration: underline !important; }
-    .hover-text-primary:hover { color: var(--bs-primary) !important; }
+    .hover-text-primary:hover { color: #008060 !important; }
     .hover-text-danger:hover { color: var(--bs-danger) !important; }
+
+    /* Pagination Overrides */
+    .page-link {
+        color: #008060;
+        border-color: #dee2e6;
+    }
+    .page-link:hover {
+        color: #004d3a;
+        background-color: #e6f2f0;
+        border-color: #dee2e6;
+    }
+    .page-item.active .page-link {
+        background-color: #008060;
+        border-color: #008060;
+        color: white;
+    }
+    .page-item.disabled .page-link {
+        color: #6c757d;
+    }
 </style>
 @endsection
