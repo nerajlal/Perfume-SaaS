@@ -1,6 +1,6 @@
 @extends('nurah.layouts.app')
 
-@section('title', 'Inglorious - Nurah Perfumes')
+@section('title', $product->title . ' - Nurah Perfumes')
 
 @push('styles')
 <style>
@@ -903,15 +903,19 @@
         <div class="product-gallery-column">
             <div class="image-gallery">
                 <div class="main-image-container">
-                    <span class="image-badge">Bestseller</span>
-                    <img src="{{ asset('Images/prod.webp') }}" alt="Inglorious" class="main-image" id="mainImage">
-                    
+                    @if($product->created_at->diffInDays(now()) < 7)
+                    <span class="image-badge">New</span>
+                    @endif
+                    <img src="{{ $product->main_image_url }}" alt="{{ $product->title }}" class="main-image" id="mainImage">
                 </div>
                 <div class="thumbnail-strip">
-                    <img src="{{ asset('Images/prod.webp') }}" data-full-img="{{ asset('Images/prod.webp') }}" class="thumbnail active" onclick="changeImage(this, 0)" alt="View 1">
-                    <img src="https://myop.in/cdn/shop/files/inglorious_notes.webp?v=1759559980&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_notes.webp?v=1759559980&width=1080" class="thumbnail" onclick="changeImage(this, 1)" alt="View 2">
-                    <img src="https://myop.in/cdn/shop/files/inglorious_sensation.webp?v=1759559980&width=416" data-full-img="https://myop.in/cdn/shop/files/inglorious_sensation.webp?v=1759559980&width=1080" class="thumbnail" onclick="changeImage(this, 2)" alt="View 3">
-                    
+                    @foreach($product->images as $index => $image)
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($image->path) }}" 
+                         data-full-img="{{ \Illuminate\Support\Facades\Storage::url($image->path) }}" 
+                         class="thumbnail {{ $index === 0 ? 'active' : '' }}" 
+                         onclick="changeImage(this, {{ $index }})" 
+                         alt="{{ $product->title }} View {{ $index + 1 }}">
+                    @endforeach
                 </div>
             </div>
             
@@ -922,12 +926,9 @@
         <div class="product-info-column">
             <div class="product-info">
                 <div class="product-header">
-                    <h1 class="product-name">Inglorious</h1>
-                    <div class="product-price" id="productPrice">Rs. 929.00</div>
-                    <div class="rating-row">
-                        <span class="stars">⭐⭐⭐⭐⭐</span>
-                        <span class="rating-text">5.0 (2 reviews)</span>
-                    </div>
+                    <h1 class="product-name">{{ $product->title }}</h1>
+                    <div class="product-price" id="productPrice">₹{{ number_format($product->starting_price, 0) }}</div>
+
                 </div>
 
                 <!-- Promo Banner -->
@@ -939,18 +940,14 @@
                 <div class="option-section">
                     <label class="option-label">Select Size</label>
                     <div class="size-options">
-                        <div class="size-option active" data-price="929" onclick="selectSize(this)">
-                            <span class="size-label">50ml</span>
-                            <span class="size-price">₹929</span>
+                        @foreach($product->variants as $index => $variant)
+                        <div class="size-option {{ $index === 0 ? 'active' : '' }}" 
+                             data-price="{{ $variant->price }}" 
+                             onclick="selectSize(this)">
+                            <span class="size-label">{{ $variant->size }}</span>
+                            <span class="size-price">₹{{ number_format($variant->price, 0) }}</span>
                         </div>
-                        <div class="size-option" data-price="1699" onclick="selectSize(this)">
-                            <span class="size-label">100ml</span>
-                            <span class="size-price">₹1,699</span>
-                        </div>
-                        <div class="size-option" data-price="2499" onclick="selectSize(this)">
-                            <span class="size-label">100ml</span>
-                            <span class="size-price">Personalized</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -958,9 +955,9 @@
                 <div class="option-section">
                     <label class="option-label">Intensity</label>
                     <div class="intensity-container">
-                        <div class="intensity-label">Long Lasting & Strong</div>
+                        <div class="intensity-label">{{ $product->intensity ?? 'Medium' }}</div>
                         <div class="intensity-bar">
-                            <div class="intensity-fill"></div>
+                            <div class="intensity-fill" style="width: {{ $product->intensity == 'Strong' ? '100%' : ($product->intensity == 'Medium' ? '60%' : '30%') }}"></div>
                         </div>
                     </div>
                 </div>
@@ -968,18 +965,24 @@
                 <!-- Notes -->
                 <div class="notes-card">
                     <div class="notes-title">Notes & Composition</div>
+                    @if($product->notes_top)
                     <div class="note-item">
                         <div class="note-type">▲ Top Notes</div>
-                        <div class="note-list">Lime, Grapefruit</div>
+                        <div class="note-list">{{ $product->notes_top }}</div>
                     </div>
+                    @endif
+                    @if($product->notes_heart)
                     <div class="note-item">
                         <div class="note-type">■ Middle Notes</div>
-                        <div class="note-list">Watermelon</div>
+                        <div class="note-list">{{ $product->notes_heart }}</div>
                     </div>
+                    @endif
+                    @if($product->notes_base)
                     <div class="note-item">
                         <div class="note-type">▼ Base Notes</div>
-                        <div class="note-list">Seaweed, Ambergris</div>
+                        <div class="note-list">{{ $product->notes_base }}</div>
                     </div>
+                    @endif
                 </div>
 
 
@@ -1012,11 +1015,9 @@
                         </div>
                         <div class="accordion-content">
                             <div class="accordion-text">
-                                <strong>Clean. Vivid. Sensual.</strong>
+                                <strong>{{ $product->olfactory_family }}</strong>
                                 <br><br>
-                                A harmonious union of citrus, aromatic and spicy accords, 'Inglorious' guarantees a fresh start for the go-getter in you.
-                                <br><br>
-                                A fragrance from the scent family of fresh is a must-have in the perfume collection for someone who loves crisp and clean fragrances. With breathtaking notes of fresh grapefruit and lime that make way for refreshing watermelon; finally rounded off by notes of seaweed and ambergris as base.
+                                {!! nl2br(e($product->description)) !!}
                             </div>
                         </div>
                     </div>
@@ -1028,7 +1029,7 @@
                         </div>
                         <div class="accordion-content">
                             <div class="detail-highlight">
-                                <span class="highlight-badge">50% Oil Concentration</span>
+                                <span class="highlight-badge">{{ $product->oil_concentration }}% Oil Concentration</span>
                                 <p class="highlight-text">Experience the captivating scent that has been reformulated for the Indian tropical weather.</p>
                             </div>
                             <div class="accordion-text">
@@ -1061,45 +1062,7 @@
                     </div>
                 </div>
 
-                <!-- Reviews -->
-                <div class="reviews-section">
-                    <div class="reviews-header">
-                        <h2 class="reviews-title">Customer Reviews</h2>
-                        <button style="background: none; border: none; color: var(--gold); font-weight: 700; font-size: 14px;">Write Review</button>
-                    </div>
 
-                    <div class="reviews-summary">
-                        <div class="review-score">5.0</div>
-                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                        <div class="review-count">Based on 2 reviews</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div>
-                                <div class="reviewer-name">Lipsa Dhar</div>
-                                <div class="review-stars-small">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <div class="review-text">
-                            <div class="review-label">Longevity</div>
-                            Love the captivating smell
-                        </div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div>
-                                <div class="reviewer-name">Ajmal Kuppanath</div>
-                                <div class="review-stars-small">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-                        <div class="review-text">
-                            <div class="review-label">Good product</div>
-                            good
-                        </div>
-                    </div>
-                </div>
 
                 <!-- FAQs -->
                 <div class="faq-section">
@@ -1293,7 +1256,7 @@
     // State variables
     let currentImageIndex = 0;
     let quantity = 1;
-    let currentPrice = 929;
+    let currentPrice = {{ $product->starting_price }};
 
     // Helper: Update Price Display
     function updatePrice() {

@@ -193,8 +193,8 @@
                 @if($item->product)
                 <a href="{{ route('product', ['id' => $item->product->id]) }}" class="product-card">
                     <div class="product-image-wrapper">
-                        <!-- Create a fresh/new badge logic if needed, for now static or based on timestamps -->
-                        @if($item->product->created_at->diffInDays(now()) < 30)
+                        <!-- Create a fresh/new badge logic for 7 days -->
+                        @if($item->product->created_at->diffInDays(now()) < 7)
                             <span class="product-badge">New</span>
                         @endif
                         
