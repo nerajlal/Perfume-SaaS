@@ -9,6 +9,48 @@
 </div>
 
 <div class="card border shadow-sm">
+    <div class="card-header bg-light border-bottom p-3">
+        <div class="d-flex gap-3">
+            <div class="flex-grow-1">
+                 <form action="{{ route('admin.bundles') }}" method="GET">
+                     @foreach(request()->except(['search', 'page']) as $key => $value)
+                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                     @endforeach
+                     <div class="input-group shadow-sm">
+                         <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
+                         <input type="text" name="search" value="{{ request('search') }}" class="form-control border-start-0 ps-0 shadow-none" placeholder="Filter bundles">
+                     </div>
+                 </form>
+            </div>
+            
+            <!-- Status Filter -->
+            <div class="dropdown">
+                <button class="btn btn-white border shadow-sm text-secondary bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-filter me-2"></i> {{ request('status') ? ucfirst(request('status')) : 'All Status' }}
+                </button>
+                <ul class="dropdown-menu shadow-sm border-0">
+                    <li><a class="dropdown-item small {{ !request('status') ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['status' => null, 'page' => 1])) }}">All Status</a></li>
+                    <li><a class="dropdown-item small {{ request('status') == 'active' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['status' => 'active', 'page' => 1])) }}">Active</a></li>
+                    <li><a class="dropdown-item small {{ request('status') == 'draft' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['status' => 'draft', 'page' => 1])) }}">Draft</a></li>
+                </ul>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-white border shadow-sm text-secondary bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-sort me-2"></i> Sort
+                </button>
+                <ul class="dropdown-menu shadow-sm border-0 dropdown-menu-end">
+                    <li><a class="dropdown-item small {{ !request('sort') || request('sort') == 'newest' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['sort' => 'newest', 'page' => 1])) }}">Newest First</a></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'oldest' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['sort' => 'oldest', 'page' => 1])) }}">Oldest First</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'title_asc' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['sort' => 'title_asc', 'page' => 1])) }}">Title (A-Z)</a></li>
+                    <li><a class="dropdown-item small {{ request('sort') == 'title_desc' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.bundles', array_merge(request()->query(), ['sort' => 'title_desc', 'page' => 1])) }}">Title (Z-A)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0 text-secondary">
             <thead class="bg-light text-uppercase small fw-medium text-muted">
@@ -22,51 +64,48 @@
                     <th class="px-3 py-3" style="width: 80px;"></th>
                  </tr>
             </thead>
-            <tbody class="border-top-0">
-                @forelse($bundles as $bundle)
-                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.bundles.edit', $bundle->id) }}'">
-                    <td class="px-3 py-3" onclick="event.stopPropagation()"><div class="form-check"><input type="checkbox" class="form-check-input" value="{{ $bundle->id }}"></div></td>
-                    <td class="px-3 py-3">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="d-flex align-items-center justify-content-center bg-light border rounded overflow-hidden" style="width: 40px; height: 40px;">
-                                @if($bundle->image)
-                                    <img src="{{ Storage::url($bundle->image) }}" class="w-100 h-100 object-fit-cover" alt="{{ $bundle->title }}">
-                                @else
-                                    <i class="fas fa-cubes text-secondary opacity-50"></i>
-                                @endif
-                            </div>
-                            <span class="fw-medium text-dark text-decoration-hover-underline">{{ $bundle->title }}</span>
-                        </div>
-                    </td>
-                    <td class="px-3 py-3">
-                        <span class="badge {{ $bundle->status === 'active' ? 'bg-success bg-opacity-10 text-success' : 'bg-secondary bg-opacity-10 text-secondary' }} rounded-pill px-2 py-1 fw-medium">
-                            {{ ucfirst($bundle->status) }}
-                        </span>
-                    </td>
-                    <td class="px-3 py-3 fw-medium text-dark">₹ {{ number_format($bundle->total_price, 2) }}</td>
-                    <td class="px-3 py-3">{{ $bundle->products->count() }} products</td>
-                    <td class="px-3 py-3">--</td> {{-- Sales data not yet available --}}
-                    <td class="px-3 py-3 text-end">
-                        <div class="d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
-                             <a href="{{ route('admin.bundles.edit', $bundle->id) }}" class="btn btn-white btn-sm border-0 text-secondary hover-text-primary p-1"><i class="fas fa-edit"></i></a>
-                             
-                             <form action="{{ route('admin.bundles.destroy', $bundle->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this bundle?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-white btn-sm border-0 text-secondary hover-text-danger p-1"><i class="fas fa-trash"></i></button>
-                             </form>
-                        </div>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">No bundles found.</td>
-                </tr>
-                @endforelse
+            <tbody class="border-top-0" id="bundles-table-body">
+                @include('admin.bundles.partials.table')
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('input[name="search"]');
+        const tableBody = document.getElementById('bundles-table-body');
+        let debounceTimer;
+
+        searchInput.addEventListener('input', function(e) {
+            clearTimeout(debounceTimer);
+            const query = e.target.value;
+            
+            // Update URL without reloading
+            const url = new URL(window.location.href);
+            if (query) {
+                url.searchParams.set('search', query);
+            } else {
+                url.searchParams.delete('search');
+            }
+            url.searchParams.set('page', 1);
+            window.history.pushState({}, '', url);
+
+            debounceTimer = setTimeout(() => {
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    tableBody.innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+            }, 300);
+        });
+    });
+</script>
 <style>
     .text-decoration-hover-underline:hover { text-decoration: underline !important; }
     .hover-text-primary:hover { color: var(--bs-primary) !important; }

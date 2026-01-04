@@ -10,9 +10,46 @@ use Illuminate\Support\Str;
 
 class BundleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bundles = Bundle::with(['products.variants'])->latest()->paginate(10);
+        $query = Bundle::with(['products.variants']);
+
+        // Search
+        if ($request->filled('search')) {
+            $query->where('title', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // Status Filter
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Sorting
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'oldest':
+                    $query->oldest();
+                    break;
+                case 'title_asc':
+                    $query->orderBy('title', 'asc');
+                    break;
+                case 'title_desc':
+                    $query->orderBy('title', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $bundles = $query->paginate(10);
+
+        if ($request->ajax()) {
+            return view('admin.bundles.partials.table', compact('bundles'))->render();
+        }
+
         return view('admin.bundles.index', compact('bundles'));
     }
 

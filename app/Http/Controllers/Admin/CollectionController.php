@@ -13,9 +13,50 @@ class CollectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $collections = Collection::withCount('products')->latest()->paginate(10);
+        $query = Collection::withCount('products');
+
+        // Search
+        if ($request->filled('search')) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // Status Filter
+        if ($request->filled('status')) {
+            if ($request->status === 'active') {
+                $query->where('status', true);
+            } elseif ($request->status === 'draft') {
+                $query->where('status', false);
+            }
+        }
+
+        // Sorting
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'oldest':
+                    $query->oldest();
+                    break;
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $collections = $query->paginate(10);
+
+        if ($request->ajax()) {
+            return view('admin.collections.partials.table', compact('collections'))->render();
+        }
+
         return view('admin.collections.index', compact('collections'));
     }
 
