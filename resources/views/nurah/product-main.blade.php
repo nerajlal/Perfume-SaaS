@@ -374,6 +374,18 @@
         
         /* Add padding to bottom of page so content isn't hidden by sticky bar */
         .product-wrapper { padding-bottom: 100px; }
+
+        /* Related Grid Mobile */
+        .related-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 15px !important;
+        }
+    }
+
+    .related-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
     }
 </style>
 @endpush
@@ -524,7 +536,7 @@
 <div class="product-wrapper" style="padding-top: 0;">
     <h3 style="font-family: var(--font-display); font-size: 24px; margin-bottom: 30px; border-top: 1px solid var(--color-border); padding-top: 40px;">Recently Viewed</h3>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px;">
+    <div class="related-grid">
         @foreach($relatedProducts as $related)
         <a href="{{ route('product', ['id' => $related->id]) }}" style="text-decoration: none;">
             <div style="background: #f9f9f9; aspect-ratio: 1; margin-bottom: 15px; border-radius: 10px; overflow: hidden;">

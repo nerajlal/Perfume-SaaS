@@ -213,11 +213,7 @@ class PageController extends Controller
                     return array_search($model->id, $relatedIds);
                 });
         } else {
-            $relatedProducts = \App\Models\Product::where('status', 'active')
-                ->where('id', '!=', $id)
-                ->inRandomOrder()
-                ->limit(4)
-                ->get();
+            $relatedProducts = collect();
         }
         
         // Fetch specific active coupon for this product
