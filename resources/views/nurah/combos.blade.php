@@ -190,7 +190,7 @@
                     <div class="product-price">
                         ₹{{ number_format($bundle->total_price, 0) }}
                     </div>
-                     <button class="add-btn" onclick="event.preventDefault(); addToCart('{{ $bundle->title }}')">Add to Cart</button>
+                     <button class="add-btn" onclick="event.preventDefault(); addToCart({{ $bundle->id }}, '{{ $bundle->title }}', this)">Add to Cart</button>
                 </div>
             </a>
             @endforeach
@@ -218,19 +218,53 @@
         }
     }
 
-    function addToCart(title) {
-        const toast = document.getElementById('toast');
-        if(toast) {
-            toast.textContent = title + ' added to cart! (Demo)';
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
-        
-        // This is a placeholder since backend logic for adding a BUNDLE ID to cart wasn't visible in routes.
-        // If there is an actual route (e.g. POST /cart/add with bundle_id), it should be implemented here.
-        // For now, fulfills the design request.
+    function addToCart(id, title, btn) {
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '...';
+
+        fetch('{{ route("cart.add") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                id: id,
+                quantity: 1,
+                type: 'bundle'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                const toast = document.getElementById('toast');
+                if(toast) {
+                    toast.textContent = (title || 'Item') + ' added to cart!';
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2500);
+                }
+                
+                if(navigator.vibrate) navigator.vibrate(50);
+                
+                const cartBadge = document.querySelector('.cart-count'); 
+                if(cartBadge) {
+                    cartBadge.innerText = data.cartCount;
+                    cartBadge.style.display = 'flex';
+                }
+            } else {
+                alert(data.message || 'Error adding to cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        });
     }
 </script>
 @endpush

@@ -20,6 +20,7 @@ class CartController extends Controller
             $cart = $this->getCartFromDb();
         } else {
             $cart = session()->get('cart', []);
+            $cart = array_reverse($cart, true); // Last added first
         }
 
         $total = 0;
@@ -346,6 +347,7 @@ class CartController extends Controller
     {
         $dbItems = Cart::where('user_id', Auth::id())
             ->with(['product.variants', 'bundle'])
+            ->latest()
             ->get();
         $cart = [];
         
