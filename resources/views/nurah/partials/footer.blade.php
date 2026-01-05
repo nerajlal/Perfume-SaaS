@@ -63,5 +63,7 @@
 
 <!-- Quick Action Button -->
 <div class="quick-action">
-    <button class="action-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i></button>
+    <a href="https://wa.me/8547470675" target="_blank" class="action-btn" style="background-color: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <i class="fab fa-whatsapp" style="font-size: 24px;"></i>
+    </a>
 </div>
