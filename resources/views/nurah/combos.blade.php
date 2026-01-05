@@ -180,7 +180,7 @@
                         Save {{ $bundle->discount_type == 'percentage' ? number_format($bundle->discount_value) . '%' : '₹' . number_format($bundle->discount_value) }}
                     </span>
                     @endif
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($bundle->image) }}" alt="{{ $bundle->title }}" class="product-image">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($bundle->image) }}" alt="{{ $bundle->title }}" class="product-image" onerror="handleImageError(this)">
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">{{ $bundle->title }}</h3>
@@ -210,6 +210,14 @@
 
 @push('scripts')
 <script>
+    // Image Fallback
+    function handleImageError(img) {
+        if (!img.getAttribute('data-error-handled')) {
+            img.setAttribute('data-error-handled', 'true');
+            img.src = '{{ asset("images/g-load.webp") }}';
+        }
+    }
+
     function addToCart(title) {
         const toast = document.getElementById('toast');
         if(toast) {
