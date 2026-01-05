@@ -73,7 +73,7 @@ class CartController extends Controller
                         "name" => $bundle->title,
                         "quantity" => $quantity,
                         "price" => $bundle->total_price,
-                        "image" => $bundle->image,
+                        "image" => \Illuminate\Support\Facades\Storage::url($bundle->image),
                         "size" => null,
                         "type" => "bundle"
                     ];
@@ -361,7 +361,7 @@ class CartController extends Controller
                     "name" => $item->bundle->title,
                     "quantity" => $item->quantity,
                     "price" => $item->bundle->total_price,
-                    "image" => $item->bundle->image,
+                    "image" => \Illuminate\Support\Facades\Storage::url($item->bundle->image),
                     "size" => null,
                     "type" => "bundle"
                 ];
