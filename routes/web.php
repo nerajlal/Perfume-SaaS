@@ -61,10 +61,8 @@ Route::middleware('auth')->group(function () {
 // })->name('login');
 
 Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-Route::view('/admin/orders', 'admin.orders')->name('admin.orders');
-Route::get('/admin/orders/{id}', function ($id) {
-    return view('admin.orders.show', ['id' => $id]);
-})->name('admin.orders.show');
+Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders');
+Route::get('/admin/orders/{id}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
 
 Route::get('/admin/collections', [App\Http\Controllers\Admin\CollectionController::class, 'index'])->name('admin.collections');
 Route::get('/admin/collections/create', [App\Http\Controllers\Admin\CollectionController::class, 'create'])->name('admin.collections.create');

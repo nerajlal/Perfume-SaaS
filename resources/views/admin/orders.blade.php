@@ -23,43 +23,42 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Dummy Row 1 -->
-                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', 1025) }}'">
-                    <td class="px-3 py-3 fw-semibold text-dark"><a href="{{ route('admin.orders.show', 1025) }}" class="text-decoration-none text-dark hover-primary">#1025</a></td>
-                    <td class="px-3 py-3 text-secondary">Just now</td>
-                    <td class="px-3 py-3">John Doe</td>
-                    <td class="px-3 py-3 text-dark">₹3,500.00</td>
-                    <td class="px-3 py-3"><span class="badge bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-pill fw-medium">Pending</span></td>
-                    <td class="px-3 py-3"><span class="badge bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-pill fw-medium">Unfulfilled</span></td>
-                    <td class="px-3 py-3 text-end">1</td>
+                @foreach($orders as $order)
+                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', $order->id) }}'">
+                    <td class="px-3 py-3 fw-semibold text-dark"><a href="{{ route('admin.orders.show', $order->id) }}" class="text-decoration-none text-dark hover-primary">{{ $order->order_number }}</a></td>
+                    <td class="px-3 py-3 text-secondary">{{ $order->created_at->format('M d, Y h:i A') }}</td>
+                    <td class="px-3 py-3">{{ $order->customer_name }}</td>
+                    <td class="px-3 py-3 text-dark">₹{{ number_format($order->total_amount, 2) }}</td>
+                    <td class="px-3 py-3">
+                        @if($order->payment_status == 'paid')
+                            <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Paid</span>
+                        @elseif($order->payment_status == 'pending')
+                            <span class="badge bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-pill fw-medium">Pending</span>
+                        @else
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary px-2 py-1 rounded-pill fw-medium">{{ ucfirst($order->payment_status) }}</span>
+                        @endif
+                    </td>
+                    <td class="px-3 py-3">
+                        <!-- Fulfillment Status Logic (Assuming 'status' column or similar) -->
+                        @if($order->status == 'delivered')
+                            <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Delivered</span>
+                        @elseif($order->status == 'shipped')
+                            <span class="badge bg-info bg-opacity-10 text-info px-2 py-1 rounded-pill fw-medium">Shipped</span>
+                        @elseif($order->status == 'cancelled')
+                            <span class="badge bg-danger bg-opacity-10 text-danger px-2 py-1 rounded-pill fw-medium">Cancelled</span>
+                        @else
+                            <span class="badge bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-pill fw-medium">{{ ucfirst($order->status) }}</span>
+                        @endif
+                    </td>
+                    <td class="px-3 py-3 text-end">{{ $order->items_count }}</td>
                 </tr>
-                <!-- Dummy Row 2 -->
-                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', 1024) }}'">
-                    <td class="px-3 py-3 fw-semibold text-dark"><a href="{{ route('admin.orders.show', 1024) }}" class="text-decoration-none text-dark hover-primary">#1024</a></td>
-                    <td class="px-3 py-3 text-secondary">Today, 9:21 AM</td>
-                    <td class="px-3 py-3">Sarah Jenkins</td>
-                    <td class="px-3 py-3 text-dark">₹8,400.00</td>
-                    <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Paid</span></td>
-                    <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Delivered</span></td>
-                    <td class="px-3 py-3 text-end">3</td>
-                </tr>
-                 <!-- Dummy Row 3 -->
-                 <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', 1023) }}'">
-                    <td class="px-3 py-3 fw-semibold text-dark"><a href="{{ route('admin.orders.show', 1023) }}" class="text-decoration-none text-dark hover-primary">#1023</a></td>
-                    <td class="px-3 py-3 text-secondary">Yesterday</td>
-                    <td class="px-3 py-3">Michael Ross</td>
-                    <td class="px-3 py-3 text-dark">₹2,100.00</td>
-                    <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Paid</span></td>
-                    <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Delivered</span></td>
-                    <td class="px-3 py-3 text-end">1</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
-    <!-- Pagination Dummy -->
+    <!-- Pagination -->
     <div class="card-footer bg-white border-top p-3 d-flex justify-content-end gap-2 text-muted small">
-        <button class="btn btn-white border btn-sm text-secondary" disabled>Previous</button>
-        <button class="btn btn-white border btn-sm text-secondary">Next</button>
+        {{ $orders->links('pagination::bootstrap-5') }} <!-- Standard Laravel Pagination Link -->
     </div>
 </div>
 @endsection
