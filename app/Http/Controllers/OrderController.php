@@ -25,7 +25,8 @@ class OrderController extends Controller
             'phone' => 'required',
         ]);
 
-        // 2. Get Cart Data
+        try {
+            // 2. Get Cart Data
         // Ideally we reuse CartController logic, but for now we'll fetch manually to be safe or call the helper
         // 2. Get Cart Data
         $cart = [];
@@ -147,6 +148,9 @@ class OrderController extends Controller
                 // Decrement Stock for each product in the bundle
                 $bundle = \App\Models\Bundle::with('products.variants')->find($details['bundle_id']);
                 if ($bundle) {
+                    // Increment Total Sales for Bundle
+                    $bundle->increment('total_sales', $details['quantity']);
+
                     foreach ($bundle->products as $bProduct) {
                         $qtyInBundle = $bProduct->pivot->quantity ?? 1;
                         $totalQtyToDeduct = $details['quantity'] * $qtyInBundle;
@@ -168,6 +172,13 @@ class OrderController extends Controller
             \App\Models\Cart::where('user_id', Auth::id())->delete();
         }
         session()->forget('cart');
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage() . ' | Line: ' . $e->getLine() . ' | File: ' . $e->getFile()
+            ], 500);
+        }
 
         // 7. Return Success
         return response()->json([
