@@ -46,9 +46,49 @@
                         <!-- Order Items Preview -->
                         <div style="background: #fafafa; padding: 15px; border-radius: 5px;">
                             @foreach($order->items as $item)
-                                <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px; color: #444;">
-                                    <span>{{ $item->quantity }}x {{ $item->name }} @if($item->size) ({{ $item->size }}) @endif</span>
-                                    <span>₹{{ number_format($item->total) }}</span>
+                                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 14px; margin-bottom: 15px; color: #444;">
+                                    <div style="display: flex; align-items: center;">
+                                        <!-- Item Image -->
+                                        <div style="width: 60px; height: 60px; flex-shrink: 0; margin-right: 15px; border-radius: 6px; overflow: hidden; background-color: #f0f0f0; border: 1px solid #eee;">
+                                            @php
+                                                $imgSrc = asset('images/placeholder.png'); // Fallback
+                                                if($item->product && $item->product->main_image_url) {
+                                                    $imgSrc = $item->product->main_image_url;
+                                                } elseif($item->bundle && $item->bundle->image) {
+                                                    $imgSrc = asset('storage/' . $item->bundle->image);
+                                                }
+                                                
+                                                $link = '#';
+                                                if($item->product_id) {
+                                                    $link = route('product', ['id' => $item->product_id]);
+                                                } elseif($item->bundle_id) {
+                                                    $link = route('combo', ['id' => $item->bundle_id]);
+                                                }
+                                            @endphp
+                                            <a href="{{ $link }}" style="display: block; width: 100%; height: 100%;">
+                                                <img src="{{ $imgSrc }}" alt="{{ $item->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                            </a>
+                                        </div>
+
+                                        <!-- Item Details -->
+                                        <div>
+                                            <div style="font-weight: 500; margin-bottom: 2px;">
+                                                @if($item->product_id)
+                                                    <a href="{{ route('product', ['id' => $item->product_id]) }}" style="color: inherit; text-decoration: none;">{{ $item->name }}</a>
+                                                @elseif($item->bundle_id)
+                                                    <a href="{{ route('combo', ['id' => $item->bundle_id]) }}" style="color: inherit; text-decoration: none;">{{ $item->name }}</a>
+                                                @else
+                                                    {{ $item->name }}
+                                                @endif
+                                            </div>
+                                            <div style="font-size: 13px; color: #777;">
+                                                Qty: {{ $item->quantity }} @if($item->size) &bull; Size: {{ $item->size }} @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Price -->
+                                    <div style="font-weight: 600;">₹{{ number_format($item->total) }}</div>
                                 </div>
                             @endforeach
                         </div>

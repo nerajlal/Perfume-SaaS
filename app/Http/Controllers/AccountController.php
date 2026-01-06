@@ -44,7 +44,7 @@ class AccountController extends Controller
 
     public function orders()
     {
-        $orders = \App\Models\Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $orders = \App\Models\Order::where('user_id', Auth::id())->with(['items.product', 'items.bundle'])->orderBy('created_at', 'desc')->get();
         return view('nurah.account.orders', compact('orders'));
     }
 }
