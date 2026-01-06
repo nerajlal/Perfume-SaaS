@@ -143,10 +143,10 @@
                         India
                     </p>
                     
-                    <hr class="text-muted opacity-25 my-3">
+                    <!-- <hr class="text-muted opacity-25 my-3"> -->
                     
-                    <h3 class="small fw-semibold text-muted text-uppercase mb-2">Billing Address</h3>
-                    <p class="small text-muted opacity-75">Same as shipping address</p>
+                    <!-- <h3 class="small fw-semibold text-muted text-uppercase mb-2">Billing Address</h3>
+                    <p class="small text-muted opacity-75">Same as shipping address</p> -->
                 </div>
             </div>
 
