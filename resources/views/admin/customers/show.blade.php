@@ -119,9 +119,9 @@
                         </div>
                          <div class="d-flex align-items-center gap-3">
                              <div class="text-center text-secondary small" style="width: 32px;"><i class="fas fa-phone"></i></div>
-                             <span class="small text-dark" id="copy-phone-text">{{ $customer->phone ?? 'No phone number' }}</span>
-                             @if($customer->phone)
-                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-dark" onclick="copyToClipboard('{{ $customer->phone }}', this)"><i class="far fa-copy"></i></button>
+                             <span class="small text-dark" id="copy-phone-text">{{ $customer->phone ?? ($customer->defaultAddress->phone ?? 'No phone number') }}</span>
+                             @if($customer->phone || ($customer->defaultAddress && $customer->defaultAddress->phone))
+                                <button class="btn btn-link btn-sm p-0 text-secondary hover-text-dark" onclick="copyToClipboard('{{ $customer->phone ?? $customer->defaultAddress->phone }}', this)"><i class="far fa-copy"></i></button>
                              @endif
                         </div>
                     </div>
