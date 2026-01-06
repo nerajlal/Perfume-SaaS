@@ -8,7 +8,7 @@
         <a href="{{ route('admin.products') }}" class="text-secondary text-decoration-none">
             <i class="fas fa-arrow-left"></i>
         </a>
-        <h1 class="h3 fw-bold text-dark mb-0">Midnight Oud 50ml</h1>
+        <h1 class="h3 fw-bold text-dark mb-0">{{ $product->title }}</h1>
         <span class="badge bg-success bg-opacity-10 text-success rounded-pill fw-medium text-uppercase small">Active</span>
     </div>
 
