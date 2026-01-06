@@ -21,6 +21,7 @@ class AccountController extends Controller
     public function updateAddress(Request $request)
     {
         $request->validate([
+            'phone' => 'nullable|string|max:20',
             'address_line1' => 'required|string|max:255',
             'city' => 'required|string|max:100',
             'state' => 'required|string|max:100',

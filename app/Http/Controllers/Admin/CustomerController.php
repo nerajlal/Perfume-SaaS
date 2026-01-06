@@ -10,7 +10,10 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::where('type', 'user')->with('defaultAddress');
+        $query = User::where('type', 'user')
+            ->with('defaultAddress')
+            ->withCount('orders')
+            ->withSum('orders as total_spent', 'total_amount');
 
         // Search
         if ($request->has('search')) {
@@ -58,7 +61,13 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer = User::findOrFail($id);
+        $customer = User::with(['defaultAddress', 'orders' => function($query) {
+            $query->latest();
+        }])
+        ->withCount('orders')
+        ->withSum('orders as total_spent', 'total_amount')
+        ->findOrFail($id);
+        
         return view('admin.customers.show', compact('customer'));
     }
 }

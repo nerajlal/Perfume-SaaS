@@ -84,6 +84,11 @@
                     <span class="form-section-title">Shipping Address</span>
                     
                     <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" name="phone" class="form-input" value="{{ old('phone', $address->phone ?? '') }}" required placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label">Address Line 1</label>
                         <input type="text" name="address_line1" class="form-input" value="{{ old('address_line1', $address->address_line1 ?? '') }}" required placeholder="Street address, P.O. box">
                     </div>

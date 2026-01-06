@@ -33,7 +33,7 @@
                  <div class="card border shadow-sm overflow-hidden">
                      <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center p-3">
                         <h2 class="h6 fw-bold text-secondary mb-0">Orders</h2>
-                        <span class="small text-muted">Total spent: ₹0.00</span>
+                        <span class="small text-muted">Total spent: <span class="fw-bold text-dark">₹{{ number_format($customer->total_spent ?? 0, 2) }}</span></span>
                      </div>
                      
                      <div class="table-responsive">
@@ -47,11 +47,42 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y">
-                                <tr>
-                                    <td colspan="4" class="text-center py-4 text-muted">
-                                        No orders found for this customer.
+                                @forelse($customer->orders as $order)
+                                <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', $order->id) }}'">
+                                    <td class="px-3 py-3 font-medium text-dark fw-bold">
+                                        {{ $order->order_number }}
+                                    </td>
+                                    <td class="px-3 py-3 text-secondary">
+                                        {{ $order->created_at->format('M d, Y') }}
+                                        <div class="small text-muted">{{ $order->created_at->format('h:i A') }}</div>
+                                    </td>
+                                    <td class="px-3 py-3">
+                                        @php
+                                            $statusColors = [
+                                                'pending' => 'bg-warning text-warning-emphasis',
+                                                'processing' => 'bg-info text-info-emphasis',
+                                                'shipped' => 'bg-primary text-primary-emphasis',
+                                                'delivered' => 'bg-success text-success-emphasis',
+                                                'cancelled' => 'bg-danger text-danger-emphasis',
+                                            ];
+                                            $badgeClass = $statusColors[$order->status] ?? 'bg-secondary text-secondary-emphasis';
+                                        @endphp
+                                        <span class="badge {{ $badgeClass }} bg-opacity-10 rounded-pill px-2 py-1 fw-medium">
+                                            {{ ucfirst($order->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-3 py-3 text-end fw-medium text-dark">
+                                        ₹{{ number_format($order->total_amount, 2) }}
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-muted">
+                                        <div class="mb-2"><i class="fas fa-shopping-bag fa-2x opacity-25"></i></div>
+                                        <p class="mb-0">No orders found for this customer.</p>
+                                    </td>
+                                </tr>
+                                @endforelse
                             </tbody>
                          </table>
                      </div>

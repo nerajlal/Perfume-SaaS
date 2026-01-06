@@ -5,9 +5,9 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0 text-dark">Customers</h1>
-    <div class="d-flex gap-2">
+    <!-- <div class="d-flex gap-2">
         <a href="{{ route('admin.customers.create') }}" class="btn btn-success shadow-sm">Add customer</a>
-    </div>
+    </div> -->
 </div>
 
 <div class="card border shadow-sm container-fluid p-0" style="min-height: 400px;">
