@@ -19,6 +19,7 @@
 <!-- Metrics Grid -->
 <div class="row g-3 mb-4">
     <!-- Total Sales -->
+    <!-- Total Sales -->
     <div class="col-12 col-md-6 col-lg-3">
         <div class="card p-3 h-100 border shadow-sm position-relative">
             <a href="{{ route('admin.analytics') }}" class="stretched-link"></a>
@@ -26,13 +27,13 @@
                 <div class="p-2 bg-success bg-opacity-10 rounded">
                     <i class="fas fa-coins text-success"></i>
                 </div>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1 small d-flex align-items-center">
-                    <i class="fas fa-arrow-up me-1"></i> 12%
+                <span class="badge {{ $salesGrowth >= 0 ? 'bg-success text-success' : 'bg-danger text-danger' }} bg-opacity-10 rounded-pill px-2 py-1 small d-flex align-items-center">
+                    <i class="fas fa-arrow-{{ $salesGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($salesGrowth), 1) }}%
                 </span>
             </div>
             <h3 class="small fw-medium text-muted mb-1">Total Sales</h3>
-            <span class="fs-4 fw-bold text-dark">₹45,231.00</span>
-            <p class="small text-muted mt-2 mb-0">vs. ₹40,100 last period</p>
+            <span class="fs-4 fw-bold text-dark">₹{{ number_format($currentSales, 2) }}</span>
+            <p class="small text-muted mt-2 mb-0">vs. ₹{{ number_format($prevSales, 2) }} last 30d</p>
         </div>
     </div>
 
@@ -44,13 +45,13 @@
                 <div class="p-2 bg-primary bg-opacity-10 rounded">
                     <i class="fas fa-shopping-bag text-primary"></i>
                 </div>
-                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-2 py-1 small d-flex align-items-center">
-                    <i class="fas fa-arrow-up me-1"></i> 8%
+                <span class="badge {{ $ordersGrowth >= 0 ? 'bg-primary text-primary' : 'bg-danger text-danger' }} bg-opacity-10 rounded-pill px-2 py-1 small d-flex align-items-center">
+                    <i class="fas fa-arrow-{{ $ordersGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($ordersGrowth), 1) }}%
                 </span>
             </div>
             <h3 class="small fw-medium text-muted mb-1">Total Orders</h3>
-            <span class="fs-4 fw-bold text-dark">124</span>
-            <p class="small text-muted mt-2 mb-0">vs. 112 last period</p>
+            <span class="fs-4 fw-bold text-dark">{{ number_format($currentOrders) }}</span>
+            <p class="small text-muted mt-2 mb-0">vs. {{ number_format($prevOrders) }} last 30d</p>
         </div>
     </div>
 
@@ -62,13 +63,13 @@
                  <div class="p-2 bg-info bg-opacity-10 rounded">
                     <i class="fas fa-users text-info"></i>
                 </div>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1 small d-flex align-items-center">
-                    <i class="fas fa-arrow-up me-1"></i> 4%
+                <span class="badge {{ $customersGrowth >= 0 ? 'bg-success text-success' : 'bg-danger text-danger' }} bg-opacity-10 rounded-pill px-2 py-1 small d-flex align-items-center">
+                    <i class="fas fa-arrow-{{ $customersGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($customersGrowth), 1) }}%
                 </span>
             </div>
             <h3 class="small fw-medium text-muted mb-1">New Customers</h3>
-            <span class="fs-4 fw-bold text-dark">45</span>
-            <p class="small text-muted mt-2 mb-0">vs. 41 last period</p>
+            <span class="fs-4 fw-bold text-dark">{{ number_format($currentCustomers) }}</span>
+            <p class="small text-muted mt-2 mb-0">vs. {{ number_format($prevCustomers) }} last 30d</p>
         </div>
     </div>
 
@@ -85,7 +86,7 @@
                 </span>
             </div>
             <h3 class="small fw-medium text-muted mb-1">Low Stock Items</h3>
-            <span class="fs-4 fw-bold text-dark">3</span>
+            <span class="fs-4 fw-bold text-dark">{{ $lowStockCount }}</span>
             <p class="small text-muted mt-2 mb-0">Restock required</p>
         </div>
     </div>
@@ -111,42 +112,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="px-3 py-3 fw-semibold text-dark">#1024</td>
+                        @forelse($recentOrders as $order)
+                        <tr class="cursor-pointer" onclick="window.location='{{ route('admin.orders.show', $order->id) }}'">
+                            <td class="px-3 py-3 fw-semibold text-dark">{{ $order->order_number }}</td>
                             <td class="px-3 py-3">
                                 <div class="d-flex flex-column">
-                                    <span class="fw-medium text-dark">Sarah Jenkins</span>
-                                    <span class="small text-muted">sarah@example.com</span>
+                                    <span class="fw-medium text-dark">{{ $order->customer_name }}</span>
+                                    <span class="small text-muted">{{ $order->customer_email }}</span>
                                 </div>
                             </td>
-                            <td class="px-3 py-3 text-dark">₹8,400</td>
-                            <td class="px-3 py-3"><span class="badge bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-pill fw-medium">Pending</span></td>
-                            <td class="px-3 py-3 text-end">3</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3 fw-semibold text-dark">#1023</td>
+                            <td class="px-3 py-3 text-dark">₹{{ number_format($order->total_amount, 2) }}</td>
                             <td class="px-3 py-3">
-                                <div class="d-flex flex-column">
-                                    <span class="fw-medium text-dark">Mike Ross</span>
-                                    <span class="small text-muted">mike.r@example.com</span>
-                                </div>
+                                @php
+                                    $statusClass = match($order->status) {
+                                        'pending' => 'bg-warning text-warning',
+                                        'processing' => 'bg-info text-info',
+                                        'shipped' => 'bg-primary text-primary',
+                                        'delivered' => 'bg-success text-success',
+                                        'cancelled' => 'bg-danger text-danger',
+                                        default => 'bg-secondary text-secondary'
+                                    };
+                                @endphp
+                                <span class="badge {{ $statusClass }} bg-opacity-10 px-2 py-1 rounded-pill fw-medium text-capitalize">{{ $order->status }}</span>
                             </td>
-                            <td class="px-3 py-3 text-dark">₹2,100</td>
-                            <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Paid</span></td>
-                            <td class="px-3 py-3 text-end">1</td>
+                            <td class="px-3 py-3 text-end">{{ $order->items->count() }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <td class="px-3 py-3 fw-semibold text-dark">#1022</td>
-                            <td class="px-3 py-3">
-                                <div class="d-flex flex-column">
-                                    <span class="fw-medium text-dark">Emma Watson</span>
-                                    <span class="small text-muted">emma.w@example.com</span>
-                                </div>
-                            </td>
-                            <td class="px-3 py-3 text-dark">₹12,500</td>
-                            <td class="px-3 py-3"><span class="badge bg-success bg-opacity-10 text-success px-2 py-1 rounded-pill fw-medium">Paid</span></td>
-                            <td class="px-3 py-3 text-end">4</td>
+                            <td colspan="5" class="text-center py-4 text-muted">No recent orders found.</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -161,44 +156,27 @@
                 <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill">3</span>
             </div>
             <div class="p-3 d-flex flex-column gap-3">
+                @forelse($lowStockItems as $item)
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center gap-3">
-                        <div class="d-flex align-items-center justify-content-center rounded bg-danger bg-opacity-10 text-danger" style="width: 40px; height: 40px;">
-                            <i class="fas fa-exclamation-triangle small"></i>
+                        <div class="d-flex align-items-center justify-content-center rounded bg-{{ $item->stock == 0 ? 'danger' : 'warning' }} bg-opacity-10 text-{{ $item->stock == 0 ? 'danger' : 'warning' }}" style="width: 40px; height: 40px;">
+                            <i class="fas fa-{{ $item->stock == 0 ? 'exclamation-circle' : 'box-open' }} small"></i>
                         </div>
                         <div>
-                            <h4 class="small fw-medium text-dark mb-0">Black Musk (50ml)</h4>
-                            <p class="small text-danger fw-medium mb-0">Only 2 left</p>
+                            <h4 class="small fw-medium text-dark mb-0">{{ $item->product ? $item->product->title : 'Unknown Product' }} @if($item->size) ({{ $item->size }}) @endif</h4>
+                            <p class="small text-{{ $item->stock == 0 ? 'danger' : 'warning' }} fw-medium mb-0">{{ $item->stock == 0 ? 'Out of Stock' : 'Only ' . $item->stock . ' left' }}</p>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-outline-secondary py-1 px-2" style="font-size: 0.75rem;">Restock</button>
+                    @if($item->product_id)
+                    <a href="{{ route('admin.products.edit', $item->product_id) }}" class="btn btn-sm btn-outline-secondary py-1 px-2" style="font-size: 0.75rem;">Restock</a>
+                    @endif
                 </div>
-
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="d-flex align-items-center justify-content-center rounded bg-warning bg-opacity-10 text-warning" style="width: 40px; height: 40px;">
-                            <i class="fas fa-box-open small"></i>
-                        </div>
-                        <div>
-                            <h4 class="small fw-medium text-dark mb-0">Amber Wood (100ml)</h4>
-                            <p class="small text-warning fw-medium mb-0">5 left</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-secondary py-1 px-2" style="font-size: 0.75rem;">Restock</button>
+                @empty
+                <div class="text-center py-4 text-muted small">
+                    <i class="fas fa-check-circle text-success mb-2 fs-5"></i><br>
+                    Inventory looks good!
                 </div>
-
-                 <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="d-flex align-items-center justify-content-center rounded bg-warning bg-opacity-10 text-warning" style="width: 40px; height: 40px;">
-                            <i class="fas fa-box-open small"></i>
-                        </div>
-                        <div>
-                            <h4 class="small fw-medium text-dark mb-0">Vanilla Essence (Tester)</h4>
-                            <p class="small text-warning fw-medium mb-0">8 left</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-secondary py-1 px-2" style="font-size: 0.75rem;">Restock</button>
-                </div>
+                @endforelse
             </div>
         </div>
     </div>

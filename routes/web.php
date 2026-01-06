@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
 //     return redirect()->route('admin.login');
 // })->name('login');
 
-Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
+Route::get('/admin', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders');
 Route::get('/admin/orders/{id}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
 Route::get('/admin/orders/{id}/print', [App\Http\Controllers\Admin\OrderController::class, 'print'])->name('admin.orders.print');
@@ -106,7 +106,7 @@ Route::get('/admin/customers', [App\Http\Controllers\Admin\CustomerController::c
 Route::view('/admin/customers/create', 'admin.customers.create')->name('admin.customers.create');
 Route::get('/admin/customers/{id}', [App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('admin.customers.show');
 
-Route::view('/admin/analytics', 'admin.analytics')->name('admin.analytics');
+Route::get('/admin/analytics', [App\Http\Controllers\Admin\AnalyticsController::class, 'index'])->name('admin.analytics');
 Route::get('/admin/analytics/{type}', function ($type) {
     $titles = [
         'sales' => ['title' => 'Total Sales', 'value' => '₹45,231.00', 'metricLabel' => 'Revenue'],

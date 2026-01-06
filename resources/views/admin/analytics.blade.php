@@ -5,10 +5,17 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0 text-dark">Analytics</h1>
-    <div class="d-flex align-items-center gap-2 border rounded bg-white px-3 py-1 shadow-sm text-sm cursor-pointer hover-bg-light">
-        <i class="far fa-calendar text-secondary"></i>
-        <span class="text-dark">Last 30 days</span>
-        <i class="fas fa-chevron-down text-secondary small ms-1"></i>
+    <div class="dropdown">
+        <div class="d-flex align-items-center gap-2 border rounded bg-white px-3 py-1 shadow-sm text-sm cursor-pointer hover-bg-light dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="far fa-calendar text-secondary"></i>
+            <span class="text-dark">{{ $periodLabel }}</span>
+        </div>
+        <ul class="dropdown-menu shadow-sm border-0 dropdown-menu-end">
+            <li><a class="dropdown-item small {{ $period == '7_days' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.analytics', ['period' => '7_days']) }}">Last 7 days</a></li>
+            <li><a class="dropdown-item small {{ $period == '30_days' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.analytics', ['period' => '30_days']) }}">Last 30 days</a></li>
+            <li><a class="dropdown-item small {{ $period == '90_days' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.analytics', ['period' => '90_days']) }}">Last 90 days</a></li>
+            <li><a class="dropdown-item small {{ $period == 'year' ? 'active bg-light text-dark fw-bold' : '' }}" href="{{ route('admin.analytics', ['period' => 'year']) }}">Last Year</a></li>
+        </ul>
     </div>
 </div>
 
@@ -20,9 +27,9 @@
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Total Sales</h3>
             </div>
-            <div class="h3 fw-bold text-dark mb-1">₹45,231.00</div>
-            <div class="small text-success fw-medium">
-                 <i class="fas fa-arrow-up me-1"></i> 12%
+            <div class="h3 fw-bold text-dark mb-1">₹{{ number_format($totalSales, 2) }}</div>
+            <div class="small {{ $salesGrowth >= 0 ? 'text-success' : 'text-danger' }} fw-medium">
+                 <i class="fas fa-arrow-{{ $salesGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($salesGrowth), 1) }}%
             </div>
             <div class="progress mt-3" style="height: 4px;">
                 <div class="progress-bar bg-primary" role="progressbar" style="width: 70%"></div>
@@ -30,15 +37,15 @@
         </a>
     </div>
 
-    <!-- Total Orders (New Normal) -->
+    <!-- Total Orders -->
     <div class="col-12 col-md-6 col-lg-3">
         <a href="{{ route('admin.analytics.show', 'orders') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Total Orders</h3>
             </div>
-            <div class="h3 fw-bold text-dark mb-1">342</div>
-            <div class="small text-success fw-medium">
-                 <i class="fas fa-arrow-up me-1"></i> 8%
+            <div class="h3 fw-bold text-dark mb-1">{{ number_format($totalOrders) }}</div>
+            <div class="small {{ $ordersGrowth >= 0 ? 'text-success' : 'text-danger' }} fw-medium">
+                 <i class="fas fa-arrow-{{ $ordersGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($ordersGrowth), 1) }}%
             </div>
              <div class="progress mt-3" style="height: 4px;">
                 <div class="progress-bar bg-purple" role="progressbar" style="width: 55%"></div>
@@ -46,15 +53,15 @@
         </a>
     </div>
 
-    <!-- Average Order Value (New Normal) -->
+    <!-- Average Order Value -->
     <div class="col-12 col-md-6 col-lg-3">
         <a href="{{ route('admin.analytics.show', 'aov') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Avg. Order Value</h3>
             </div>
-            <div class="h3 fw-bold text-dark mb-1">₹1,250.00</div>
-            <div class="small text-danger fw-medium">
-                 <i class="fas fa-arrow-down me-1"></i> 2%
+            <div class="h3 fw-bold text-dark mb-1">₹{{ number_format($avgOrderValue, 2) }}</div>
+            <div class="small {{ $aovGrowth >= 0 ? 'text-success' : 'text-danger' }} fw-medium">
+                 <i class="fas fa-arrow-{{ $aovGrowth >= 0 ? 'up' : 'down' }} me-1"></i> {{ number_format(abs($aovGrowth), 1) }}%
             </div>
              <div class="progress mt-3" style="height: 4px;">
                 <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"></div>
@@ -62,18 +69,18 @@
         </a>
     </div>
 
-    <!-- Online Store Sessions -->
+    <!-- Online Store Sessions (Static for now) -->
     <div class="col-12 col-md-6 col-lg-3">
         <a href="{{ route('admin.analytics.show', 'sessions') }}" class="card border shadow-sm p-3 text-decoration-none h-100 hover-shadow transition-base">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h3 class="h6 text-muted text-uppercase small fw-bold mb-0">Sessions</h3>
             </div>
-            <div class="h3 fw-bold text-dark mb-1">10,234</div>
-            <div class="small text-success fw-medium">
-                 <i class="fas fa-arrow-up me-1"></i> 5%
+            <div class="h3 fw-bold text-dark mb-1">--</div>
+            <div class="small text-muted fw-medium">
+                 Not tracked
             </div>
              <div class="progress mt-3" style="height: 4px;">
-                <div class="progress-bar bg-indigo" role="progressbar" style="width: 65%"></div>
+                <div class="progress-bar bg-indigo" role="progressbar" style="width: 0%"></div>
             </div>
         </a>
     </div>
@@ -81,7 +88,7 @@
 
 <div class="row g-3 mb-4">
     
-    <!-- Top Products (Normal) -->
+    <!-- Top Products -->
     <div class="col-12 col-lg-8">
         <div class="card border shadow-sm">
             <div class="card-header bg-light border-bottom p-3 d-flex justify-content-between align-items-center">
@@ -98,48 +105,34 @@
                         </tr>
                     </thead>
                     <tbody class="border-top-0">
+                        @forelse($topProducts as $product)
                         <tr>
                             <td class="px-3 py-3">
                                 <div class="d-flex align-items-center gap-3">
-                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-image text-secondary opacity-50"></i>
+                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px; overflow:hidden;">
+                                        @if($product->product && $product->product->main_image_url)
+                                            <img src="{{ $product->product->main_image_url }}" alt="{{ $product->name }}" style="width:100%; height:100%; object-fit:cover;">
+                                        @else
+                                            <i class="fas fa-image text-secondary opacity-50"></i>
+                                        @endif
                                     </div>
-                                    <span class="fw-medium text-dark">Midnight Oud 50ml</span>
+                                    <span class="fw-medium text-dark">{{ $product->name }}</span>
                                 </div>
                             </td>
-                            <td class="px-3 py-3 text-end text-secondary">45</td>
-                            <td class="px-3 py-3 text-end fw-medium text-dark">₹1,89,000</td>
+                            <td class="px-3 py-3 text-end text-secondary">{{ $product->total_qty }}</td>
+                            <td class="px-3 py-3 text-end fw-medium text-dark">₹{{ number_format($product->total_revenue, 2) }}</td>
                         </tr>
-                         <tr>
-                            <td class="px-3 py-3">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-image text-secondary opacity-50"></i>
-                                    </div>
-                                    <span class="fw-medium text-dark">Jasmine Musk Oil</span>
-                                </div>
-                            </td>
-                            <td class="px-3 py-3 text-end text-secondary">32</td>
-                            <td class="px-3 py-3 text-end fw-medium text-dark">₹44,800</td>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="text-center py-4 text-muted">No sales data found for this period.</td>
                         </tr>
-                         <tr>
-                            <td class="px-3 py-3">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-image text-secondary opacity-50"></i>
-                                    </div>
-                                    <span class="fw-medium text-dark">Rose & Amber Gift Set</span>
-                                </div>
-                            </td>
-                            <td class="px-3 py-3 text-end text-secondary">18</td>
-                            <td class="px-3 py-3 text-end fw-medium text-dark">₹1,53,000</td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer bg-white border-top p-2 text-center">
+            <!-- <div class="card-footer bg-white border-top p-2 text-center">
                  <a href="{{ route('admin.products', ['sort' => 'best_selling']) }}" class="small text-decoration-none">View all products</a>
-            </div>
+            </div> -->
         </div>
     </div>
 
