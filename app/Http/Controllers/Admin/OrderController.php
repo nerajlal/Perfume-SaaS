@@ -45,4 +45,10 @@ class OrderController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Order status updated successfully']);
     }
+
+    public function print($id)
+    {
+        $order = Order::with(['items.product', 'items.bundle.products.variants', 'user'])->findOrFail($id);
+        return view('admin.orders.print', compact('order'));
+    }
 }
