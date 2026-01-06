@@ -16,10 +16,15 @@
                             <span style="font-weight: 700; color: #333;">{{ $order->order_number }}</span>
                             <span style="color: #666; font-size: 13px; margin-left: 10px;">{{ $order->created_at->format('M d, Y') }}</span>
                         </div>
-                        <div>
-                            <span style="font-weight: 600; font-size: 14px; color: {{ $order->payment_status == 'paid' ? 'green' : '#d4a574' }}; text-transform: uppercase;">
+                        <div style="text-align: right;">
+                            <div style="font-weight: 600; font-size: 14px; color: {{ $order->payment_status == 'paid' ? 'green' : '#d4a574' }}; text-transform: uppercase;">
                                 {{ $order->status }}
-                            </span>
+                            </div>
+                            @if($order->tracking_number)
+                                <div style="font-size: 13px; color: #666; margin-top: 4px;">
+                                    Tracking: <span style="font-weight: 700; color: #333;">{{ $order->tracking_number }}</span>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div style="padding: 20px;">
