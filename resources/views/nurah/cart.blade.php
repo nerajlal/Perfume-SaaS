@@ -47,10 +47,13 @@
     }
     
     .cart-item {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 0.8fr 0.5fr;
         padding: 20px;
         border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item-main {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 0.8fr 0.5fr;
         align-items: center;
     }
     
@@ -214,7 +217,7 @@
             display: none; /* Hide header on mobile */
         }
         
-        .cart-item {
+        .cart-item-main {
             grid-template-columns: 1fr;
             gap: 15px;
             position: relative;
@@ -273,39 +276,48 @@
             
             @foreach($cart as $id => $details)
             <div class="cart-item" data-id="{{ $id }}">
-                <div class="item-info">
-                    @php
-                        $itemUrl = isset($details['bundle_id']) 
-                            ? route('combo', ['id' => $details['bundle_id']]) 
-                            : route('product', ['id' => $details['product_id']]);
-                    @endphp
-                    
-                    <a href="{{ $itemUrl }}">
-                        <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}" class="item-image" onerror="this.src='{{ asset('images/g-load.webp') }}'">
-                    </a>
-                    <div class="item-details">
-                        <a href="{{ $itemUrl }}" style="text-decoration: none; color: inherit;">
-                            <h3>{{ $details['name'] }}</h3>
+                <div class="cart-item-main">
+                    <div class="item-info">
+                        @php
+                            $itemUrl = isset($details['bundle_id']) 
+                                ? route('combo', ['id' => $details['bundle_id']]) 
+                                : route('product', ['id' => $details['product_id']]);
+                        @endphp
+                        
+                        <a href="{{ $itemUrl }}">
+                            <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}" class="item-image" onerror="this.src='{{ asset('images/g-load.webp') }}'">
                         </a>
-                        @if(isset($details['size']) && $details['size'])
-                            <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Size: {{ $details['size'] }}</p>
-                        @endif
-
-                        @if(isset($details['coupon']) && $details['coupon'])
-                            <div style="font-size: 11px; color: #8a6d3b; background: #fdf8ef; border: 1px dashed #C5A059; padding: 4px 8px; border-radius: 4px; display: inline-block;">
-                                <i class="fas fa-tag me-1"></i> <strong>{{ $details['coupon']->code }}</strong> coupon will automatically apply at checkout to get {{ $details['coupon']->type == 'percentage' ? number_format($details['coupon']->value) . '%' : '₹' . number_format($details['coupon']->value) }} OFF
-                            </div>
-                        @endif
+                        <div class="item-details">
+                            <a href="{{ $itemUrl }}" style="text-decoration: none; color: inherit;">
+                                <h3>{{ $details['name'] }}</h3>
+                            </a>
+                            @if(isset($details['size']) && $details['size'])
+                                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Size: {{ $details['size'] }}</p>
+                            @endif
+                        </div>
                     </div>
+                    <div class="item-price">₹{{ number_format($details['price']) }}</div>
+                    <div class="item-quantity">
+                        <button class="qty-btn minus" onclick="updateCart('{{ $id }}', {{ $details['quantity'] - 1 }})">-</button>
+                        <input type="text" value="{{ $details['quantity'] }}" class="qty-input" readonly>
+                        <button class="qty-btn plus" onclick="updateCart('{{ $id }}', {{ $details['quantity'] + 1 }})">+</button>
+                    </div>
+                    <div class="item-total" id="total-{{ $id }}">₹{{ number_format($details['price'] * $details['quantity']) }}</div>
+                    <button class="remove-btn" onclick="removeItem('{{ $id }}')"><i class="fas fa-trash"></i></button>
                 </div>
-                <div class="item-price">₹{{ number_format($details['price']) }}</div>
-                <div class="item-quantity">
-                    <button class="qty-btn minus" onclick="updateCart('{{ $id }}', {{ $details['quantity'] - 1 }})">-</button>
-                    <input type="text" value="{{ $details['quantity'] }}" class="qty-input" readonly>
-                    <button class="qty-btn plus" onclick="updateCart('{{ $id }}', {{ $details['quantity'] + 1 }})">+</button>
-                </div>
-                <div class="item-total" id="total-{{ $id }}">₹{{ number_format($details['price'] * $details['quantity']) }}</div>
-                <button class="remove-btn" onclick="removeItem('{{ $id }}')"><i class="fas fa-trash"></i></button>
+
+                @if(isset($details['coupon']) && $details['coupon'])
+                    @php
+                        $discountVal = $details['coupon']->type == 'percentage' 
+                            ? $details['price'] * ($details['coupon']->value / 100) 
+                            : $details['coupon']->value;
+                        $newPrice = max(0, $details['price'] - $discountVal);
+                    @endphp
+                    <div style="margin-top: 15px; width: 100%; font-size: 12px; color: #8a6d3b; background: #fdf8ef; border: 1px dashed #C5A059; padding: 8px 12px; border-radius: 4px;">
+                        <i class="fas fa-tag me-1"></i> <strong>{{ $details['coupon']->code }}</strong> coupon will automatically apply at checkout to get {{ $details['coupon']->type == 'percentage' ? number_format($details['coupon']->value) . '%' : '₹' . number_format($details['coupon']->value) }} OFF. 
+                        <strong>Effective Price: ₹{{ number_format($newPrice) }}</strong>
+                    </div>
+                @endif
             </div>
             @endforeach
             
