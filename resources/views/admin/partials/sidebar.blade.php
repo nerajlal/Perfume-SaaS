@@ -96,16 +96,16 @@
                 </a>
             </li>
             <li>
+                 <a href="{{ route('admin.settings.delivery-partners.index') }}" class="sidebar-item {{ request()->routeIs('admin.settings.delivery-partners*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-truck text-center" style="width: 20px;"></i>
+                    <span>Delivery Partners</span>
+                </a>
+            </li>
+            <li>
                  <a href="{{ route('admin.settings.managers') }}" class="sidebar-item {{ request()->routeIs('admin.settings.managers*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
                     <i class="fas fa-users-cog text-center" style="width: 20px;"></i>
                     <span>Site Managers</span>
                     <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
-                </a>
-            </li>
-            <li>
-                 <a href="{{ route('admin.settings.delivery-partners.index') }}" class="sidebar-item {{ request()->routeIs('admin.settings.delivery-partners*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
-                    <i class="fas fa-truck text-center" style="width: 20px;"></i>
-                    <span>Delivery Partners</span>
                 </a>
             </li>
             <li>
