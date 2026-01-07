@@ -140,3 +140,7 @@ Route::delete('/admin/settings/home-products/{id}', [App\Http\Controllers\Admin\
 
 Route::view('/admin/settings/managers', 'admin.settings.managers.index')->name('admin.settings.managers');
 Route::view('/admin/settings/managers/create', 'admin.settings.managers.create')->name('admin.settings.managers.create');
+
+Route::resource('admin/settings/delivery-partners', App\Http\Controllers\Admin\DeliveryPartnerController::class, [
+    'names' => 'admin.settings.delivery-partners'
+])->except(['show', 'create', 'edit']);

@@ -103,6 +103,12 @@
                 </a>
             </li>
             <li>
+                 <a href="{{ route('admin.settings.delivery-partners.index') }}" class="sidebar-item {{ request()->routeIs('admin.settings.delivery-partners*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-truck text-center" style="width: 20px;"></i>
+                    <span>Delivery Partners</span>
+                </a>
+            </li>
+            <li>
                  <a href="{{ route('admin.blog') }}" class="sidebar-item {{ request()->routeIs('admin.blog*') ? 'active' : '' }} d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
                     <i class="fas fa-newspaper text-center" style="width: 20px;"></i>
                     <span>Blog & Articles</span>
