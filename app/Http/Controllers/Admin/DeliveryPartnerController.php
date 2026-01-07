@@ -28,7 +28,7 @@ class DeliveryPartnerController extends Controller
             'tracking_url_template' => 'nullable|string'
         ]);
 
-        DeliveryPartner::create($request->all());
+        DeliveryPartner::create($request->except('_token'));
 
         return redirect()->back()->with('success', 'Delivery Partner added successfully!');
     }
@@ -46,7 +46,7 @@ class DeliveryPartnerController extends Controller
             'tracking_url_template' => 'nullable|string'
         ]);
 
-        $partner->update($request->all());
+        $partner->update($request->except('_token'));
 
         return redirect()->back()->with('success', 'Delivery Partner updated successfully!');
     }

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Delivery Partners</h4>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPartnerModal">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPartnerModal">
                         <i class="fas fa-plus"></i> Add Partner
                     </button>
                 </div>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>
         </form>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </div>
             </div>
         </form>
