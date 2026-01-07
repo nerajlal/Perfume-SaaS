@@ -383,9 +383,9 @@
             
             @if($hasOutOfStock)
                 <div style="margin-top: 20px; color: #ff3b30; font-size: 13px; font-weight: 600; text-align: center; border: 1px solid #ff3b30; padding: 10px; border-radius: 6px; background: #fff0f0;">
-                    <i class="fas fa-exclamation-circle"></i> Some items are out of stock. Please remove them to proceed.
+                    <i class="fas fa-exclamation-circle"></i> Note: Out of stock items will be excluded from checkout.
                 </div>
-                <button class="checkout-btn" style="background: #ccc; cursor: not-allowed;" disabled>Proceed to Checkout</button>
+                <a href="{{ route('checkout') }}" class="checkout-btn" style="text-decoration: none; display: block; text-align: center;">Proceed to Checkout</a>
             @else
                 <a href="{{ route('checkout') }}" class="checkout-btn" style="text-decoration: none; display: block; text-align: center;">Proceed to Checkout</a>
             @endif

@@ -272,19 +272,31 @@ class PageController extends Controller
                 ->get();
 
              foreach($items as $item) {
+                 $stock = 0;
                  if($item->product_id && $item->product) {
-                    $cart[$item->product_id . '-' . $item->size] = [
-                        "name" => $item->product->title,
-                        "quantity" => $item->quantity,
-                        "price" => $item->product->starting_price,
-                        "image" => $item->product->main_image_url,
-                        "product_id" => $item->product_id,
-                        "bundle_id" => null,
-                        "size" => $item->size,
-                        "type" => "product",
-                        "coupon" => $this->getActiveCoupon($item->product)
-                    ];
+                    // Check Stock
+                    if ($item->size) {
+                        $variant = $item->product->variants->where('size', $item->size)->first();
+                        $stock = $variant ? $variant->stock : 0;
+                    } else {
+                        $stock = $item->product->variants->sum('stock');
+                    }
+                    
+                    if($stock > 0) {
+                        $cart[$item->product_id . '-' . $item->size] = [
+                            "name" => $item->product->title,
+                            "quantity" => $item->quantity,
+                            "price" => $item->product->starting_price,
+                            "image" => $item->product->main_image_url,
+                            "product_id" => $item->product_id,
+                            "bundle_id" => null,
+                            "size" => $item->size,
+                            "type" => "product",
+                            "coupon" => $this->getActiveCoupon($item->product)
+                        ];
+                    }
                 } elseif ($item->bundle_id && $item->bundle) {
+                    // Bundles assumed always in stock or add logic
                     $cart['bundle-' . $item->bundle_id] = [
                         "name" => $item->bundle->title,
                         "quantity" => $item->quantity,
@@ -298,12 +310,27 @@ class PageController extends Controller
                 }
              }
         } else {
-            $cart = session()->get('cart', []);
-            // Enrich session cart with coupons
-            foreach($cart as $key => &$item) {
+            $sessionCart = session()->get('cart', []);
+            // Enrich session cart with coupons and filter OOS
+            foreach($sessionCart as $key => $item) {
                 if(isset($item['type']) && $item['type'] == 'product' && isset($item['product_id'])) {
                     $product = \App\Models\Product::find($item['product_id']);
-                    $item['coupon'] = $this->getActiveCoupon($product);
+                    if($product) {
+                        $stock = 0;
+                        if(isset($item['size']) && $item['size']) {
+                            $variant = $product->variants->where('size', $item['size'])->first();
+                            $stock = $variant ? $variant->stock : 0;
+                        } else {
+                            $stock = $product->variants->sum('stock');
+                        }
+
+                        if($stock > 0) {
+                            $item['coupon'] = $this->getActiveCoupon($product);
+                            $cart[$key] = $item;
+                        }
+                    }
+                } elseif(isset($item['type']) && $item['type'] == 'bundle') {
+                     $cart[$key] = $item;
                 }
             }
         }
