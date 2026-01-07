@@ -39,6 +39,11 @@ class CartController extends Controller
                             $item['stock'] = $product->variants->sum('stock');
                         }
                     }
+                } elseif (isset($item['type']) && $item['type'] == 'bundle' && isset($item['bundle_id'])) {
+                    $bundle = Bundle::find($item['bundle_id']);
+                    if ($bundle) {
+                        $item['stock'] = $bundle->is_out_of_stock ? 0 : 100;
+                    }
                 }
             }
         }
@@ -384,7 +389,7 @@ class CartController extends Controller
                     "image" => \Illuminate\Support\Facades\Storage::url($item->bundle->image),
                     "size" => null,
                     "type" => "bundle",
-                    "stock" => 100 // Assume bundles always in stock for now or implement logic
+                    "stock" => $item->bundle->is_out_of_stock ? 0 : 100 
                 ];
             }
             elseif ($item->product_id && $item->product) {

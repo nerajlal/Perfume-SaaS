@@ -296,17 +296,18 @@ class PageController extends Controller
                         ];
                     }
                 } elseif ($item->bundle_id && $item->bundle) {
-                    // Bundles assumed always in stock or add logic
-                    $cart['bundle-' . $item->bundle_id] = [
-                        "name" => $item->bundle->title,
-                        "quantity" => $item->quantity,
-                        "price" => $item->bundle->total_price,
-                        "image" => \Illuminate\Support\Facades\Storage::url($item->bundle->image),
-                        "product_id" => null,
-                        "bundle_id" => $item->bundle_id,
-                        "size" => null,
-                        "type" => "bundle"
-                    ];
+                    if (!$item->bundle->is_out_of_stock) {
+                        $cart['bundle-' . $item->bundle_id] = [
+                            "name" => $item->bundle->title,
+                            "quantity" => $item->quantity,
+                            "price" => $item->bundle->total_price,
+                            "image" => \Illuminate\Support\Facades\Storage::url($item->bundle->image),
+                            "product_id" => null,
+                            "bundle_id" => $item->bundle_id,
+                            "size" => null,
+                            "type" => "bundle"
+                        ];
+                    }
                 }
              }
         } else {
@@ -330,7 +331,12 @@ class PageController extends Controller
                         }
                     }
                 } elseif(isset($item['type']) && $item['type'] == 'bundle') {
-                     $cart[$key] = $item;
+                     if(isset($item['bundle_id'])) {
+                         $bundle = \App\Models\Bundle::find($item['bundle_id']);
+                         if ($bundle && !$bundle->is_out_of_stock) {
+                             $cart[$key] = $item;
+                         }
+                     }
                 }
             }
         }

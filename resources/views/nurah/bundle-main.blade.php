@@ -409,13 +409,23 @@
 
             <!-- Actions Bar -->
             <div class="actions-bar">
-                <div class="qty-counter">
-                    <button class="qty-control" onclick="updateQty(-1)">−</button>
-                    <span class="qty-number" id="qtyVal">1</span>
-                    <button class="qty-control" onclick="updateQty(1)">+</button>
-                </div>
-                <button class="btn-main" onclick="addToCart('{{ $bundle->title }}')">Add to Bag</button>
-                <button class="btn-secondary" onclick="location.href='/checkout'">Buy It Now</button>
+                @if(!$bundle->is_out_of_stock)
+                    <div class="qty-counter">
+                        <button class="qty-control" onclick="updateQty(-1)">−</button>
+                        <span class="qty-number" id="qtyVal">1</span>
+                        <button class="qty-control" onclick="updateQty(1)">+</button>
+                    </div>
+                    <button class="btn-main" onclick="addToCart('{{ $bundle->title }}')">Add to Bag</button>
+                    <button class="btn-secondary" onclick="location.href='/checkout'">Buy It Now</button>
+                @else
+                     <div class="qty-counter" style="opacity: 0.5; pointer-events: none;">
+                        <button class="qty-control" disabled>−</button>
+                        <span class="qty-number">0</span>
+                        <button class="qty-control" disabled>+</button>
+                    </div>
+                    <button class="btn-main" disabled style="background: #ccc; cursor: not-allowed;">Out of Stock</button>
+                    <button class="btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">Buy It Now</button>
+                @endif
             </div>
             
             <p style="text-align: center; margin-top: 15px; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Free Shipping over ₹399 • 14-Day Returns</p>

@@ -40,4 +40,15 @@ class Bundle extends Model
 
         return max(0, $total);
     }
+
+    public function getIsOutOfStockAttribute()
+    {
+        foreach ($this->products as $product) {
+            // Check if any product in the bundle has zero total stock across all variants
+            if ($product->variants->sum('stock') <= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
