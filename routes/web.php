@@ -3,61 +3,20 @@
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-// Public Storefront Routes (Tenant Scoped)
-Route::prefix('{tenant_id}')->middleware('identify_tenant')->group(function () {
-    Route::get('/', [PageController::class, 'home'])->name('home');
-    Route::get('/collections', [PageController::class, 'collection'])->name('collection');
-    Route::get('/products', [PageController::class, 'collection'])->name('products');
-    Route::get('/all-products', [PageController::class, 'allProducts'])->name('all-products');
-    Route::get('/combos', [PageController::class, 'combos'])->name('combos');
-    Route::get('/combo', [PageController::class, 'combo'])->name('combo');
-    Route::get('/cosmopolitan', [PageController::class, 'cosmopolitan'])->name('cosmopolitan');
-    Route::get('/product', [PageController::class, 'product'])->name('product');
-    Route::view('/about', 'nurah.about')->name('about');
-    Route::view('/contact', 'nurah.contact')->name('contact');
-    Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
-    Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
-    Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-    Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
-    Route::get('/shipping-policy', [PageController::class, 'shippingPolicy'])->name('shipping-policy');
-    Route::get('/return-policy', [PageController::class, 'returnPolicy'])->name('return-policy');
-    Route::get('/terms-of-service', [PageController::class, 'termsOfService'])->name('terms-of-service');
-    Route::post('/order/place', [App\Http\Controllers\OrderController::class, 'store'])->name('order.place');
-
-    // Account Routes
-    Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index')->middleware('auth');
-    Route::post('/account/address', [App\Http\Controllers\AccountController::class, 'updateAddress'])->name('account.address.update')->middleware('auth');
-    Route::get('/account/orders', [App\Http\Controllers\AccountController::class, 'orders'])->name('account.orders')->middleware('auth');
-
-    // User Auth Routes
-    Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register');
-    Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
-    // Google Auth
-    Route::get('auth/google', [App\Http\Controllers\AuthController::class, 'redirectToGoogle'])->name('google.login');
-    Route::get('auth/google/callback', [App\Http\Controllers\AuthController::class, 'handleGoogleCallback']);
-});
+// Public Landing Page (SaaS Home)
+Route::view('/', 'landing')->name('landing');
 
 // Admin Routes (Auth Disabled for now)
-// Route::prefix('admin')->name('admin.')->group(function () {
-//     // Auth Routes
-//     Route::get('/login', [App\Http\Controllers\Admin\AuthController::class, 'showLogin'])->name('login');
-//     Route::post('/login', [App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login.submit');
-//     Route::post('/logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+// Admin Authentication Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [App\Http\Controllers\Admin\AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+});
 
-//     // Protected Routes
-//     Route::middleware('auth')->group(function () {
-//         Route::view('/', 'admin.dashboard')->name('dashboard');
-//     });
-// });
-
-// // Fallback for auth middleware if 'login' route is missing
-// Route::get('/login', function() {
-//     return redirect()->route('admin.login');
-// })->name('login');
-
-Route::get('/admin', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+// Admin Panel Routes (Protected)
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders');
 Route::get('/admin/orders/{id}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
 Route::get('/admin/orders/{id}/print', [App\Http\Controllers\Admin\OrderController::class, 'print'])->name('admin.orders.print');
@@ -141,13 +100,50 @@ Route::view('/admin/settings/managers/create', 'admin.settings.managers.create')
 
 Route::post('admin/settings/delivery-partners/{id}/default', [App\Http\Controllers\Admin\DeliveryPartnerController::class, 'setDefault'])->name('admin.settings.delivery-partners.default');
 
-Route::resource('admin/settings/delivery-partners', App\Http\Controllers\Admin\DeliveryPartnerController::class, [
-    'names' => 'admin.settings.delivery-partners'
-])->except(['show', 'create', 'edit']);
+    Route::resource('admin/settings/delivery-partners', App\Http\Controllers\Admin\DeliveryPartnerController::class, [
+        'names' => 'admin.settings.delivery-partners'
+    ])->except(['show', 'create', 'edit']);
+});
 
 // Super Admin Routes (Public for Verification)
 Route::prefix('su-admin')->name('super_admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'createTenant'])->name('create_tenant');
     Route::post('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'storeTenant'])->name('store_tenant');
+});
+
+// Public Storefront Routes (Tenant Scoped)
+Route::prefix('{tenant_id}')->middleware('identify_tenant')->whereNumber('tenant_id')->group(function () {
+    Route::get('/', [PageController::class, 'home'])->name('home');
+    Route::get('/collections', [PageController::class, 'collection'])->name('collection');
+    Route::get('/products', [PageController::class, 'collection'])->name('products');
+    Route::get('/all-products', [PageController::class, 'allProducts'])->name('all-products');
+    Route::get('/combos', [PageController::class, 'combos'])->name('combos');
+    Route::get('/combo', [PageController::class, 'combo'])->name('combo');
+    Route::get('/cosmopolitan', [PageController::class, 'cosmopolitan'])->name('cosmopolitan');
+    Route::get('/product', [PageController::class, 'product'])->name('product');
+    Route::view('/about', 'nurah.about')->name('about');
+    Route::view('/contact', 'nurah.contact')->name('contact');
+    Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
+    Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
+    Route::get('/shipping-policy', [PageController::class, 'shippingPolicy'])->name('shipping-policy');
+    Route::get('/return-policy', [PageController::class, 'returnPolicy'])->name('return-policy');
+    Route::get('/terms-of-service', [PageController::class, 'termsOfService'])->name('terms-of-service');
+    Route::post('/order/place', [App\Http\Controllers\OrderController::class, 'store'])->name('order.place');
+
+    // Account Routes
+    Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index')->middleware('auth');
+    Route::post('/account/address', [App\Http\Controllers\AccountController::class, 'updateAddress'])->name('account.address.update')->middleware('auth');
+    Route::get('/account/orders', [App\Http\Controllers\AccountController::class, 'orders'])->name('account.orders')->middleware('auth');
+
+    // User Auth Routes
+    Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register');
+    Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+    // Google Auth
+    Route::get('auth/google', [App\Http\Controllers\AuthController::class, 'redirectToGoogle'])->name('google.login');
+    Route::get('auth/google/callback', [App\Http\Controllers\AuthController::class, 'handleGoogleCallback']);
 });

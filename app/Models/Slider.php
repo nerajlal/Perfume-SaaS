@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'image_desktop',
@@ -15,6 +15,7 @@ class Slider extends Model
         'title',
         'status',
         'order',
+        'tenant_id',
     ];
 
     protected $casts = [

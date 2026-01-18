@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'user_id',
@@ -27,7 +27,8 @@ class Order extends Model
         'notes',
         'placed_at',
         'tracking_number',
-        'delivery_partner_id'
+        'delivery_partner_id',
+        'tenant_id',
     ];
 
     protected $casts = [

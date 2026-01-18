@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SuperAdminSeeder::class,
-            TenantSeeder::class,
+            // TenantSeeder::class, // Commented out for manual testing
             // CollectionSeeder::class, // Commented out as they might not be multi-tenant ready or we want clean slate
             // ProductSeeder::class,
             // BundleSeeder::class,

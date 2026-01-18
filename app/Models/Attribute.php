@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'name',
         'type',
         'color',
+        'tenant_id',
     ];
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discount extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use \Illuminate\Database\Eloquent\Factories\HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'code',
@@ -17,6 +17,7 @@ class Discount extends Model
         'ends_at',
         'usage_limit',
         'uses_count',
+        'tenant_id',
     ];
 
     protected $casts = [

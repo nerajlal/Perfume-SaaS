@@ -27,7 +27,7 @@
     </nav>
     
     <div class="p-3 border-top">
-         <form method="POST" action="{{ route('logout') }}">
+         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="btn btn-sm btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2">
                 <i class="fas fa-sign-out-alt"></i> Logout

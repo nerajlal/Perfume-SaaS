@@ -20,7 +20,8 @@ class TenantScope implements Scope
         }
 
         // 2. Check if User is Authenticated (Admin Access)
-        if (auth()->check()) {
+        // usage of hasUser() prevents infinite loop when User model determines authentication
+        if (auth()->hasUser()) {
             $user = auth()->user();
             if ($user->tenant_id) {
                 // Tenant Admin / Tenant User

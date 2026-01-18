@@ -15,6 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'super_admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
             'identify_tenant' => \App\Http\Middleware\IdentifyTenant::class,
         ]);
+        
+        $middleware->redirectGuestsTo(function (\Illuminate\Http\Request $request) {
+            if ($request->is('admin*') || $request->is('su-admin*')) {
+                return route('admin.login');
+            }
+            return route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $e, \Illuminate\Http\Request $request) {

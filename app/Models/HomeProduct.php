@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class HomeProduct extends Model
 {
-    protected $fillable = ['product_id', 'sort_order'];
+    use \App\Models\Traits\BelongsToTenant;
+    protected $fillable = ['product_id', 'sort_order', 'tenant_id'];
 
     public function product()
     {

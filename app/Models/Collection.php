@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'name',
@@ -15,6 +15,7 @@ class Collection extends Model
         'description',
         'image',
         'status',
+        'tenant_id',
     ];
 
     protected $casts = [
