@@ -17,86 +17,108 @@ class TenantSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create Tenant
-        $tenant = Tenant::create([
-            'name' => 'Nurah Global',
-            'domain' => 'nurah.test',
-        ]);
+        // Loop to create 3 Stores
+        for ($i = 1; $i <= 3; $i++) {
+            $isDemo = ($i === 1);
+            $tenantName = $isDemo ? 'Nurah Global' : "Store $i Perfumes";
+            $domain = $isDemo ? 'nurah.test' : "store{$i}.test";
+            
+            // 1. Create Tenant
+            $tenant = Tenant::create([
+                'name' => $tenantName,
+                'domain' => $domain,
+            ]);
 
-        // 2. Create Tenant Admin
-        User::create([
-            'name' => 'Nurah Admin',
-            'email' => 'admin@nurah.in',
-            'password' => Hash::make('password'),
-            'type' => 'admin',
-            'site_name' => 'Nurah Global',
-            'tenant_id' => $tenant->id,
-        ]);
+            // 2. Create Tenant Admin
+            User::create([
+                'name' => "$tenantName Admin",
+                'email' => $isDemo ? 'admin@nurah.in' : "admin@store{$i}.com",
+                'password' => Hash::make('password'),
+                'type' => 'admin',
+                'site_name' => $tenantName,
+                'tenant_id' => $tenant->id,
+            ]);
 
-        // 3. Create Sample Collection
-        $collection = Collection::create([
-            'name' => 'Signature Collection',
-            'slug' => 'signature-collection',
-            'tenant_id' => $tenant->id,
-        ]);
+            // 3. Create 3 Collections
+            $collections = [];
+            for ($c = 1; $c <= 3; $c++) {
+                $collections[] = Collection::create([
+                    'name' => "Collection $c ($tenantName)",
+                    'slug' => \Illuminate\Support\Str::slug("col-{$i}-{$c}"),
+                    'tenant_id' => $tenant->id,
+                ]);
+            }
 
-        // 4. Create Sample Product
-        $p1 = Product::create([
-            'title' => 'Santal Royal',
-            'slug' => 'santal-royal',
-            'description' => 'A luxurious woody scent.',
-            'status' => 'active',
-            'type' => 'perfume',
-            'tenant_id' => $tenant->id,
-            'collection_id' => $collection->id,
-        ]);
-        
-        \App\Models\ProductVariant::create([
-            'product_id' => $p1->id,
-            'size' => '50ml',
-            'price' => 12000,
-            'compare_at_price' => 15000,
-            'stock' => 100,
-        ]);
+            // 4. Create 3 Products per Collection (Total 9)
+            $products = [];
+            foreach ($collections as $col) {
+                for ($p = 1; $p <= 3; $p++) {
+                    $prod = Product::create([
+                        'title' => "Product {$p} of {$col->name}",
+                        'slug' => \Illuminate\Support\Str::slug("prod-{$i}-{$col->id}-{$p}"),
+                        'description' => "This is a seeded product for $tenantName.",
+                        'status' => 'active',
+                        'type' => 'perfume',
+                        'tenant_id' => $tenant->id,
+                        'collection_id' => $col->id,
+                    ]);
+                    
+                    \App\Models\ProductVariant::create([
+                        'product_id' => $prod->id,
+                        'size' => '50ml',
+                        'price' => rand(1000, 5000),
+                        'compare_at_price' => rand(5500, 8000),
+                        'stock' => rand(10, 100),
+                        'sku' => "SKU-{$i}-{$prod->id}",
+                    ]);
+                    $products[] = $prod;
+                }
+            }
 
-         $p2 = Product::create([
-            'title' => 'Rose Oud',
-            'slug' => 'rose-oud',
-            'description' => 'Classic rose with deep oud notes.',
-            'status' => 'active',
-            'type' => 'perfume',
-            'tenant_id' => $tenant->id,
-            'collection_id' => $collection->id,
-        ]);
+            // 5. Create 3 Customers
+            $customers = [];
+            for ($u = 1; $u <= 3; $u++) {
+                $customers[] = User::create([
+                    'name' => "Customer {$u} of Store {$i}",
+                    'email' => "cust{$u}@store{$i}.com",
+                    'password' => Hash::make('password'),
+                    'type' => 'customer',
+                    'tenant_id' => $tenant->id,
+                ]);
+            }
 
-        \App\Models\ProductVariant::create([
-            'product_id' => $p2->id,
-            'size' => '50ml',
-            'price' => 8500,
-            'stock' => 50,
-        ]);
-        
-        // Create Tenant 2 for Isolation Test
-        $tenant2 = Tenant::create([
-             'name' => 'Second Store',
-        ]);
-        
-        // Note: Creating User 2 to test isolation properly requires valid email
-        User::create([
-            'name' => 'Second Store Admin',
-            'email' => 'admin@store2.com',
-            'password' => Hash::make('password'),
-            'type' => 'admin',
-            'site_name' => 'Second Store',
-            'tenant_id' => $tenant2->id,
-        ]);
-        
-        Product::create([
-            'title' => 'Hidden Product',
-            'slug' => 'hidden-product',
-            'description' => 'Should not be seen by Tenant 1',
-            'status' => 'active',
-            'tenant_id' => $tenant2->id,
-        ]);
+            // 6. Create 3 Orders
+            foreach ($customers as $index => $customer) {
+                $order = \App\Models\Order::create([
+                    'tenant_id' => $tenant->id,
+                    'user_id' => $customer->id,
+                    'order_number' => "ORD-{$i}-" . ($index+1) . "-" . time(),
+                    'status' => 'processing',
+                    'subtotal' => 1000,
+                    'total_amount' => 1100,
+                    'customer_name' => $customer->name,
+                    'customer_email' => $customer->email,
+                    'customer_phone' => '1234567890',
+                    'shipping_address' => json_encode(['address' => '123 St, City']),
+                ]);
+
+                // Add Order Item (1 random product)
+                if (!empty($products)) {
+                    $prod = $products[0];
+                    $variant = $prod->variants->first();
+                    \Illuminate\Support\Facades\DB::table('order_items')->insert([
+                        'order_id' => $order->id,
+                        'product_id' => $prod->id,
+                        'name' => $prod->title,
+                        'quantity' => 1,
+                        'price' => $variant ? $variant->price : 1000,
+                        'total' => $variant ? $variant->price : 1000,
+                        'type' => 'product',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
     }
 }
