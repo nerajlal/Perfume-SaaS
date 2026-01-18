@@ -1,6 +1,6 @@
 @extends('nurah.layouts.app')
 
-@section('title', 'Contact Us - Nurah Perfumes')
+@section('title', 'Contact Us - xxxx Perfumes')
 
 @push('styles')
 <style>
@@ -160,7 +160,7 @@
                 <div class="info-item">
                     <div class="info-icon"><i class="fas fa-envelope"></i></div>
                     <h3 class="info-title">Email Us</h3>
-                    <a href="mailto:support@nurah.in" class="info-link">support@nurah.in</a>
+                    <a href="mailto:support@xxxx.in" class="info-link">support@xxxx.in</a>
                 </div>
 
                 <div class="info-item">

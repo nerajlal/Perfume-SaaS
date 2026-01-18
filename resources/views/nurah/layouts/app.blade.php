@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nurah Perfumes - @yield('title', 'India\'s First Perfume Bar')</title>
+    <title>xxxx Perfumes - @yield('title', 'India\'s First Perfume Bar')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,23 +11,23 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gold: #d4a574;
-            --dark-gold: #b8915f;
-            --text: #333333;
-            --text-light: #666666;
-            --bg-light: #f8f8f8;
-            --border: #e0e0e0;
+            --black: #1a1a1a;
+            --white: #fffcf7;
+            --gold: #c5a059;
+            --dark-gold: #a68442;
+            --text: #2d2d2d;
+            --text-light: #6a6a6a;
+            --bg-light: #f4f1ea;
+            --border: #e6e2da;
             --success: #28a745;
         }
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            background: var(--white);
+            background: var(--bg-light); /* Changed to light bg for warmth */
         }
 
         /* Common Components */
@@ -60,7 +60,7 @@
 
         /* Footer */
         /* Footer */
-        footer { background: #111; color: var(--white); padding: 20px 20px 10px; margin-top: auto; border-top: 1px solid #222; }
+        footer { background: #262421; color: var(--white); padding: 40px 20px 20px; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 20px; margin-bottom: 20px; }
         .footer-logo { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin-bottom: 15px; color: var(--gold); letter-spacing: -0.5px; }
         .footer-tagline { font-size: 14px; color: #999; line-height: 1.8; margin-bottom: 15px; max-width: 300px; }

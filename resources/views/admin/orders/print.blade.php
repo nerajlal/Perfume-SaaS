@@ -125,7 +125,7 @@
     <button onclick="window.print()" class="print-btn">Print Label</button>
 
     <div class="header">
-        <div class="logo">Nurah Perfumes</div>
+        <div class="logo">xxxx Perfumes</div>
         <div class="invoice-details">
             <h1 style="margin: 0; font-size: 24px;">#{{ $order->order_number }}</h1>
             <p style="margin: 5px 0 0; color: #666;">{{ $order->created_at->format('F d, Y') }}</p>
@@ -157,11 +157,11 @@
         <div class="address-box">
             <div class="address-title">From</div>
             <div class="address-content">
-                <p><strong>Nurah Perfumes</strong></p>
+                <p><strong>xxxx Perfumes</strong></p>
                 <p>123 Perfume Lane</p>
                 <p>Fragrance City, MH 400001</p>
                 <p>India</p>
-                <p>support@nurahperfumes.com</p>
+                <p>support@xxxxperfumes.com</p>
             </div>
         </div>
     </div>
@@ -217,7 +217,7 @@
     </div>
 
     <div class="footer">
-        <p>Thank you for shopping with Nurah Perfumes!</p>
+        <p>Thank you for shopping with xxxx Perfumes!</p>
         <!--  -->
     </div>
 

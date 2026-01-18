@@ -1,6 +1,6 @@
 @extends('nurah.layouts.app')
 
-@section('title', 'About Us - Nurah Perfumes')
+@section('title', 'About Us - xxxx Perfumes')
 <!-- {{ asset('Images/about-store.webp') }} -->
 @push('styles')
 <style>
@@ -140,12 +140,12 @@
     <section class="about-section">
         <div class="story-grid">
             <div class="story-image">
-                <img src="{{ asset('Images/about-store.webp') }}" alt="Nurah Store" style="width: 100%; border-radius: 20px;">
+                <img src="{{ asset('Images/about-store.webp') }}" alt="xxxx Store" style="width: 100%; border-radius: 20px;">
             </div>
             <div class="story-content">
                 <h2>Why We Do, What We Do</h2>
                 <p class="story-text">
-                    Nurah Perfumes was born from a simple yet profound desire: to bring the art of high-quality perfumery to everyone. We believe that a fragrance is more than just a scent; it's a memory, an emotion, and a personal statement.
+                    xxxx Perfumes was born from a simple yet profound desire: to bring the art of high-quality perfumery to everyone. We believe that a fragrance is more than just a scent; it's a memory, an emotion, and a personal statement.
                 </p>
                 <p class="story-text">
                     As India's pioneering perfume bar, we combine traditional expertise with modern science. Our fragrances are crafted with a remarkable <strong>50% fragrance oil concentration</strong>, ensuring they linger on your skin and in the air, perfectly adapted to tropical climates.

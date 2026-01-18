@@ -3,7 +3,7 @@
     <div class="footer-content">
         <!-- Brand Column -->
         <div class="footer-col">
-            <div class="footer-logo">Nurah Perfumes</div>
+            <div class="footer-logo">xxxx Perfumes</div>
             <p class="footer-tagline">Crafting memories through scents. India's first perfume bar offering exceptional, long-lasting fragrances.</p>
             <div class="footer-social">
                 <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
@@ -47,7 +47,7 @@
 
     <div class="footer-bottom">
         <div class="copyright">
-            © 2025 Nurah Perfumes. All rights reserved. 
+            © 2025 xxxx Perfumes. All rights reserved. 
             <span style="opacity: 0.7; margin-left: 5px;">Developed by <a href="https://metora.in/" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: bold;">Metora</a></span>
         </div>
         <div class="payment-icons">

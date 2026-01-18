@@ -20,69 +20,171 @@
     .section-title em { font-style: italic; font-weight: 400; font-family: 'Playfair Display', serif; }
 
     /* Product Grid */
-    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-decoration: none; color: inherit; display: block; }
-    .product-card:hover { transform: translateY(-5px); }
+    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .product-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: all 0.4s ease; text-decoration: none; color: inherit; display: block; border: 1px solid var(--border); }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); border-color: var(--gold); }
     .product-image-wrapper { position: relative; aspect-ratio: 1; background: var(--bg-light); overflow: hidden; }
-    .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .product-card:hover .product-image { transform: scale(1.05); }
-    .product-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--white); padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; z-index: 1; }
-    .product-info { padding: 15px; text-align: center; }
-    .product-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 5px; color: var(--black); }
-    .product-price { font-size: 14px; font-weight: 700; color: var(--black); }
-    .product-price span { font-weight: 400; color: var(--text-light); font-size: 12px; margin-right: 5px; }
-    .view-all-btn { display: block; width: max-content; margin: 40px auto 0; padding: 12px 30px; background: var(--black); color: var(--white); text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 14px; transition: background 0.3s; }
-    .view-all-btn:hover { background: var(--gold); }
+    .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .product-card:hover .product-image { transform: scale(1.08); }
+    .product-badge { position: absolute; top: 15px; left: 15px; background: var(--white); color: var(--black); padding: 5px 12px; border-radius: 30px; font-size: 10px; font-weight: 800; text-transform: uppercase; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.1); letter-spacing: 0.5px; }
+    .product-info { padding: 20px; text-align: center; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--black); letter-spacing: -0.3px; }
+    .product-price { font-size: 15px; font-weight: 700; color: var(--dark-gold); }
+    .product-price span { font-weight: 500; color: var(--text-light); font-size: 12px; margin-right: 5px; text-transform: uppercase; letter-spacing: 1px; }
+    .view-all-btn { display: block; width: max-content; margin: 50px auto 0; padding: 14px 40px; background: transparent; color: var(--black); text-decoration: none; border-radius: 40px; font-weight: 700; font-size: 13px; transition: all 0.3s; border: 2px solid var(--black); text-transform: uppercase; letter-spacing: 1px; }
+    .view-all-btn:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
 
     /* Store Section */
-    .store-section { background: var(--black); color: var(--white); padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
-    .store-count { font-size: 120px; font-weight: 900; line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(212, 165, 116, 0.2); margin-bottom: -40px; position: relative; z-index: 0; }
-    .store-title { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; color: var(--white); }
-    .store-subtitle { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; font-size: 14px; font-weight: 600; }
-    .store-btn { display: inline-block; border: 2px solid var(--white); color: var(--white); padding: 12px 30px; text-decoration: none; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; transition: all 0.3s; margin-bottom: 40px; position: relative; z-index: 1; font-weight: 700; }
-    .store-btn:hover { background: var(--white); color: var(--black); }
-    .store-description { max-width: 600px; margin: 0 auto; font-size: 15px; opacity: 0.8; line-height: 1.8; position: relative; z-index: 1; }
+    .store-section { 
+        background: radial-gradient(circle at center, #2a2a2a 0%, #111 100%); 
+        color: var(--white); 
+        padding: 100px 20px; 
+        text-align: center; 
+        position: relative; 
+        overflow: hidden; 
+    }
+    .store-count { 
+        font-size: 150px; 
+        font-weight: 900; 
+        line-height: 1; 
+        color: transparent; 
+        -webkit-text-stroke: 1px rgba(255,255,255,0.05); 
+        position: absolute; 
+        top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        z-index: 0; pointer-events: none; 
+    }
+    .store-title { 
+        font-family: 'Playfair Display', serif; 
+        font-size: 42px; 
+        margin-bottom: 15px; 
+        position: relative; 
+        z-index: 1; 
+        color: var(--white); 
+    }
+    .store-subtitle { 
+        color: var(--gold); 
+        text-transform: uppercase; 
+        letter-spacing: 4px; 
+        margin-bottom: 35px; 
+        font-size: 13px; 
+        font-weight: 700; 
+        position: relative; z-index: 1;
+    }
+    .store-btn { 
+        display: inline-block; 
+        background: transparent;
+        border: 1px solid var(--gold); 
+        color: var(--gold); 
+        padding: 14px 40px; 
+        text-decoration: none; 
+        text-transform: uppercase; 
+        font-size: 13px; 
+        letter-spacing: 2px; 
+        transition: all 0.3s; 
+        margin-bottom: 40px; 
+        position: relative; 
+        z-index: 1; 
+        font-weight: 600; 
+        border-radius: 50px;
+    }
+    .store-btn:hover { 
+        background: var(--gold); 
+        color: var(--black); 
+        box-shadow: 0 10px 30px rgba(197, 160, 89, 0.2); 
+        transform: translateY(-3px);
+    }
+    .store-description { 
+        max-width: 700px; 
+        margin: 0 auto; 
+        font-size: 16px; 
+        opacity: 0.7; 
+        line-height: 2; 
+        position: relative; 
+        z-index: 1; 
+    }
 
-    /* Category Marquee */
-    .marquee-wrapper {
-        overflow: hidden;
-        width: 100%;
-        position: relative;
-    }
-    
-    .marquee-track {
-        display: flex;
+    /* Collection Grid */
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
-        width: max-content;
-        animation: marquee-scroll 30s linear infinite;
     }
     
-    .marquee-track:hover {
-        animation-play-state: paused;
-    }
-    
-    .category-card {
-        flex: 0 0 300px; /* Fixed width for cards in marquee */
+    .collection-card {
         position: relative;
-        border-radius: 15px;
+        background: var(--white);
+        border-radius: 20px;
         overflow: hidden;
         aspect-ratio: 3/4;
-        cursor: pointer;
-        display: block;
         text-decoration: none;
-        color: inherit;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.4s ease;
     }
-
-    @keyframes marquee-scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    
+    .collection-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
-
-    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .category-card:hover img { transform: scale(1.05); }
-    .category-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%); display: flex; align-items: flex-end; justify-content: center; color: var(--white); text-align: center; padding: 30px; }
-    .category-name { font-weight: 800; font-size: 24px; margin-bottom: 5px; letter-spacing: 1px; text-transform: uppercase; font-family: 'Playfair Display', serif; }
-    .category-desc { font-style: italic; font-size: 14px; opacity: 0.9; }
+    
+    .collection-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .collection-card:hover img {
+        transform: scale(1.1);
+    }
+    
+    .collection-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 25px;
+        color: var(--white);
+        opacity: 0.9;
+        transition: opacity 0.3s;
+    }
+    
+    .collection-card:hover .collection-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 50%);
+    }
+    
+    .collection-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        transform: translateY(0);
+        transition: transform 0.3s;
+    }
+    
+    .collection-desc {
+        font-size: 13px;
+        color: rgba(255,255,255,0.8);
+        font-weight: 500;
+        margin-top: 5px;
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.3s;
+    }
+    
+    .collection-card:hover .collection-desc {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    @media (max-width: 900px) {
+        .collection-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+    }
 
     /* Cosmopolitan */
     .cosmopolitan-section { background: #111; padding: 80px 20px; color: var(--white); text-align: center; }
@@ -102,129 +204,132 @@
     .video-text { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--white); font-weight: 700; text-align: center; padding: 20px; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 
     /* Gender Carousel */
-    .gender-carousel-container {
-        position: relative;
-        height: 500px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .gender-carousel {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    /* Gender Grid */
+    .gender-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     .gender-card {
-        position: absolute;
-        width: 300px;
-        height: 400px;
-        border-radius: 20px;
+        position: relative;
+        height: 500px;
+        border-radius: 24px;
         overflow: hidden;
-        transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
         text-decoration: none;
         color: inherit;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .gender-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
     }
 
     .gender-card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.7s ease;
+    }
+
+    .gender-card:hover img {
+        transform: scale(1.08); /* Enhance zoom */
     }
 
     .gender-overlay {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
-        padding: 40px 20px 20px;
-        text-align: center;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%); /* Softer gradient */
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 40px;
+        opacity: 0.9;
+        transition: opacity 0.3s;
+    }
+
+    .gender-card:hover .gender-overlay {
+        opacity: 1;
+        background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 60%);
     }
 
     .gender-title {
         color: var(--white);
-        font-size: 18px;
+        font-family: 'Playfair Display', serif;
+        font-size: 28px; /* Larger title */
         font-weight: 700;
-        letter-spacing: 2px;
-    }
-
-    /* States */
-    .gender-card.active {
-        transform: translate(0, 0) scale(1.1);
-        z-index: 10;
-        opacity: 1;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    }
-
-    .gender-card.prev {
-        transform: translate(-120%, 0) scale(0.85);
-        z-index: 5;
-        opacity: 0.6;
-        cursor: pointer;
-    }
-
-    .gender-card.next {
-        transform: translate(120%, 0) scale(0.85);
-        z-index: 5;
-        opacity: 0.6;
-        cursor: pointer;
+        letter-spacing: 1px;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     /* Mobile Adjustment */
     @media (max-width: 768px) {
-        .gender-carousel-container { height: 400px; }
-        .gender-card { width: 220px; height: 320px; }
-        .gender-card.prev { transform: translate(-80%, 0) scale(0.8); }
-        .gender-card.next { transform: translate(80%, 0) scale(0.8); }
+        .gender-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .gender-card {
+            height: 350px;
+        }
     }
 
     /* Testimonials */
-    .testimonials { background: var(--bg-light); padding: 80px 20px; }
-    .testimonial-slider { display: flex; overflow-x: auto; gap: 20px; padding: 10px 5px 30px; scrollbar-width: none; -ms-overflow-style: none; scroll-snap-type: x mandatory; }
+    .testimonials { background: var(--bg-light); padding: 100px 20px; }
+    .testimonial-slider { display: flex; overflow-x: auto; gap: 30px; padding: 20px 10px 40px; scrollbar-width: none; -ms-overflow-style: none; scroll-snap-type: x mandatory; }
     .testimonial-slider::-webkit-scrollbar { display: none; }
-    .testimonial-card { min-width: 300px; background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03); scroll-snap-align: center; }
-    .testimonial-text { font-size: 16px; line-height: 1.8; margin-bottom: 25px; color: var(--text); font-style: italic; }
-    .testimonial-author { font-weight: 700; color: var(--black); font-size: 15px; margin-bottom: 5px; }
-    .testimonial-location { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
-
-    /* Press */
-    .press-section { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); }
-    .press-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 40px; color: var(--black); }
-    .press-slider { display: flex; justify-content: center; gap: 40px; align-items: center; flex-wrap: wrap; opacity: 0.6; }
-    .press-logo { height: 25px; object-fit: contain; filter: grayscale(100%); transition: filter 0.3s, opacity 0.3s; }
-    .press-logo:hover { filter: grayscale(0%); opacity: 1; }
-
-    /* About Section */
-    .about-section { display: grid; gap: 40px; padding: 80px 20px; align-items: center; max-width: 1200px; margin: 0 auto; }
-    .about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .about-title { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 25px; line-height: 1.2; color: var(--black); }
-    .about-text { margin-bottom: 25px; line-height: 1.9; color: var(--text-light); font-size: 16px; }
-    .about-text strong { color: var(--black); }
-    .about-btn { display: inline-block; background: var(--black); color: var(--white); padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s; }
-    .about-btn:hover { transform: translateY(-3px); }
-
-    /* Blog */
-    .blog-grid { display: grid; gap: 25px; }
-    .blog-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s; }
-    .blog-card:hover { transform: translateY(-5px); }
-    .blog-image { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-    .blog-content { padding: 25px; }
-    .blog-date { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-    .blog-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 15px; line-height: 1.4; color: var(--black); font-weight: 700; }
-    .blog-link { color: var(--black); text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 2px; }
-
-    /* Features */
-    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 50px 20px; border-top: 1px solid var(--border); text-align: center; background: var(--white); }
-    .feature-icon { font-size: 32px; margin-bottom: 15px; }
-    .feature-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; color: var(--black); }
-    .feature-text { font-size: 12px; color: var(--text-light); line-height: 1.5; padding: 0 10px; }
+    .testimonial-card { 
+        min-width: 350px; 
+        background: var(--white); 
+        padding: 50px 35px; 
+        border-radius: 24px; 
+        box-shadow: 0 10px 40px rgba(0,0,0,0.03); 
+        border: 1px solid var(--border); 
+        scroll-snap-align: center; 
+        position: relative; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
+        transition: transform 0.3s;
+    }
+    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.06); }
+    .testimonial-card::before { 
+        content: '\201C'; 
+        font-family: 'Playfair Display', serif; 
+        font-size: 80px; 
+        color: var(--gold); 
+        opacity: 0.2; 
+        line-height: 1; 
+        margin-bottom: -40px; 
+    }
+    .testimonial-text { 
+        font-family: 'Playfair Display', serif; 
+        font-size: 20px; 
+        line-height: 1.6; 
+        margin-bottom: 30px; 
+        color: var(--black); 
+        font-style: italic; 
+    }
+    .testimonial-author { 
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700; 
+        color: var(--black); 
+        font-size: 13px; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        margin-bottom: 5px; 
+    }
+    .testimonial-location { 
+        font-size: 11px; 
+        color: var(--text-light); 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+    }
 
     /* Popup */
     .popup-newsletter { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--white); padding: 50px; border-radius: 20px; text-align: center; max-width: 450px; width: 90%; z-index: 2000; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -244,6 +349,35 @@
     .newsletter-btn { background: var(--black); color: var(--white); border: none; padding: 12px 30px; border-radius: 25px; font-weight: 700; cursor: pointer; font-size: 13px; letter-spacing: 1px; transition: background 0.3s; }
     .newsletter-btn:hover { background: var(--gold); }
 
+    /* Press */
+    .press-section { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); background: var(--bg-light); }
+    .press-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 40px; color: var(--black); }
+    .press-slider { display: flex; justify-content: center; gap: 50px; align-items: center; flex-wrap: wrap; opacity: 0.6; }
+    .press-logo { height: 30px; object-fit: contain; filter: grayscale(100%); transition: filter 0.3s, opacity 0.3s; }
+    .press-logo:hover { filter: grayscale(0%); opacity: 1; }
+
+    /* About Section */
+    .about-section { display: grid; gap: 40px; padding: 80px 20px; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .about-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .about-title { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 25px; line-height: 1.2; color: var(--black); }
+    .about-text { margin-bottom: 25px; line-height: 1.9; color: var(--text-light); font-size: 16px; }
+    .about-text strong { color: var(--black); }
+    .about-btn { display: inline-block; background: var(--black); color: var(--white); padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s; }
+    .about-btn:hover { transform: translateY(-3px); background: var(--gold); }
+
+    /* Features */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 60px 20px; border-top: 1px solid var(--border); text-align: center; background: var(--white); max-width: 1200px; margin: 0 auto; }
+    .feature { padding: 20px; transition: transform 0.3s; }
+    .feature:hover { transform: translateY(-5px); }
+    .feature-icon { font-size: 36px; margin-bottom: 20px; color: var(--gold); }
+    .feature-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--black); }
+    .feature-text { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+    /* Mobile Features */
+    @media (max-width: 768px) {
+        .features { grid-template-columns: 1fr; gap: 40px; }
+    }
+
     /* Desktop Media Queries */
     @media (min-width: 768px) {
         .section { padding: 80px 20px; }
@@ -251,9 +385,7 @@
         .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         .category-grid { grid-template-columns: repeat(4, 1fr); }
         .blog-grid { grid-template-columns: repeat(3, 1fr); }
-        .about-section { grid-template-columns: 1fr 1px; }
-        /* Fix for about section grid column count - intended to be 2 column */
-        .about-section { grid-template-columns: 1fr 1fr; gap: 60px; }
+        .about-section { grid-template-columns: 1fr 1fr; gap: 80px; }
         .video-text { font-size: 56px; }
         .section-title { font-size: 42px; }
         .store-count { font-size: 160px; margin-bottom: -55px; }
@@ -270,7 +402,7 @@
         <div class="slide {{ $key == 0 ? 'active' : '' }}">
             <picture>
                 <source media="(max-width: 768px)" srcset="{{ Storage::url($slider->image_mobile) }}">
-                <img src="{{ Storage::url($slider->image_desktop) }}" alt="{{ $slider->title ?? 'Nurah Perfumes' }}">
+                <img src="{{ Storage::url($slider->image_desktop) }}" alt="{{ $slider->title ?? 'xxxx Perfumes' }}">
             </picture>
         </div>
         @empty
@@ -355,7 +487,7 @@
         <p class="store-subtitle">Find a store near you</p>
         <a href="#" class="store-btn">Locate Stores</a>
         <p class="store-description">
-            Nurah Perfumes is India's pioneering perfume brand offering top-notch, value for money fragrances with exceptional expertise in the art & science of perfumery.
+            xxxx Perfumes is India's pioneering perfume brand offering top-notch, value for money fragrances with exceptional expertise in the art & science of perfumery.
         </p>
     </div>
 
@@ -364,45 +496,46 @@
         <div class="section-header">
             <h2 class="section-title">Our <em>Collections</em></h2>
         </div>
-        <div class="marquee-wrapper">
-            <div class="marquee-track">
-                <!-- Original Set -->
-                @forelse($collections as $collection)
-                <a href="{{ route('collection', ['category' => $collection->slug]) }}" class="category-card">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($collection->image) }}" alt="{{ $collection->name }}" onerror="handleImageError(this)">
-                    <div class="category-overlay">
-                        <div>
-                            <h3 class="category-name">{{ $collection->name }}</h3>
-                            <p class="category-desc">{{ $collection->description }}</p>
-                        </div>
-                    </div>
-                </a>
-                @empty
-                <!-- Fallback if empty -->
-                <a href="/collections?category=fresh" class="category-card"><img src="{{ asset('Images/category-fresh.webp') }}" alt="Fresh" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">FRESH</h3></div></div></a>
-                <a href="/collections?category=oriental-woody" class="category-card"><img src="{{ asset('Images/category-oriental-woody.webp') }}" alt="Oriental" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">ORIENTAL/WOODY</h3></div></div></a>
-                <a href="/collections?category=floral" class="category-card"><img src="{{ asset('Images/category-floral.webp') }}" alt="Floral" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">FLORAL</h3></div></div></a>
-                <a href="/collections?category=citrus" class="category-card"><img src="{{ asset('Images/category-citrus.webp') }}" alt="Citrus" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">CITRUS</h3></div></div></a>
-                @endforelse
-
-                <!-- Duplicate Set for Seamless Loop -->
-                @forelse($collections as $collection)
-                <a href="{{ route('collection', ['category' => $collection->slug]) }}" class="category-card">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($collection->image) }}" alt="{{ $collection->name }}" onerror="handleImageError(this)">
-                    <div class="category-overlay">
-                        <div>
-                            <h3 class="category-name">{{ $collection->name }}</h3>
-                            <p class="category-desc">{{ $collection->description }}</p>
-                        </div>
-                    </div>
-                </a>
-                @empty
-                <a href="/collections?category=fresh" class="category-card"><img src="{{ asset('Images/category-fresh.webp') }}" alt="Fresh" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">FRESH</h3></div></div></a>
-                <a href="/collections?category=oriental-woody" class="category-card"><img src="{{ asset('Images/category-oriental-woody.webp') }}" alt="Oriental" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">ORIENTAL/WOODY</h3></div></div></a>
-                <a href="/collections?category=floral" class="category-card"><img src="{{ asset('Images/category-floral.webp') }}" alt="Floral" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">FLORAL</h3></div></div></a>
-                <a href="/collections?category=citrus" class="category-card"><img src="{{ asset('Images/category-citrus.webp') }}" alt="Citrus" onerror="handleImageError(this)"><div class="category-overlay"><div><h3 class="category-name">CITRUS</h3></div></div></a>
-                @endforelse
-            </div>
+        <div class="collection-grid">
+            @forelse($collections as $collection)
+            <a href="{{ route('collection', ['category' => $collection->slug]) }}" class="collection-card">
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($collection->image) }}" alt="{{ $collection->name }}" onerror="handleImageError(this)">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">{{ $collection->name }}</h3>
+                    <p class="collection-desc">{{ $collection->description }}</p>
+                </div>
+            </a>
+            @empty
+            <!-- Fallback if empty -->
+            <a href="/collections?category=fresh" class="collection-card">
+                <img src="{{ asset('Images/category-fresh.webp') }}" alt="Fresh" onerror="handleImageError(this)">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">FRESH</h3>
+                    <p class="collection-desc">Crisp & Invigorating</p>
+                </div>
+            </a>
+            <a href="/collections?category=oriental-woody" class="collection-card">
+                <img src="{{ asset('Images/category-oriental-woody.webp') }}" alt="Oriental" onerror="handleImageError(this)">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">ORIENTAL</h3>
+                    <p class="collection-desc">Warm & Spicy</p>
+                </div>
+            </a>
+            <a href="/collections?category=floral" class="collection-card">
+                <img src="{{ asset('Images/category-floral.webp') }}" alt="Floral" onerror="handleImageError(this)">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">FLORAL</h3>
+                    <p class="collection-desc">Soft & Romantic</p>
+                </div>
+            </a>
+            <a href="/collections?category=citrus" class="collection-card">
+                <img src="{{ asset('Images/category-citrus.webp') }}" alt="Citrus" onerror="handleImageError(this)">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">CITRUS</h3>
+                    <p class="collection-desc">Zesty & Bright</p>
+                </div>
+            </a>
+            @endforelse
         </div>
     </section>
 
@@ -458,29 +591,27 @@
         <div class="section-header">
             <h2 class="section-title">Shop By <em>Gender</em></h2>
         </div>
-        <div class="gender-carousel-container">
-            <div class="gender-carousel">
-                <a href="/collections?gender=for-him" class="gender-card active" data-index="0">
-                    <img src="{{ asset('Images/gender-him.webp') }}" alt="For Him">
-                    <div class="gender-overlay">
-                        <h3 class="gender-title">FOR HIM</h3>
-                    </div>
-                </a>
+        <div class="gender-grid">
+            <a href="/collections?gender=for-him" class="gender-card">
+                <img src="{{ asset('Images/gender-him.webp') }}" alt="For Him">
+                <div class="gender-overlay">
+                    <h3 class="gender-title">For Him</h3>
+                </div>
+            </a>
 
-                <a href="/collections?gender=for-her" class="gender-card next" data-index="1">
-                    <img src="{{ asset('Images/gender-her.webp') }}" alt="For Her">
-                    <div class="gender-overlay">
-                        <h3 class="gender-title">FOR HER</h3>
-                    </div>
-                </a>
+            <a href="/collections?gender=for-her" class="gender-card">
+                <img src="{{ asset('Images/gender-her.webp') }}" alt="For Her">
+                <div class="gender-overlay">
+                    <h3 class="gender-title">For Her</h3>
+                </div>
+            </a>
 
-                <a href="/collections?gender=unisex" class="gender-card prev" data-index="2">
-                    <img src="{{ asset('Images/gender-unisex.webp') }}" alt="Unisex">
-                    <div class="gender-overlay">
-                        <h3 class="gender-title">UNISEX</h3>
-                    </div>
-                </a>
-            </div>
+            <a href="/collections?gender=unisex" class="gender-card">
+                <img src="{{ asset('Images/gender-unisex.webp') }}" alt="Unisex">
+                <div class="gender-overlay">
+                    <h3 class="gender-title">Unisex</h3>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -497,7 +628,7 @@
             </div>
 
             <div class="testimonial-card">
-                <p class="testimonial-text">I was looking for a unique gift, and Nurah was the perfect choice. The <em>packaging is as exquisite</em> as the scent itself.</p>
+                <p class="testimonial-text">I was looking for a unique gift, and xxxx was the perfect choice. The <em>packaging is as exquisite</em> as the scent itself.</p>
                 <p class="testimonial-author">— Rahul Menon</p>
                 <p class="testimonial-location">Kochi</p>
             </div>
@@ -534,8 +665,8 @@
         </div>
         <div>
             <h2 class="about-title"><em>Why We Do,</em> What We Do</h2>
-            <p class="about-text">Nurah Perfumes is India's first perfume brand known for <strong>high-quality, long-lasting</strong> fragrances with unparalleled expertise in the art and science of perfumery.</p>
-            <p class="about-text">Nurah perfumes, reformulated with <strong>50% fragrance oil concentration</strong> last longer in tropical weather conditions.</p>
+            <p class="about-text">xxxx Perfumes is India's first perfume brand known for <strong>high-quality, long-lasting</strong> fragrances with unparalleled expertise in the art and science of perfumery.</p>
+            <p class="about-text">xxxx perfumes, reformulated with <strong>50% fragrance oil concentration</strong> last longer in tropical weather conditions.</p>
             <a href="/about" class="about-btn">Learn More</a>
         </div>
     </div>
@@ -670,50 +801,8 @@
         if(alertOverlay) alertOverlay.classList.remove('active');
     }
 
-    // Gender Carousel
-    const genderCards = document.querySelectorAll('.gender-card');
-    
-    function rotateGender() {
-        // Current state: 0 (active), 1 (next), 2 (prev)
-        // We want: 0 becomes prev (2), 1 becomes active (0), 2 becomes next (1) -> moving items left
-        // Or simple rotation
-        
-        let active = document.querySelector('.gender-card.active');
-        let next = document.querySelector('.gender-card.next');
-        let prev = document.querySelector('.gender-card.prev');
-        
-        // Remove classes
-        if(active) active.classList.remove('active');
-        if(next) next.classList.remove('next');
-        if(prev) prev.classList.remove('prev');
-        
-        // Shift assignments: prev <- active <- next <- prev (Rotating right/content moves left)
-        if(active) active.classList.add('prev');
-        if(next) next.classList.add('active');
-        if(prev) prev.classList.add('next');
-    }
-    
-    // Auto rotate every 3 seconds
-    let genderInterval = setInterval(rotateGender, 3000);
-    
-    // Pause on hover
-    const genderContainer = document.querySelector('.gender-carousel');
-    if(genderContainer) {
-        genderContainer.addEventListener('mouseenter', () => clearInterval(genderInterval));
-        genderContainer.addEventListener('mouseleave', () => genderInterval = setInterval(rotateGender, 3000));
-    }
-    
-    // Click to activate
-    genderCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if(!this.classList.contains('active')) {
-                e.preventDefault(); // Don't navigate if clicking side card, just rotate to it (optional UX)
-                // Determine direction based on class and rotate
-                rotateGender(); // Simple single step rotation implies clicking 'next'.
-                // If we want bidirectional, we need more logic, but user visual asked for 'round moving', simple one-way loop is fine.
-            }
-        });
-    });
+    const alertOverlay = document.getElementById('popupOverlay');
+    if(alertOverlay) alertOverlay.addEventListener('click', closePopup);
 
     const alertOverlay = document.getElementById('popupOverlay');
     if(alertOverlay) alertOverlay.addEventListener('click', closePopup);

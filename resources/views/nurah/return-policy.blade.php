@@ -1,6 +1,6 @@
 @extends('nurah.layouts.app')
 
-@section('title', 'Return & Refund Policy - Nurah Perfumes')
+@section('title', 'Return & Refund Policy - xxxx Perfumes')
 
 @push('styles')
 <style>
@@ -220,7 +220,7 @@
                 <p class="card-text" style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
                     Our support team is here to help you through every step.
                 </p>
-                <a href="mailto:support@nurahperfumes.com" style="display: inline-block; background: white; color: black; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; width: fit-content; margin: 0 auto;">Email Support</a>
+                <a href="mailto:support@xxxxperfumes.com" style="display: inline-block; background: white; color: black; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; width: fit-content; margin: 0 auto;">Email Support</a>
             </div>
 
         </div>

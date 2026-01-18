@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'title',
@@ -25,6 +25,7 @@ class Product extends Model
         'notes_top',
         'notes_heart',
         'notes_base',
+        'tenant_id',
     ];
 
     protected static function boot()

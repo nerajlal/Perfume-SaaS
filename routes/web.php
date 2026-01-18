@@ -147,3 +147,10 @@ Route::post('admin/settings/delivery-partners/{id}/default', [App\Http\Controlle
 Route::resource('admin/settings/delivery-partners', App\Http\Controllers\Admin\DeliveryPartnerController::class, [
     'names' => 'admin.settings.delivery-partners'
 ])->except(['show', 'create', 'edit']);
+
+// Super Admin Routes (Public for Verification)
+Route::prefix('su-admin')->name('super_admin.')->group(function () {
+    Route::get('/', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'createTenant'])->name('create_tenant');
+    Route::post('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'storeTenant'])->name('store_tenant');
+});
