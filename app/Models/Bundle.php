@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bundle extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Models\Traits\BelongsToTenant;
 
     protected $fillable = [
         'title',
@@ -17,6 +17,7 @@ class Bundle extends Model
         'status',
         'discount_type',
         'discount_value',
+        'tenant_id',
     ];
 
     public function products()

@@ -75,7 +75,26 @@ class TenantSeeder extends Seeder
                 }
             }
 
-            // 5. Create 3 Customers
+            // 5. Create 1 Bundle
+            if (count($products) >= 2) {
+                $bundle = \App\Models\Bundle::create([
+                    'title' => "Signature Bundle ({$tenantName})",
+                    'slug' => \Illuminate\Support\Str::slug("bundle-{$i}"),
+                    'description' => "A perfect combination of our best scents.",
+                    'status' => 'active',
+                    'discount_type' => 'percentage',
+                    'discount_value' => 15, // 15% off
+                    'tenant_id' => $tenant->id,
+                ]);
+
+                // Attach 2 Random Products
+                $bundleProducts = collect($products)->random(2);
+                foreach ($bundleProducts as $bp) {
+                    $bundle->products()->attach($bp->id, ['quantity' => 1]);
+                }
+            }
+
+            // 6. Create 3 Customers
             $customers = [];
             for ($u = 1; $u <= 3; $u++) {
                 $customers[] = User::create([
