@@ -14,7 +14,7 @@
             </div>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
                 <li>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
                         <button type="submit" class="dropdown-item small text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</button>
                     </form>
