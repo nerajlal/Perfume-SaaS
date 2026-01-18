@@ -13,23 +13,23 @@ class TenantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+        // 1. Check if a Tenant is identified from the URL/Route (Public Access)
+        if (app()->has('currentTenant')) {
+            $builder->where('tenant_id', app('currentTenant')->id);
+            return;
+        }
+
+        // 2. Check if User is Authenticated (Admin Access)
         if (auth()->check()) {
             $user = auth()->user();
             if ($user->tenant_id) {
+                // Tenant Admin / Tenant User
                 $builder->where('tenant_id', $user->tenant_id);
             } else {
-                 // If no tenant_id (e.g. Super Admin), maybe show all?
-                 // Or maybe Super Admin has their own data (tenant_id = null)?
-                 // For now, let's assume NULL tenant_id means "System/Global" or "Super Admin's Own".
-                 // But realistically Super Admin wants to see specific tenant data. 
-                 // We will skip filtering for Super Admin to let them see everything, OR filter by NULL.
-                 // Let's filter by NULL for consistency unless they are viewing "All".
-                 // Actually, usually Super Admin wants to see everything.
-                 if ($user->type === 'super_admin') {
-                     // Do nothing, show all?
-                 } else {
-                     $builder->whereNull('tenant_id');
-                 }
+                 // Super Admin (No tenant_id).
+                 // Logic: If they are Super Admin, they can see everything.
+                 // Unless we want to enforce them to pick a context (not implemented yet).
+                 // So we don't apply any filter here.
             }
         }
     }
