@@ -117,6 +117,12 @@
                     <i class="fas fa-crown text-warning ms-auto" title="Premium Feature"></i>
                 </a>
             </li>
+            <li>
+                <a href="{{ url(Auth::user()->tenant_id) }}" target="_blank" class="sidebar-item d-flex align-items-center gap-3 px-3 py-2 rounded text-decoration-none text-secondary small">
+                    <i class="fas fa-external-link-alt text-center" style="width: 20px;"></i>
+                    <span>View Website</span>
+                </a>
+            </li>
         </ul>
 
     </nav>
