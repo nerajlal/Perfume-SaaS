@@ -84,21 +84,21 @@
                                 <input type="radio" class="btn-check" name="plan" id="plan_basic" value="basic" autocomplete="off" checked>
                                 <label class="btn btn-outline-light w-100 text-start d-flex justify-content-between align-items-center" for="plan_basic">
                                     <span>Basic Plan</span>
-                                    <span class="badge bg-secondary">Free</span>
+                                    <span class="badge bg-secondary">₹2,999</span>
                                 </label>
                             </div>
                             <div class="form-check p-0 mb-2">
                                 <input type="radio" class="btn-check" name="plan" id="plan_essential" value="essential" autocomplete="off">
                                 <label class="btn btn-outline-light w-100 text-start d-flex justify-content-between align-items-center" for="plan_essential">
                                     <span>Essential Plan</span>
-                                    <span class="badge bg-primary">$29</span>
+                                    <span class="badge bg-primary">₹6,500</span>
                                 </label>
                             </div>
                             <div class="form-check p-0">
                                 <input type="radio" class="btn-check" name="plan" id="plan_pro" value="pro" autocomplete="off">
                                 <label class="btn btn-outline-light w-100 text-start d-flex justify-content-between align-items-center" for="plan_pro">
                                     <span>Pro Plan</span>
-                                    <span class="badge bg-warning text-dark">$79</span>
+                                    <span class="badge bg-warning text-dark">₹7,000</span>
                                 </label>
                             </div>
                         </div>

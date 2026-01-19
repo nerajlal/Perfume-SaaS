@@ -45,12 +45,12 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h6 class="text-muted text-uppercase small fw-bold mb-0">Monthly Revenue</h6>
+                    <h6 class="text-muted text-uppercase small fw-bold mb-0">Yearly Revenue</h6>
                     <div class="icon-shape bg-light text-info rounded-circle p-2">
-                        <i class="fas fa-dollar-sign"></i>
+                        <i class="fas fa-rupee-sign"></i>
                     </div>
                 </div>
-                <h2 class="display-6 fw-bold text-dark mb-0">${{ number_format($monthlyRevenue, 2) }}</h2>
+                <h2 class="display-6 fw-bold text-dark mb-0">₹{{ number_format($yearlyRevenue, 2) }}</h2>
                 <small class="text-muted" style="font-size: 10px;">stimated based on plans</small>
             </div>
         </div>

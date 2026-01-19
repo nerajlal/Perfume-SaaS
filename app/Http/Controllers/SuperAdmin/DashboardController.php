@@ -19,18 +19,18 @@ class DashboardController extends Controller
                               ->where('subscription_ends_at', '>', now())
                               ->count();
         
-        // Mock Revenue Calculation based on Plans (Basic: 0, Essential: 29, Pro: 79)
+        // Mock Revenue Calculation based on Plans (Basic: 2999, Essential: 6500, Pro: 7000)
         // In a real app, this would come from an Orders/Invoices table
         $basicCount = Tenant::where('plan', 'basic')->count();
         $essentialCount = Tenant::where('plan', 'essential')->count();
         $proCount = Tenant::where('plan', 'pro')->count();
         
-        $monthlyRevenue = ($essentialCount * 29) + ($proCount * 79);
+        $yearlyRevenue = ($basicCount * 2999) + ($essentialCount * 6500) + ($proCount * 7000);
 
         // Recent Signups (Last 5)
         $recentTenants = Tenant::latest()->take(5)->get();
 
-        return view('super_admin.dashboard', compact('totalStores', 'activeStores', 'expiringSoon', 'monthlyRevenue', 'recentTenants'));
+        return view('super_admin.dashboard', compact('totalStores', 'activeStores', 'expiringSoon', 'yearlyRevenue', 'recentTenants'));
     }
 
     public function tenants(Request $request)
