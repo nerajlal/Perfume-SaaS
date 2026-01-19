@@ -11,7 +11,29 @@ use App\Models\Tenant;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    public function index()
+    {
+        $totalStores = Tenant::count();
+        $activeStores = Tenant::where('status', true)->count();
+        $expiringSoon = Tenant::where('subscription_ends_at', '<', now()->addDays(30))
+                              ->where('subscription_ends_at', '>', now())
+                              ->count();
+        
+        // Mock Revenue Calculation based on Plans (Basic: 0, Essential: 29, Pro: 79)
+        // In a real app, this would come from an Orders/Invoices table
+        $basicCount = Tenant::where('plan', 'basic')->count();
+        $essentialCount = Tenant::where('plan', 'essential')->count();
+        $proCount = Tenant::where('plan', 'pro')->count();
+        
+        $monthlyRevenue = ($essentialCount * 29) + ($proCount * 79);
+
+        // Recent Signups (Last 5)
+        $recentTenants = Tenant::latest()->take(5)->get();
+
+        return view('super_admin.dashboard', compact('totalStores', 'activeStores', 'expiringSoon', 'monthlyRevenue', 'recentTenants'));
+    }
+
+    public function tenants(Request $request)
     {
         $query = Tenant::with('admin');
 
@@ -55,7 +77,7 @@ class DashboardController extends Controller
             return view('super_admin.partials.tenants_table_body', compact('tenants'));
         }
 
-        return view('super_admin.dashboard', compact('tenants'));
+        return view('super_admin.tenants.index', compact('tenants'));
     }
 
     public function toggleStatus($id)
