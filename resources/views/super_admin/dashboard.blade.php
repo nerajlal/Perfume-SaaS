@@ -40,36 +40,40 @@
         </div>
     </div>
 
-    <!-- Monthly Revenue (Mock) -->
+    <!-- Yearly Revenue (Mock) -->
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h6 class="text-muted text-uppercase small fw-bold mb-0">Yearly Revenue</h6>
-                    <div class="icon-shape bg-light text-info rounded-circle p-2">
-                        <i class="fas fa-rupee-sign"></i>
+        <a href="{{ route('super_admin.revenue') }}" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 hover-shadow transition-all">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="text-muted text-uppercase small fw-bold mb-0">Yearly Revenue</h6>
+                        <div class="icon-shape bg-light text-info rounded-circle p-2">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
                     </div>
+                    <h2 class="display-6 fw-bold text-dark mb-0">₹{{ number_format($yearlyRevenue, 2) }}</h2>
+                    <small class="text-muted" style="font-size: 10px;">stimated based on plans &bull; Click to View</small>
                 </div>
-                <h2 class="display-6 fw-bold text-dark mb-0">₹{{ number_format($yearlyRevenue, 2) }}</h2>
-                <small class="text-muted" style="font-size: 10px;">stimated based on plans</small>
             </div>
-        </div>
+        </a>
     </div>
 
     <!-- Expiring Soon -->
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h6 class="text-muted text-uppercase small fw-bold mb-0">Expiring Soon</h6>
-                    <div class="icon-shape bg-light text-warning rounded-circle p-2">
-                        <i class="fas fa-clock"></i>
+        <a href="{{ route('super_admin.tenants.expiring') }}" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 hover-shadow transition-all">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="text-muted text-uppercase small fw-bold mb-0">Expiring Soon</h6>
+                        <div class="icon-shape bg-light text-warning rounded-circle p-2">
+                            <i class="fas fa-clock"></i>
+                        </div>
                     </div>
+                    <h2 class="display-6 fw-bold text-dark mb-0">{{ $expiringSoon }}</h2>
+                    <small class="text-muted" style="font-size: 10px;">Next 30 Days &bull; Click to View</small>
                 </div>
-                <h2 class="display-6 fw-bold text-dark mb-0">{{ $expiringSoon }}</h2>
-                <small class="text-muted" style="font-size: 10px;">Next 30 Days</small>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 

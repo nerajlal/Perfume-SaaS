@@ -109,6 +109,9 @@ Route::post('admin/settings/delivery-partners/{id}/default', [App\Http\Controlle
 Route::prefix('su-admin')->name('super_admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/tenants', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'tenants'])->name('tenants');
+    Route::get('/tenants/expiring', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'expiring'])->name('tenants.expiring');
+    Route::post('/tenants/{id}/renew', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'renewSubscription'])->name('tenants.renew');
+    Route::get('/revenue', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'revenue'])->name('revenue');
     Route::get('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'createTenant'])->name('create_tenant');
     Route::post('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'storeTenant'])->name('store_tenant');
     Route::post('/tenants/{id}/toggle-status', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'toggleStatus'])->name('toggle_status');

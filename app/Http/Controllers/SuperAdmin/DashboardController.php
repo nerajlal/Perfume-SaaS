@@ -130,4 +130,55 @@ class DashboardController extends Controller
 
         return redirect()->route('super_admin.dashboard')->with('success', 'Tenant Admin created successfully.');
     }
+    public function expiring()
+    {
+        $tenants = Tenant::where('subscription_ends_at', '<', now()->addDays(30))
+                         ->where('subscription_ends_at', '>', now())
+                         ->with('admin')
+                         ->orderBy('subscription_ends_at', 'asc')
+                         ->get();
+
+        return view('super_admin.tenants.expiring', compact('tenants'));
+    }
+
+    public function renewSubscription($id)
+    {
+        $tenant = Tenant::findOrFail($id);
+        
+        // Ensure we have a date to work with
+        $currentExpiry = $tenant->subscription_ends_at ?? now();
+        
+        // Logic: Add 365 days to the current expiry date
+        // If the subscription is already expired, this adds 365 days to that past date.
+        // For "Expiring Soon" (future dates), this correctly extends the term.
+        $tenant->subscription_ends_at = $currentExpiry->copy()->addDays(365);
+        $tenant->save();
+
+        return back()->with('success', 'Subscription renewed for 1 year.');
+    }
+    public function revenue()
+    {
+        // Counts
+        $basicCount = Tenant::where('plan', 'basic')->count();
+        $essentialCount = Tenant::where('plan', 'essential')->count();
+        $proCount = Tenant::where('plan', 'pro')->count();
+
+        // Revenue Breakdown
+        $basicRevenue = $basicCount * 2999;
+        $essentialRevenue = $essentialCount * 6500;
+        $proRevenue = $proCount * 7000;
+        $totalRevenue = $basicRevenue + $essentialRevenue + $proRevenue;
+
+        // Paying Tenants for List
+        $payingTenants = Tenant::whereIn('plan', ['essential', 'pro'])
+                               ->with('admin')
+                               ->orderBy('plan', 'desc') // Pro first
+                               ->get();
+
+        return view('super_admin.revenue.index', compact(
+            'basicCount', 'essentialCount', 'proCount',
+            'basicRevenue', 'essentialRevenue', 'proRevenue',
+            'totalRevenue', 'payingTenants'
+        ));
+    }
 }
