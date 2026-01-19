@@ -110,6 +110,7 @@ Route::prefix('su-admin')->name('super_admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'createTenant'])->name('create_tenant');
     Route::post('/create-tenant', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'storeTenant'])->name('store_tenant');
+    Route::post('/tenants/{id}/toggle-status', [App\Http\Controllers\SuperAdmin\DashboardController::class, 'toggleStatus'])->name('toggle_status');
 });
 
 // Public Storefront Routes (Tenant Scoped - Path Based for Local Dev)

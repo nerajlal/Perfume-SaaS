@@ -38,7 +38,7 @@
                                 <span class="input-group-text bg-light text-muted border-start-0">.metora.in</span>
                             </div>
                             <div class="form-text mt-2 ms-1">
-                                <i class="fas fa-globe me-1 text-muted"></i> Your store will be accessible at <strong id="url_preview" class="text-dark">http://brand-name.metora.in</strong>
+                                <i class="fas fa-globe me-1 text-muted"></i> Your store will be accessible at <strong id="url_preview" class="text-dark">https://brand-name.metora.in</strong>
                             </div>
                         </div>
                     </div>
@@ -61,8 +61,8 @@
                             </div>
                             <div class="col-12">
                                 <label for="password" class="form-label fw-medium text-secondary small text-uppercase ls-1">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" value="12345678" required>
-                                <div class="form-text text-success"><i class="fas fa-check-circle me-1"></i> Default strong password set.</div>
+                                <input type="text" class="form-control" id="password" name="password" value="12345678" required>
+                                <div class="form-text text-success"><i class="fas fa-check-circle me-1"></i> Default password set.</div>
                             </div>
                         </div>
                     </div>
@@ -107,10 +107,10 @@
 
                 <!-- Actions -->
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm">
+                    <button type="submit" class="btn btn-dark btn-lg fw-bold shadow-sm">
                         Create Store
                     </button>
-                    <a href="{{ route('super_admin.dashboard') }}" class="btn btn-outline-secondary border-0">Cancel</a>
+                    <a href="{{ route('super_admin.dashboard') }}" class="btn btn-outline-dark border-0">Cancel</a>
                 </div>
             </div>
         </div>

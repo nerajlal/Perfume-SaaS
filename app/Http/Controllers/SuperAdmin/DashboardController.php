@@ -7,12 +7,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\Tenant;
+
 class DashboardController extends Controller
 {
     public function index()
     {
-        $tenants = User::where('type', 'admin')->get();
+        $tenants = Tenant::with('admin')->latest()->get();
         return view('super_admin.dashboard', compact('tenants'));
+    }
+
+    public function toggleStatus($id)
+    {
+        $tenant = Tenant::findOrFail($id);
+        $tenant->status = !$tenant->status;
+        $tenant->save();
+
+        return back()->with('success', 'Tenant status updated successfully.');
     }
 
     public function createTenant()
