@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xxxx Admin - Login</title>
+    <title>Store Admin - Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,9 +16,9 @@
     <div class="w-100 p-4" style="max-width: 448px;">
         <div class="card border shadow-sm p-4 p-md-5">
             <div class="d-flex justify-content-center mb-4">
-                <div class="bg-dark text-white d-flex align-items-center justify-content-center rounded fw-bold fs-4" style="width: 48px; height: 48px;">N</div>
+                <div class="bg-dark text-white d-flex align-items-center justify-content-center rounded fw-bold fs-4" style="width: 48px; height: 48px;">SA</div>
             </div>
-            <h2 class="h4 fw-bold text-center text-dark mb-4">Log in to xxxx Admin</h2>
+            <h2 class="h4 fw-bold text-center text-dark mb-4">Log in to Store Admin</h2>
             
             <form method="POST" action="{{ route('admin.login.submit') }}">
                 @csrf
