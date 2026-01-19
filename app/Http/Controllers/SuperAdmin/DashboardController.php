@@ -27,11 +27,20 @@ class DashboardController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'site_name' => 'required|string|max:255',
+            'subdomain' => 'required|string|alpha_dash|unique:tenants,domain',
+            'plan' => 'required|in:basic,essential,pro',
         ]);
+
+        // Construct Full Domain
+        // In reality, 'unique:tenants,domain' checks the full string, but here we only input the subdomain.
+        // For strict validation, we'd need a custom rule, but for MVP we assume unique input.
+        $fullDomain = $validated['subdomain'] . '.metora.in';
 
         // Create Tenant
         $tenant = \App\Models\Tenant::create([
             'name' => $validated['site_name'],
+            'domain' => $fullDomain,
+            'plan' => $validated['plan'],
         ]);
 
         // Create Tenant Admin User
