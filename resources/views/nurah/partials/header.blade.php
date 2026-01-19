@@ -7,7 +7,7 @@
 <div class="mobile-header">
     <div class="header-top">
         <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-        <a href="{{ route('home') }}" class="logo">xxxx Perfumes</a>
+        <a href="{{ route('home') }}" class="logo">{{ $currentTenant->name ?? 'Perfume Store' }}</a>
         <div class="header-icons">
             <button class="icon-btn" onclick="openSearch()"><i class="fas fa-search"></i></button>
             @auth
