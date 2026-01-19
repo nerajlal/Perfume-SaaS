@@ -9,12 +9,12 @@
     <nav class="flex-grow-1 overflow-auto py-2">
         <ul class="nav flex-column gap-1">
             <li class="nav-item">
-                <a href="{{ route('super_admin.dashboard') }}" class="nav-link {{ request()->routeIs('super_admin.dashboard') ? 'active bg-primary text-white' : 'text-dark' }} px-3 py-2 rounded">
+                <a href="{{ route('super_admin.dashboard') }}" class="nav-link {{ request()->routeIs('super_admin.dashboard') ? 'active bg-dark text-white' : 'text-dark' }} px-3 py-2 rounded">
                     <i class="fas fa-home me-2"></i> Overview
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('super_admin.tenants') }}" class="nav-link {{ request()->routeIs('super_admin.tenants') ? 'active bg-primary text-white' : 'text-dark' }} px-3 py-2 rounded">
+                <a href="{{ route('super_admin.tenants') }}" class="nav-link {{ request()->routeIs('super_admin.tenants') ? 'active bg-dark text-white' : 'text-dark' }} px-3 py-2 rounded">
                     <i class="fas fa-store me-2"></i> Stores
                 </a>
             </li>
