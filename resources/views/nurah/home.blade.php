@@ -465,7 +465,7 @@
                     </div>
                 </a>
                 <!-- ... (keep one or two static items as fallback if desired, or just show nothing) ... -->
-                 <a href="{{ route('product') }}" class="product-card">
+                <a href="{{ route('product') }}" class="product-card">
                     <div class="product-image-wrapper">
                         <span class="product-badge">New</span>
                          <img src="{{ asset('Images/product-marshmallow-fluff.webp') }}" alt="Sandal Veer" class="product-image">
@@ -477,7 +477,7 @@
                 </a>
             @endforelse
         </div>
-        <a href="/all-products" class="view-all-btn">View All Perfumes</a>
+        <a href="{{ route('all-products') }}" class="view-all-btn">View All Perfumes</a>
     </section>
 
     <!-- Store Section -->
@@ -507,28 +507,28 @@
             </a>
             @empty
             <!-- Fallback if empty -->
-            <a href="/collections?category=fresh" class="collection-card">
+            <a href="{{ route('collection', ['category' => 'fresh']) }}" class="collection-card">
                 <img src="{{ asset('Images/category-fresh.webp') }}" alt="Fresh" onerror="handleImageError(this)">
                 <div class="collection-overlay">
                     <h3 class="collection-name">FRESH</h3>
                     <p class="collection-desc">Crisp & Invigorating</p>
                 </div>
             </a>
-            <a href="/collections?category=oriental-woody" class="collection-card">
+            <a href="{{ route('collection', ['category' => 'oriental-woody']) }}" class="collection-card">
                 <img src="{{ asset('Images/category-oriental-woody.webp') }}" alt="Oriental" onerror="handleImageError(this)">
                 <div class="collection-overlay">
                     <h3 class="collection-name">ORIENTAL</h3>
                     <p class="collection-desc">Warm & Spicy</p>
                 </div>
             </a>
-            <a href="/collections?category=floral" class="collection-card">
+            <a href="{{ route('collection', ['category' => 'floral']) }}" class="collection-card">
                 <img src="{{ asset('Images/category-floral.webp') }}" alt="Floral" onerror="handleImageError(this)">
                 <div class="collection-overlay">
                     <h3 class="collection-name">FLORAL</h3>
                     <p class="collection-desc">Soft & Romantic</p>
                 </div>
             </a>
-            <a href="/collections?category=citrus" class="collection-card">
+            <a href="{{ route('collection', ['category' => 'citrus']) }}" class="collection-card">
                 <img src="{{ asset('Images/category-citrus.webp') }}" alt="Citrus" onerror="handleImageError(this)">
                 <div class="collection-overlay">
                     <h3 class="collection-name">CITRUS</h3>
@@ -592,21 +592,21 @@
             <h2 class="section-title">Shop By <em>Gender</em></h2>
         </div>
         <div class="gender-grid">
-            <a href="/collections?gender=for-him" class="gender-card">
+            <a href="{{ route('collection', ['gender' => 'for-him']) }}" class="gender-card">
                 <img src="{{ asset('Images/gender-him.webp') }}" alt="For Him">
                 <div class="gender-overlay">
                     <h3 class="gender-title">For Him</h3>
                 </div>
             </a>
 
-            <a href="/collections?gender=for-her" class="gender-card">
+            <a href="{{ route('collection', ['gender' => 'for-her']) }}" class="gender-card">
                 <img src="{{ asset('Images/gender-her.webp') }}" alt="For Her">
                 <div class="gender-overlay">
                     <h3 class="gender-title">For Her</h3>
                 </div>
             </a>
 
-            <a href="/collections?gender=unisex" class="gender-card">
+            <a href="{{ route('collection', ['gender' => 'unisex']) }}" class="gender-card">
                 <img src="{{ asset('Images/gender-unisex.webp') }}" alt="Unisex">
                 <div class="gender-overlay">
                     <h3 class="gender-title">Unisex</h3>
@@ -665,9 +665,9 @@
         </div>
         <div>
             <h2 class="about-title"><em>Why We Do,</em> What We Do</h2>
-            <p class="about-text">xxxx Perfumes is India's first perfume brand known for <strong>high-quality, long-lasting</strong> fragrances with unparalleled expertise in the art and science of perfumery.</p>
-            <p class="about-text">xxxx perfumes, reformulated with <strong>50% fragrance oil concentration</strong> last longer in tropical weather conditions.</p>
-            <a href="/about" class="about-btn">Learn More</a>
+            <p class="about-text">{{ $currentTenant->name ?? 'Perfume Store' }} is India's first perfume brand known for <strong>high-quality, long-lasting</strong> fragrances with unparalleled expertise in the art and science of perfumery.</p>
+            <p class="about-text">{{ $currentTenant->name ?? 'Perfume Store' }}, reformulated with <strong>50% fragrance oil concentration</strong> last longer in tropical weather conditions.</p>
+            <a href="{{ route('about') }}" class="about-btn">Learn More</a>
         </div>
     </div>
 
