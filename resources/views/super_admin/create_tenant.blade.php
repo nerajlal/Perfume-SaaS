@@ -120,7 +120,7 @@
 <script>
     document.getElementById('subdomain').addEventListener('input', function(e) {
         const val = e.target.value ? e.target.value : 'brand-name';
-        document.getElementById('url_preview').textContent = 'http://' + val + '.metora.in';
+        document.getElementById('url_preview').textContent = 'https://' + val + '.metora.in';
     });
 </script>
 

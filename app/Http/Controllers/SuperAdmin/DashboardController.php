@@ -11,9 +11,50 @@ use App\Models\Tenant;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tenants = Tenant::with('admin')->latest()->get();
+        $query = Tenant::with('admin');
+
+        // Search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('domain', 'like', "%{$search}%");
+            });
+        }
+
+        // Status Filter
+        if ($request->filled('status')) {
+            if ($request->status == 'active') {
+                $query->where('status', true);
+            } elseif ($request->status == 'inactive') {
+                $query->where('status', false);
+            }
+        }
+
+        // Sorting
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                default:
+                    $query->latest();
+            }
+        } else {
+            $query->latest();
+        }
+
+        $tenants = $query->get();
+
+        if ($request->ajax()) {
+            return view('super_admin.partials.tenants_table_body', compact('tenants'));
+        }
+
         return view('super_admin.dashboard', compact('tenants'));
     }
 
@@ -52,6 +93,7 @@ class DashboardController extends Controller
             'name' => $validated['site_name'],
             'domain' => $fullDomain,
             'plan' => $validated['plan'],
+            'subscription_ends_at' => now()->addDays(365),
         ]);
 
         // Create Tenant Admin User
