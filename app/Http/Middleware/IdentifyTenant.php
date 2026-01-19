@@ -36,6 +36,7 @@ class IdentifyTenant
             // Dynamically set App URL to match the current request host (for subdomains)
             \Illuminate\Support\Facades\URL::forceRootUrl($request->getSchemeAndHttpHost());
             config(['app.url' => $request->getSchemeAndHttpHost()]);
+            config(['filesystems.disks.public.url' => $request->getSchemeAndHttpHost() . '/storage']);
         } else {
              // If we are on a tenant route but found no tenant, that's a 404.
              // However, for the root '/' or non-tenant routes, we should just let it pass (handled by web.php structure).
